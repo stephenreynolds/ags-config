@@ -15,6 +15,7 @@
           ags.packages.${system}.default
           nodejs
           sassc
+          inotify-tools
         ];
       };
     };
