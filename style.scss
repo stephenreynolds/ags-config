@@ -1,0 +1,60 @@
+label {
+  font-weight: 600;
+}
+
+.workspaces {
+  button {
+    background-color: transparent;
+    color: #eee;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #efefef;
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    &.focused {
+      border-bottom: 3px solid aqua;
+    }
+  }
+}
+
+.client-title {
+  margin-left: 1em;
+  color: aqua;
+}
+
+.media {
+  background-color: transparent;
+  color: #eee;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #efefef;
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+}
+
+.notification {
+  image {
+    color: yellow;
+    margin-left: 1em;
+  }
+}
+
+.clock {
+  margin: 0 6px;
+}
+
+progress, highlight {
+  background-color: aqua;
+  min-height: 8px;
+}
