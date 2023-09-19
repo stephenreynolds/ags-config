@@ -7,9 +7,9 @@ import { scssWatcher } from "./js/utils.js";
 scssWatcher();
 
 export default {
-  maxStreamVolume: 1.05,
-  cacheNotificationActions: true,
-  windows: [
-    forMonitors(BottomBar),
-  ].flat(2),
+    maxStreamVolume: 1.05,
+    cacheNotificationActions: true,
+    windows: [
+        forMonitors(BottomBar),
+    ].flat(2),
 };

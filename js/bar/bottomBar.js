@@ -1,6 +1,5 @@
 import Workspaces from "./widgets/workspaces.js";
 import ClientTitle from "./widgets/clientTitle.js";
-import Media from "./widgets/media.js";
 import Notification from "./widgets/notification.js";
 import Volume from "./widgets/volume.js";
 import SysTray from "./widgets/systray.js";
@@ -8,22 +7,23 @@ import Clock from "./widgets/clock.js";
 
 const { Box, CenterBox, Window } = ags.Widget;
 
-const left = () => Box({
+const Left = (monitor) => Box({
+  className: "start",
   children: [
-    Workspaces(),
+    Workspaces(monitor),
     ClientTitle(),
   ],
 });
 
 const Center = () => Box({
+  className: "center",
   children: [
-    Media(),
     Notification(),
   ],
 });
 
 const Right = () => Box({
-  halign: "end",
+  className: "end",
   children: [
     Volume(),
     SysTray(),
@@ -33,12 +33,12 @@ const Right = () => Box({
 
 export default monitor => Window({
   name: `bar-${monitor}`,
-  className: "bar",
   monitor,
   anchor: ["bottom", "left", "right"],
   exclusive: true,
   child: CenterBox({
-    startWidget: left(),
+    className: "bar",
+    startWidget: Left(monitor),
     centerWidget: Center(),
     endWidget: Right(),
   }),

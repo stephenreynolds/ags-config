@@ -1,0 +1,51 @@
+.bar {
+  @if $bar_style == "normal" {
+    background-color: $bg_color;
+  }
+
+  .workspaces {
+    > * {
+      padding: 0;
+    }
+
+    .eventbox {
+      transition: $transition;
+    }
+
+    button {
+      all: unset;
+
+      .indicator {
+        font-size: 0;
+        min-width: 10px;
+        min-height: 10px;
+        border-radius: $radii * 0.6;
+        border: $border;
+        margin: 0 $spacing / 2;
+        transition: $transition / 2;
+        background-color: transparentize($fg_color, 0.2);
+      }
+
+      &:first-child .indicator {
+        margin-left: $spacing;
+      }
+
+      &:last-child .indicator {
+        margin-right: $spacing;
+      }
+
+      &:hover .indicator {
+        box-shadow: inset 0 0 0 10px transparentize($fg_color, 0.8);
+      }
+
+      &.active .indicator, &:active .indicator {
+        background-color: $accent;
+      }
+
+      &.active .indicator {
+        min-width: 14px;
+        min-height: 14px;
+      }
+    }
+  }
+}
