@@ -10,6 +10,8 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
+      configDir = ./src;
+
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           ags.packages.${system}.default
