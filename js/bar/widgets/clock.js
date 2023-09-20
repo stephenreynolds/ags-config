@@ -7,7 +7,7 @@ const Time = () => Label({
     connections: [[
         1000, label => execAsync(["date", options.timeFormat])
             .then(time => label.label = time).catch(console.error)
-    ]]
+    ]],
 });
 
 const Date = () => Label({
@@ -15,7 +15,7 @@ const Date = () => Label({
     connections: [[
         1000, label => execAsync(["date", options.dateFormat])
             .then(date => label.label = date).catch(console.error)
-    ]]
+    ]],
 });
 
 const Clock = () => Box({
