@@ -3,9 +3,11 @@ const { execAsync } = ags.Utils;
 const { Box, Button, EventBox, Label } = ags.Widget;
 
 const getMonitorWorkspaces = monitor =>
-    Hyprland.workspaces.filter(w =>
-        w.monitor === Hyprland.getMonitor(monitor).name &&
-        w.id != -99);
+    Hyprland.workspaces
+        .filter(w =>
+            w.monitor === Hyprland.getMonitor(monitor).name &&
+            w.id != -99)
+        .sort((a, b) => a.id - b.id);
 
 const WorkspaceButton = (workspace, monitor) => Button({
     onClicked: () => execAsync(`hyprctl dispatch workspace ${workspace.id}`).catch(print),
