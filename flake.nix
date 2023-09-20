@@ -10,9 +10,6 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      homeManagerModules.ags = ./ags.nix;
-      homeManagerModules.default = self.homeManagerModules.ags;
-
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           ags.packages.${system}.default
