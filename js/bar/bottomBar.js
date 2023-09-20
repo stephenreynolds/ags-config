@@ -1,5 +1,4 @@
 import Workspaces from "./widgets/workspaces.js";
-import ClientTitle from "./widgets/clientTitle.js";
 import Notification from "./widgets/notification.js";
 import Volume from "./widgets/volume.js";
 import SysTray from "./widgets/systray.js";
@@ -11,7 +10,6 @@ const Left = (monitor) => Box({
   className: "start",
   children: [
     Workspaces(monitor),
-    ClientTitle(),
   ],
 });
 
