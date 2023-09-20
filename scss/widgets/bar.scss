@@ -48,4 +48,10 @@
       }
     }
   }
+
+  .clock {
+    margin: $spacing / 2 $spacing;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
 }
