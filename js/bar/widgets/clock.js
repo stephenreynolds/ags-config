@@ -8,7 +8,7 @@ const Time = () => Label({
         1000, label => execAsync(["date", options.timeFormat])
             .then(time => label.label = time).catch(console.error)
     ]]
-})
+});
 
 const Date = () => Label({
     halign: "end",
@@ -16,7 +16,7 @@ const Date = () => Label({
         1000, label => execAsync(["date", options.dateFormat])
             .then(date => label.label = date).catch(console.error)
     ]]
-})
+});
 
 const Clock = () => Box({
     className: "clock",
@@ -25,6 +25,6 @@ const Clock = () => Box({
         Time(),
         Date(),
     ],
-})
+});
 
 export default Clock;
