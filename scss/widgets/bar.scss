@@ -1,4 +1,6 @@
 .bar {
+  padding: $spacing / 2 $spacing;
+
   @if $bar_style == "normal" {
     background-color: rgba($bg_color, $bg_opacity);
   }
@@ -10,10 +12,14 @@
 
     .eventbox {
       transition: $transition;
-      border-radius: $radii;
 
-      &:hover {
-        margin: 10px;
+      box.inner {
+        transition: $transition / 2;
+        padding: 8px 0;
+        border-radius: $radii;
+      }
+
+      &:hover box.inner {
         background-color: transparentize($fg_color, 0.9);
       }
     }
@@ -60,7 +66,6 @@
   }
 
   .clock {
-    margin: $spacing / 2 $spacing;
     font-size: 0.85rem;
     font-weight: 500;
   }

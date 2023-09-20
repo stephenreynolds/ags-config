@@ -21,13 +21,15 @@ const WorkspaceButton = (workspace, monitor) => Button({
 });
 
 export default monitor => Box({
-    className: "workspaces panel-button",
+    className: "workspaces pnel-button",
     child: Box({
         children: [EventBox({
             onScrollUp: () => execAsync("hyprctl dispatch workspace m+1"),
             onScrollDown: () => execAsync("hyprctl dispatch workspace m-1"),
             className: "eventbox",
             child: Box({
+                className: "inner",
+                valign: "center",
                 connections: [[Hyprland, box => {
                     box.children = getMonitorWorkspaces(monitor)
                         .map(w => WorkspaceButton(w, monitor));
