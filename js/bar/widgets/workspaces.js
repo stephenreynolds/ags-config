@@ -7,7 +7,7 @@ const getMonitorWorkspaces = monitor =>
         w.monitor === Hyprland.getMonitor(monitor).name &&
         w.id != -99);
 
-const WorkspaceButton = workspace => Button({
+const WorkspaceButton = (workspace, monitor) => Button({
     onClicked: () => execAsync(`hyprctl dispatch workspace ${workspace.id}`).catch(print),
     child: Label({
         label: `${workspace.name}`,
@@ -15,7 +15,7 @@ const WorkspaceButton = workspace => Button({
         valign: "center",
     }),
     connections: [[Hyprland, btn => {
-        btn.toggleClassName("active", Hyprland.active.workspace.id === workspace.id);
+        btn.toggleClassName("active", Hyprland.getMonitor(monitor).activeWorkspace.id === workspace.id);
     }]],
 });
 
@@ -29,7 +29,7 @@ export default monitor => Box({
             child: Box({
                 connections: [[Hyprland, box => {
                     box.children = getMonitorWorkspaces(monitor)
-                        .map(w => WorkspaceButton(w));
+                        .map(w => WorkspaceButton(w, monitor));
                 }, "changed"]]
             }),
         })],
