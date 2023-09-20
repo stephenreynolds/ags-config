@@ -7,6 +7,7 @@ const dark = {
     bg_color: "#171717",
     fg_color: "#eee",
     hover_fg: "#f1f1f1",
+    bg_opacity: 1,
     ...charm,
 };
 
@@ -29,6 +30,11 @@ const catppuccin = {
     ...dark,
     ...misc,
     ...colors,
+    bg_color: "#1e1e2e",
+    fg_color: "#cdd6f4",
+    hover_fg: "#a6adc8",
+    accent: "#89b4fa",
+    bg_opacity: 0.5,
 };
 
 export default [

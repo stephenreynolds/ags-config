@@ -1,6 +1,6 @@
 .bar {
   @if $bar_style == "normal" {
-    background-color: $bg_color;
+    background-color: rgba($bg_color, $bg_opacity);
   }
 
   .workspaces {

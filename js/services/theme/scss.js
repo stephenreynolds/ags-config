@@ -9,6 +9,7 @@ $blue: ${t.blue};
 $bg_color: ${t.bg_color};
 $fg_color: ${t.fg_color};
 $hover_fg: ${t.hover_fg};
+$bg_opacity: ${t.bg_opacity};
 
 $radii: ${t.radii}px;
 $spacing: ${t.spacing}px;
