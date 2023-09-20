@@ -1,4 +1,5 @@
 import Workspaces from "./widgets/workspaces.js";
+import SystemTray from "./widgets/systray.js";
 import Clock from "./widgets/clock.js";
 
 const { Box, CenterBox, Window } = ags.Widget;
@@ -19,7 +20,9 @@ const Center = () => Box({
 const Right = () => Box({
     className: "end",
     halign: "end",
+    spacing: 20,
     children: [
+        SystemTray(),
         Clock(),
     ],
 });

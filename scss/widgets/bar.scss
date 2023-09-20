@@ -5,6 +5,12 @@
     background-color: rgba($bg_color, $bg_opacity);
   }
 
+  .systray {
+    button {
+      all: unset;
+    }
+  }
+
   .workspaces {
     > * {
       padding: 0;
