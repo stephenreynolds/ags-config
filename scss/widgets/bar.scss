@@ -10,6 +10,12 @@
 
     .eventbox {
       transition: $transition;
+      border-radius: $radii;
+
+      &:hover {
+        margin: 10px;
+        background-color: transparentize($fg_color, 0.9);
+      }
     }
 
     button {
@@ -17,13 +23,13 @@
 
       .indicator {
         font-size: 0;
-        min-width: 10px;
-        min-height: 10px;
+        min-width: 6px;
+        min-height: 6px;
         border-radius: $radii * 0.6;
         border: $border;
         margin: 0 $spacing / 2;
         transition: $transition / 2;
-        background-color: transparentize($fg_color, 0.2);
+        background-color: transparentize($fg_color, 0.4);
       }
 
       &:first-child .indicator {
@@ -39,12 +45,16 @@
       }
 
       &.active .indicator, &:active .indicator {
+        background-color: transparentize($fg_color, 0.2);
+      }
+
+      &.focused .indicator {
         background-color: $accent;
       }
 
-      &.active .indicator {
-        min-width: 14px;
-        min-height: 14px;
+      &.active .indicator, &.focused .indicator {
+        min-height: 10px;
+        min-width: 28px;
       }
     }
   }
