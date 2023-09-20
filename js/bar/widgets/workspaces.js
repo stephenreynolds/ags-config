@@ -30,7 +30,7 @@ export default monitor => Box({
                 connections: [[Hyprland, box => {
                     box.children = getMonitorWorkspaces(monitor)
                         .map(w => WorkspaceButton(w));
-                }]]
+                }, "changed"]]
             }),
         })],
     }),
