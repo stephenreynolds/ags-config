@@ -1,3 +1,4 @@
 export default {
-  workspaces: 9
+    dateFormat: "+%a %b %e",
+    timeFormat: "+%-I:%M %p",
 };
