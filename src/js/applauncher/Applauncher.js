@@ -44,7 +44,7 @@ const AppItem = (app, window) => Button({
 const Applauncher = ({ windowName = 'applauncher' } = {}) => {
     const list = Box({ vertical: true });
     const placeholder = Label({
-        label: " Couldn't find a match",
+        label: "  Couldn't find a match",
         className: 'placeholder',
     });
     const entry = Entry({

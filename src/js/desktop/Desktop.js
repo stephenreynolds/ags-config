@@ -2,7 +2,7 @@ import Theme from '../services/theme/theme.js';
 import PowerMenu from '../services/powermenu.js';
 import icons from '../icons.js';
 const { openWindow } = ags.App;
-const { MenuItem, Menu, Box, Label, Icon, EventBox, CenterBox, Window, Widget } = ags.Widget;
+const { MenuItem, Menu, Box, Label, Icon, EventBox, Window, Widget } = ags.Widget;
 
 const Item = (label, icon, onActivate) => MenuItem({
     onActivate,
