@@ -1,10 +1,9 @@
-import HoverRevealer from '../../misc/HoverRevealer.js';
 import PanelButton from '../PanelButton.js';
 import Indicator from '../../services/onScreenIndicator.js';
 import icons from '../../icons.js';
 const { App } = ags;
-const { Bluetooth, Audio, Notifications, Network } = ags.Service;
-const { Box, Label, Icon, Stack } = ags.Widget;
+const { Audio, Notifications, Network } = ags.Service;
+const { Box, Icon, Stack } = ags.Widget;
 
 const MicrophoneMuteIndicator = () => Icon({
     icon: icons.audio.mic.muted,
@@ -18,24 +17,6 @@ const DNDIndicator = () => Icon({
     connections: [[Notifications, icon => {
         icon.visible = Notifications.dnd;
     }]],
-});
-
-const BluetoothDevicesIndicator = () => Box({
-    connections: [[Bluetooth, box => {
-        box.children = Bluetooth.connectedDevices
-            .map(({ iconName, name }) => HoverRevealer({
-                indicator: Icon(iconName + '-symbolic'),
-                child: Label(name),
-            }));
-
-        box.visible = Bluetooth.connectedDevices.length > 0;
-    }]],
-});
-
-const BluetoothIndicator = () => Icon({
-    className: 'bluetooth',
-    icon: icons.bluetooth.enabled,
-    binds: [['visible', Bluetooth, 'enabled']],
 });
 
 const NetworkIndicator = () => Stack({
@@ -88,8 +69,6 @@ export default () => PanelButton({
         children: [
             MicrophoneMuteIndicator(),
             DNDIndicator(),
-            BluetoothDevicesIndicator(),
-            BluetoothIndicator(),
             NetworkIndicator(),
             AudioIndicator(),
         ],
