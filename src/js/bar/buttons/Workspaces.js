@@ -1,6 +1,6 @@
-const Hyprland = ags.Service.Hyprland;
-const { execAsync } = ags.Utils;
+const { Hyprland } = ags.Service;
 const { Box, Button, EventBox, Label } = ags.Widget;
+const { execAsync } = ags.Utils;
 
 const getMonitorWorkspaces = monitor =>
     Hyprland.workspaces

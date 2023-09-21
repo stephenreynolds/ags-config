@@ -18,6 +18,12 @@
           nodejs
           sassc
           inotify-tools
+          wf-recorder
+          swww
+          swappy
+          slurp
+          imagemagick
+          inter
         ];
       };
     };

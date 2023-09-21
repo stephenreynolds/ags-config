@@ -21,7 +21,7 @@ rules:
     - last
   curly:
     - error
-    - all
+    - multi-or-nest
     - consistent
   dot-location:
     - error
@@ -45,7 +45,7 @@ rules:
   prefer-const: error
   quotes:
     - error
-    - double
+    - single
     - avoidEscape: true
   semi:
     - error

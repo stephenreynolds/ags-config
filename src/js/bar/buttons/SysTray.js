@@ -1,9 +1,10 @@
+import PanelButton from '../PanelButton.js';
 const { SystemTray } = ags.Service;
-const { Box, Button, Icon } = ags.Widget;
+const { Box, Icon } = ags.Widget;
 const { Gravity } = imports.gi.Gdk;
 
-const SysTrayItem = item => Button({
-    child: Icon({ binds: [['icon', item, 'icon']] }),
+const SysTrayItem = item => PanelButton({
+    content: Icon({ binds: [['icon', item, 'icon']] }),
     binds: [['tooltipMarkup', item, 'tooltipMarkup']],
     setup: btn => {
         const id = item.menu.connect('popped-up', menu => {
@@ -22,7 +23,6 @@ const SysTrayItem = item => Button({
 
 export default () => Box({
     className: 'systray',
-    spacing: 10,
     properties: [
         ['items', new Map()],
         ['onAdded', (box, id) => {
