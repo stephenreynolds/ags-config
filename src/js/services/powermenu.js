@@ -10,6 +10,7 @@ export default class PowerMenu extends Service {
 
     static action(action) {
         const [cmd, title] = {
+            'lock': ['lock', 'Lock'],
             'sleep': ['systemctl suspend', 'Sleep'],
             'reboot': ['systemctl reboot', 'Reboot'],
             'logout': ['pkill Hyprland', 'Log Out'],

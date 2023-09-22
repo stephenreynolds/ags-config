@@ -56,6 +56,11 @@ export default () => Box({
                         }),
                         Button({
                             valign: 'center',
+                            onClicked: () => PowerMenu.action('lock'),
+                            child: Icon(icons.powermenu.lock),
+                        }),
+                        Button({
+                            valign: 'center',
                             onClicked: () => PowerMenu.action('logout'),
                             child: Icon(icons.powermenu.logout),
                         }),
