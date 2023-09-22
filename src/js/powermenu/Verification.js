@@ -31,7 +31,10 @@ export default () => PopupWindow({
                     }),
                     Button({
                         child: Label('Yes'),
-                        onClicked: () => ags.Utils.exec(PowerMenu.instance.cmd),
+                        onClicked: () => {
+                            ags.App.toggleWindow('verification');
+                            ags.Utils.exec(PowerMenu.instance.cmd);
+                        },
                     }),
                 ],
             }),
