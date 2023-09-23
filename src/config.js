@@ -1,5 +1,4 @@
 import BottomBar from './js/bar/BottomBar.js';
-import ScreenCorners from './js/screencorner/ScreenCorners.js';
 import Overview from './js/overview/Overview.js';
 import Dashboard from './js/dashboard/Dashboard.js';
 import OSD from './js/osd/OSD.js';
@@ -26,7 +25,6 @@ export default {
     },
     windows: [
         forMonitors(BottomBar),
-        forMonitors(ScreenCorners),
         forMonitors(OSD),
         forMonitors(Desktop),
         Notifications(options.primaryMonitor),

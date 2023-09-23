@@ -49,7 +49,6 @@ const misc = {
     shadow: 'rgba(0, 0, 0, .6)',
     drop_shadow: true,
     transition: 200,
-    screen_corners: false,
     bar_style: 'normal',
     layout: 'bottombar',
     desktop_clock: 'center center',

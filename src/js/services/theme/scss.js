@@ -49,7 +49,6 @@ $mono_font: 'CaskaydiaCove Nerd Font Mono', monospace;
 $wallpaper_fg: ${t.wallpaper_fg};
 $shader_fg: white;
 
-$screen_corners: ${t.bar_style === 'normal' && t.screen_corners};
 $bar_style: ${t.bar_style};
 $layout: ${t.layout};`;
 
