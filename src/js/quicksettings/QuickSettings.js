@@ -55,9 +55,6 @@ export default () => PopupWindow({
                 [Homogeneous([ThemeToggle()]), MicMute()],
                 [ThemeSelector()],
             ),
-            // Row(
-            //     [DND(), MicMute()],
-            // ),
         ],
     }),
 });
