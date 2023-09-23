@@ -29,7 +29,7 @@ export default {
         forMonitors(ScreenCorners),
         forMonitors(OSD),
         forMonitors(Desktop),
-        forMonitors(Notifications),
+        Notifications(options.primaryMonitor),
         Applauncher(),
         Overview(),
         Dashboard(),
