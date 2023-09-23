@@ -1,12 +1,11 @@
 import PopupWindow from '../misc/PopupWindow.js';
 import Workspace from './Workspace.js';
-import options from '../options.js';
+const { Hyprland } = ags.Service;
 
 export default () => PopupWindow({
     name: 'overview',
     content: ags.Widget.Box({
         className: 'overview',
-        children: Array.from({ length: options.workspaces }, (_, i) => i + 1).map(Workspace),
         properties: [
             ['update', box => {
                 ags.Utils.execAsync('hyprctl -j clients')
@@ -21,6 +20,8 @@ export default () => PopupWindow({
         connections: [[ags.Service.Hyprland, box => {
             if (!ags.App.getWindow('overview').visible)
                 return;
+
+            box.children = Hyprland.workspaces.map(w => Workspace(w.id));
 
             box._update(box);
         }]],
