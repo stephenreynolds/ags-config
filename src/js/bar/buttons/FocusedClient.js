@@ -1,7 +1,8 @@
 import PanelButton from '../PanelButton.js';
 
 const { Hyprland } = ags.Service;
-const { Box, Label } = ags.Widget;
+const { execAsync } = ags.Utils;
+const { Box, Icon, Item, Label, Menu } = ags.Widget;
 
 export const ClientLabel = substitutes => Label({
     connections: [[Hyprland, label => {
@@ -16,6 +17,14 @@ export const ClientLabel = substitutes => Label({
 
 export default () => PanelButton({
     className: 'focused-client',
+    onSecondaryClick: (_, event) => Menu({
+        className: 'focused-client-menu',
+        children: [
+            Item('Float', Icon('window-float-symbolic'), () => execAsync('hyprctl dispatch togglefloating active').catch(print)),
+            Item('Maximize', Icon('window-maximize-symbolic'), () => execAsync('hyprctl dispatch fullscreen 1').catch(print)),
+            Item('Close', Icon('window-close-symbolic'), () => execAsync('hyprctl dispatch closewindow active').catch(print)),
+        ],
+    }).popup_at_pointer(event),
     content: Box({
         child: ClientLabel([
             ['com.transmissionbt.Transmission._43_219944', 'Transmission'],
