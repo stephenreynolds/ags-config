@@ -17,8 +17,7 @@ const WorkspaceButton = (workspace, monitor) => Button({
         valign: 'center',
     }),
     connections: [[Hyprland, btn => {
-        btn.toggleClassName('active', Hyprland.getMonitor(monitor).activeWorkspace.id === workspace.id);
-        btn.toggleClassName('focused', Hyprland.active.workspace.id === workspace.id);
+        btn.toggleClassName('focused', Hyprland.getMonitor(monitor).activeWorkspace.id === workspace.id);
     }, 'changed']],
 });
 
