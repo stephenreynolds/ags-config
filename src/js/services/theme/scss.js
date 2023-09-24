@@ -44,7 +44,7 @@ $drop_shadow: ${t.drop_shadow};
 $transition: ${t.transition}ms;
 
 $font_size: 14px;
-$font: Inter;
+$font: 'SF Pro Display';
 $mono_font: 'CaskaydiaCove Nerd Font Mono', monospace;
 $wallpaper_fg: ${t.wallpaper_fg};
 $shader_fg: white;
