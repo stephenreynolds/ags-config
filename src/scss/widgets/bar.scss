@@ -219,6 +219,10 @@ $float: $spacing * 0.7;
                 min-width: 14px;
                 min-height: 14px;
             }
+
+            &.focused .indicator {
+                background-color: $green;
+            }
         }
     }
 }
