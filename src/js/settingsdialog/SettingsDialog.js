@@ -203,7 +203,7 @@ export const SettingsDialog = () => Widget({
             Img('Wallpaper', 'wallpaper'),
             SpinButton('Useless Gaps', 'wm_gaps', 128),
             SpinButton('Spacing', 'spacing', 18),
-            SpinButton('Roundness', 'radii', 36),
+            SpinButton('Roundness', 'wm_radii', 0),
             TextSpinButton('Bar Style', 'bar_style', ['normal', 'floating', 'separated']),
         ]),
         '󰏘 Colors': Page([
@@ -226,6 +226,7 @@ export const SettingsDialog = () => Widget({
             Color('Border Color', 'border_color'),
             SpinButton('Border Width', 'border_width'),
             SpinButton('Border Opacity', 'border_opacity'),
+            SpinButton('Roundness', 'radii', 36),
         ]),
         '󰠱 Miscellaneous': Page([
             Color('Shadow', 'shadow'),
