@@ -1,6 +1,5 @@
 import OverviewButton from './buttons/OverviewButton.js';
 import Workspaces from './buttons/Workspaces.js';
-import FocusedClient from './buttons/FocusedClient.js';
 import DateButton from './buttons/DateButton.js';
 import SysTray from './buttons/SysTray.js';
 import SystemIndicators from './buttons/SystemIndicators.js';
@@ -19,7 +18,6 @@ const Start = monitor => Box({
     children: [
         OverviewButton(),
         Workspaces(monitor),
-        FocusedClient(),
         Box({ hexpand: true }),
     ],
 });
