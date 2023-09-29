@@ -141,35 +141,6 @@ $float: $spacing * 0.7;
         image { color: $yellow; }
     }
 
-    .battery-bar {
-        image { margin-right: $spacing/2; }
-        .font-icon { font-size: 1.3em; }
-
-        levelbar trough {
-            @include widget;
-            min-width: 70px;
-            min-height: 14px;
-
-            block.filled {
-                border-radius: max($radii - $border_width, 0);
-                background-image: $active_gradient;
-            }
-        }
-
-        @mixin color($color) {
-            image, label { color: $color }
-
-            block.filled {
-                background-image: linear-gradient(to right, $color, lighten($color, 6%));
-            }
-        }
-
-        .medium { @include color($yellow) }
-        .low { @include color($red) }
-        .charging { @include color($green) }
-        &:active { @include color($accent_fg) }
-    }
-
     .workspaces {
         > * { padding: 0; }
 
@@ -195,28 +166,23 @@ $float: $spacing * 0.7;
                 border: $border;
                 margin: 0 $spacing/2;
                 transition: $transition/2;
-                background-color: transparentize($fg_color, 0.8);
+                background-color: transparentize($fg_color, 0.7);
             }
 
             &:last-child .indicator { margin-right: $spacing; }
             &:first-child .indicator { margin-left: $spacing; }
 
-            &.occupied .indicator {
+            &.focused .indicator {
+                min-height: 8px;
+                min-width: 26px;
+            }
+
+            &.active .indicator {
                 background-color: transparentize($fg_color, 0.2);
-                min-width: 10px;
-                min-height: 10px;
             }
 
             &:hover .indicator {
                 box-shadow: inset 0 0 0 10px transparentize($fg_color, 0.8);
-            }
-
-            &.active .indicator {
-                min-width: 14px;
-                min-height: 14px;
-            }
-
-            &.focused .indicator {
                 background-color: $accent;
             }
         }
