@@ -77,7 +77,7 @@ const catppuccin_mocha = {
     ...misc,
     ...colors,
     accent: '$blue',
-    bg_color: "#1e1e2e",
+    bg_color: "#171717",
     fg_color: "#cdd6f4",
     hover_fg: "#bac2de",
     red: '#f38ba8',
