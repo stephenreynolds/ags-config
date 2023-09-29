@@ -7,7 +7,7 @@ export default function({
     border_width,
     hypr_active_border,
     hypr_inactive_border,
-    radii,
+    wm_radii,
     drop_shadow,
     bar_style,
     layout,
@@ -52,7 +52,7 @@ export default function({
         execAsync(`hyprctl keyword general:gaps_in ${wm_gaps / 2}`);
         execAsync(`hyprctl keyword general:col.active_border ${hypr_active_border}`);
         execAsync(`hyprctl keyword general:col.inactive_border ${hypr_inactive_border}`);
-        execAsync(`hyprctl keyword decoration:rounding ${radii}`);
+        execAsync(`hyprctl keyword decoration:rounding ${wm_radii}`);
         execAsync(`hyprctl keyword decoration:drop_shadow ${drop_shadow ? 'yes' : 'no'}`);
     } catch (error) {
         logError(error);

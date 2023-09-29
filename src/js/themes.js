@@ -44,6 +44,7 @@ const light = {
 
 const misc = {
     wm_gaps: 10,
+    wm_radii: 0,
     radii: 9,
     spacing: 9,
     shadow: 'rgba(0, 0, 0, .6)',
