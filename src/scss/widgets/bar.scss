@@ -98,12 +98,6 @@ $float: $spacing * 0.7;
         &:active label, &.active label { color: $accent_fg; }
     }
 
-    .powermenu, .recorder {
-        image { color: transparentize($red, 0.3); }
-        &:hover image { color: transparentize($red, 0.15); }
-        &:active image { color: $red; }
-    }
-
     .date-button {
         > * {
             padding-top: 0;
@@ -136,19 +130,6 @@ $float: $spacing * 0.7;
     }
 
     .workspaces {
-        > * { padding: 0; }
-
-        .eventbox {
-            transition: $transition;
-
-            @if $bar_style == 'separated' {
-                border-radius: max($radii - $border_width, 0);
-                &:hover { background-color: $hover; }
-            } @else {
-                @include button($flat: true);
-            }
-        }
-
         button {
             all: unset;
 
