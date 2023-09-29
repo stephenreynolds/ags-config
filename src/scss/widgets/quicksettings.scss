@@ -1,6 +1,5 @@
 window#quicksettings .quicksettings {
     @include floating_widget;
-    min-width: 250px;
 
     .row {
         margin-top: $spacing;
