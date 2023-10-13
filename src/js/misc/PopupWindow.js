@@ -81,7 +81,7 @@ const layouts = {
     }),
 };
 
-export default ({ layout = 'center', expand = true, name, content, ...rest }) => Window({
+export default ({ layout = ['center'], expand = true, name, content, ...rest }) => Window({
     name,
     child: layouts[layout](name, content, expand),
     popup: true,

@@ -27,8 +27,8 @@ const Homogeneous = toggles => Box({
 
 export default () => PopupWindow({
     name: 'quicksettings',
-    anchor: 'bottom right',
-    layout: 'bottom right',
+    anchor: ['bottom', 'right'],
+    layout: ['bottom', 'right'],
     content: Box({
         className: 'quicksettings',
         vertical: true,

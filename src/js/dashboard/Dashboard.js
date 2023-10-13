@@ -3,7 +3,7 @@ import NotificationColumn from './NotificationColumn.js';
 import PopupWindow from '../misc/PopupWindow.js';
 import Separator from '../misc/Separator.js';
 
-export default ({ anchor = 'bottom right', layout = 'bottom right' } = {}) => PopupWindow({
+export default ({ anchor = ['bottom', 'right'], layout = ['bottom', 'right'] } = {}) => PopupWindow({
     name: 'dashboard',
     layout,
     anchor,

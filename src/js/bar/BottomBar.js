@@ -44,7 +44,7 @@ export default monitor => Window({
     name: `bar${monitor}`,
     exclusive: true,
     monitor,
-    anchor: 'bottom left right',
+    anchor: ['bottom', 'left', 'right'],
     child: CenterBox({
         className: 'panel',
         startWidget: Start(monitor),

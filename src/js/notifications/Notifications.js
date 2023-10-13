@@ -55,6 +55,6 @@ const PopupList = ({ transition = 'slide_up' } = {}) => Box({
 export default monitor => Window({
     monitor,
     name: `notifications${monitor}`,
-    anchor: 'bottom right',
+    anchor: ['bottom', 'right'],
     child: PopupList(),
 });
