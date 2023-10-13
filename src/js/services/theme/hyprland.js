@@ -1,5 +1,4 @@
 const { App } = ags;
-const { Hyprland } = ags.Service;
 const { execAsync } = ags.Utils;
 
 export default function({
@@ -28,7 +27,7 @@ export default function({
         });
 
 
-        Hyprland.HyprctlGet('monitors').forEach(({ name }) => {
+        JSON.parse(ags.Utils.exec('hyprctl -j monitors')).forEach(({ name }) => {
             if (bar_style !== 'normal') {
                 switch (layout) {
                     case 'topbar':
