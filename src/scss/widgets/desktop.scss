@@ -1,0 +1,52 @@
+$fg_color: #e0def4;
+$shadow: rgba(26, 26, 26, 0.6);
+$font: Inter, sans-serif;
+
+window.desktop {
+  .clock-box-shadow {
+    border: 5px solid $fg_color;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px 0 $shadow;
+
+    .clock-box {
+      border-radius: max(8px - 5px, 0);
+      padding: 0 14px;
+      box-shadow: inset 2px 2px 2px 0 $shadow;
+
+      .clock {
+        color: $fg_color;
+        font-size: 140px;
+        font-family: $font;
+      }
+
+      .separator-box {
+        padding: 24px 12px;
+        
+        separator {
+          border-radius: 8px;
+          min-width: 16px;
+          min-height: 16px;
+          background-color: $fg_color;
+        }
+      }
+    }
+  }
+
+  .date {
+    color: $fg_color;
+    font-family: $font;
+    font-size: 36px;
+    font-weight: 500;
+  }
+
+  label {
+    text-shadow: 2px 2px 2px $shadow;
+  }
+}
+
+.desktop-menu {
+  image {
+    margin-left: -14px;
+    margin-right: 6px;
+  }
+}
