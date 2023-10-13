@@ -1,0 +1,23 @@
+{
+  "name": "ags-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephenreynolds/ags-config.git"
+  },
+  "author": "Stephen Reynolds (mail@stephenreynolds.dev)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephenreynolds/ags-config/issues"
+  },
+  "homepage": "https://github.com/stephenreynolds/ags-config#readme",
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
