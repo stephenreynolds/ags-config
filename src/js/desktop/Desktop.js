@@ -1,6 +1,8 @@
+import Separator from "../misc/Separator.js";
+import Theme from "../services/theme/theme.js";
 import Clock from "../misc/Clock.js";
 import DesktopMenu from "./DesktopMenu.js";
-import { Widget } from "../imports.js";
+import { App, Widget } from "../imports.js";
 
 const DesktopClock = () => Widget.Box({
     className: "clock-box-shadow",
@@ -10,7 +12,22 @@ const DesktopClock = () => Widget.Box({
             Clock({
                 className: "clock",
                 halign: "center",
-                format: "%-I:%M %p",
+                format: "%-I",
+            }),
+            Widget.Box({
+                className: "separator-box",
+                vertical: true,
+                hexpand: true,
+                halign: "center",
+                children: [
+                    Separator({ valign: "center", vexpand: true }),
+                    Separator({ valign: "center", vexpand: true }),
+                ],
+            }),
+            Clock({
+                className: "clock",
+                halign: "center",
+                format: "%M %p",
             }),
         ],
     }),
@@ -18,22 +35,35 @@ const DesktopClock = () => Widget.Box({
 
 const Desktop = () => Widget.EventBox({
     onSecondaryClick: (_, event) => DesktopMenu().popup_at_pointer(event),
+    onMiddleClick: print,
     child: Widget.Box({
         vertical: true,
         vexpand: true,
         hexpand: true,
-        halign: "center",
-        valign: "center",
-        children: [
-            DesktopClock(),
-            Clock({ format: "%A %B %e", className: "date" }),
-        ],
+        connections: [[Theme, box => {
+            const [halign = "center", valign = "center", offset = 64] =
+                Theme.getSetting("desktop_clock")?.split(" ") || [];
+
+            box.halign = imports.gi.Gtk.Align[halign.toUpperCase()];
+            box.valign = imports.gi.Gtk.Align[valign.toUpperCase()];
+            box.setStyle(`margin: ${Number(offset)}px;`);
+        }]],
+        child: Widget.EventBox({
+            onPrimaryClick: () => App.openWindow("dashboard"),
+            child: Widget.Box({
+                vertical: true,
+                children: [
+                    DesktopClock(),
+                    Clock({ format: "%A %B %e", className: "date" }),
+                ],
+            }),
+        }),
     }),
 });
 
 export default monitor => Widget.Window({
     monitor,
-    name: `desktop-${monitor}`,
+    name: `desktop${monitor}`,
     layer: "background",
     className: "desktop",
     anchor: ["top", "bottom", "left", "right"],

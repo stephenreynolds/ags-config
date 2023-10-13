@@ -1,6 +1,9 @@
+import Theme from "../services/theme/theme.js";
 import PowerMenu from "../services/powermenu.js";
+import Lockscreen from "../services/lockscreen.js";
 import icons from "../icons.js";
 import { App, Widget } from "../imports.js";
+import Gtk from "gi://Gtk";
 
 const Item = (label, icon, onActivate) => Widget.MenuItem({
     onActivate,
@@ -19,6 +22,7 @@ const Item = (label, icon, onActivate) => Widget.MenuItem({
 export default () => Widget.Menu({
     className: "desktop-menu",
     children: [
+        Item("Applications", icons.apps.apps, () => App.openWindow("applauncher")),
         Widget.MenuItem({
             child: Widget.Box({
                 children: [
@@ -32,12 +36,15 @@ export default () => Widget.Menu({
             }),
             submenu: Widget.Menu({
                 children: [
-                    Item("Shutdown", icons.powermenu.shutdown, () => PowerMenu.action("shutdown")),
+                    Item("Lock", icons.powermenu.lock, () => Lockscreen.lockscreen()),
                     Item("Log Out", icons.powermenu.logout, () => PowerMenu.action("logout")),
+                    Item("Sleep", icons.powermenu.sleep, () => PowerMenu.action("sleep")),
                     Item("Reboot", icons.powermenu.reboot, () => PowerMenu.action("reboot")),
-                    Item("Sleep", icons.powermenu.sleep, () => PowerMenu.action("reboot")),
+                    Item("Shutdown", icons.powermenu.shutdown, () => PowerMenu.action("shutdown")),
                 ],
             }),
         }),
+        Widget({ type: Gtk.SeparatorMenuItem }),
+        Item("Settings", icons.settings, () => Theme.openSettings()),
     ],
 });
