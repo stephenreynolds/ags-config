@@ -1,16 +1,16 @@
-import Gtk from 'gi://Gtk';
-import GObject from 'gi://GObject';
-import { Widget } from '../imports.js';
+import Gtk from "gi://Gtk";
+import GObject from "gi://GObject";
+import { Widget } from "../imports.js";
 
 class FontIcon extends Gtk.Label {
     static { GObject.registerClass(this); }
 
-    constructor(params = '') {
-        const { icon = '', ...rest } = params;
-        super(typeof params === 'string' ? {} : rest);
-        this.toggleClassName('font-icon');
+    constructor(params = "") {
+        const { icon = "", ...rest } = params;
+        super(typeof params === "string" ? {} : rest);
+        this.toggleClassName("font-icon");
 
-        if (typeof params === 'object')
+        if (typeof params === "object")
             this.icon = icon;
     }
 
@@ -19,7 +19,7 @@ class FontIcon extends Gtk.Label {
 
     get size() {
         return this.get_style_context()
-            .get_property('font-size', Gtk.StateFlags.NORMAL);
+            .get_property("font-size", Gtk.StateFlags.NORMAL);
     }
 
     vfunc_get_preferred_height() {
@@ -31,6 +31,6 @@ class FontIcon extends Gtk.Label {
     }
 }
 
-export default params => typeof params === 'string'
+export default params => typeof params === "string"
     ? Widget({ type: FontIcon, icon: params })
     : Widget({ type: FontIcon, ...params });

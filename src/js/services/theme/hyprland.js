@@ -8,6 +8,7 @@ export default function({
     hypr_active_border,
     hypr_inactive_border,
     hypr_group_active,
+    hypr_group_inactive,
     hypr_group_locked_active,
     radii,
     drop_shadow,
@@ -38,7 +39,7 @@ export default function({
         Utils.execAsync(`hyprctl keyword group:col.border_inactive ${hypr_inactive_border}`);
         Utils.execAsync(`hyprctl keyword group:col.border_locked_active ${hypr_group_locked_active}`);
         Utils.execAsync(`hyprctl keyword group:groupbar:col.active ${hypr_group_active}`);
-        Utils.execAsync(`hyprctl keyword group:groupbar:col.inactive ${hypr_inactive_border}`);
+        Utils.execAsync(`hyprctl keyword group:groupbar:col.inactive ${hypr_group_inactive}`);
         Utils.execAsync(`hyprctl keyword group:groupbar:col.locked_active ${hypr_group_locked_active}`);
         Utils.execAsync(`hyprctl keyword decoration:rounding ${radii}`);
         Utils.execAsync(`hyprctl keyword decoration:drop_shadow ${drop_shadow ? "yes" : "no"}`);

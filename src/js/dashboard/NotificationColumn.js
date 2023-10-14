@@ -1,15 +1,15 @@
-import icons from '../icons.js';
-import Notification from '../misc/Notification.js';
-import { Widget, Notifications } from '../imports.js';
+import icons from "../icons.js";
+import Notification from "../misc/Notification.js";
+import { Widget, Notifications } from "../imports.js";
 
 const ClearButton = () => Widget.Button({
     onClicked: () => Notifications.clear(),
-    binds: [['sensitive', Notifications, 'notifications', n => n.length > 0]],
+    binds: [["sensitive", Notifications, "notifications", n => n.length > 0]],
     child: Widget.Box({
         children: [
-            Widget.Label('Clear '),
+            Widget.Label("Clear "),
             Widget.Icon({
-                binds: [['icon', Notifications, 'notifications', n =>
+                binds: [["icon", Notifications, "notifications", n =>
                     n.length > 0 ? icons.trash.full : icons.trash.empty]],
             }),
         ],
@@ -17,9 +17,9 @@ const ClearButton = () => Widget.Button({
 });
 
 const Header = () => Widget.Box({
-    className: 'header',
+    className: "header",
     children: [
-        Widget.Label({ label: 'Notifications', hexpand: true, xalign: 0 }),
+        Widget.Label({ label: "Notifications", hexpand: true, xalign: 0 }),
         ClearButton(),
     ],
 });
@@ -36,31 +36,31 @@ const NotificationList = () => Widget.Box({
 });
 
 const Placeholder = () => Widget.Box({
-    className: 'placeholder',
+    className: "placeholder",
     vertical: true,
-    valign: 'center',
-    halign: 'center',
+    valign: "center",
+    halign: "center",
     vexpand: true,
     hexpand: true,
     children: [
         Widget.Icon(icons.notifications.silent),
-        Widget.Label('Your inbox is empty'),
+        Widget.Label("Your inbox is empty"),
     ],
-    binds: [['visible', Notifications, 'notifications', n => n.length === 0]],
+    binds: [["visible", Notifications, "notifications", n => n.length === 0]],
 });
 
 export default () => Widget.Box({
-    className: 'notifications',
+    className: "notifications",
     vertical: true,
     children: [
         Header(),
         Widget.Scrollable({
             vexpand: true,
-            className: 'notification-scrollable',
-            hscroll: 'never',
-            vscroll: 'automatic',
+            className: "notification-scrollable",
+            hscroll: "never",
+            vscroll: "automatic",
             child: Widget.Box({
-                className: 'notification-list',
+                className: "notification-list",
                 vertical: true,
                 children: [
                     NotificationList(),

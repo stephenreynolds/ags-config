@@ -82,6 +82,7 @@ const catppuccin_mocha = {
     hypr_active_border: "rgba(89b4faFF)",
     hypr_inactive_border: "rgba(00000000)",
     hypr_group_active: "rgba(f9e2afFF)",
+    hypr_group_inactive: "rgba(45475aFF)",
     hypr_group_locked_active: "rgba(f38ba8FF)",
 };
 
@@ -106,6 +107,7 @@ const rose_pine = {
     wallpaper_fg: "$fg_color",
     hypr_inactive_border: "rgba(00000000)",
     hypr_group_active: "rgba(ebbcbaFF)",
+    hypr_group_inactive: "rgba(6e6a86FF)",
     hypr_group_locked_active: "rgba(eb6f92FF)",
 };
 
