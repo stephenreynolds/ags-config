@@ -1,7 +1,6 @@
 import Overview from "./js/overview/Overview.js";
 import Dashboard from "./js/dashboard/Dashboard.js";
 import OSD from "./js/osd/OSD.js";
-import Applauncher from "./js/applauncher/Applauncher.js";
 import PowerMenu from "./js/powermenu/PowerMenu.js";
 import Verification from "./js/powermenu/Verification.js";
 import Desktop from "./js/desktop/Desktop.js";
@@ -26,7 +25,6 @@ export default {
         forMonitors(Desktop),
         forMonitors(Lockscreen),
         Notifications(options.primaryMonitor),
-        Applauncher(),
         Overview(),
         Dashboard(),
         PowerMenu(),

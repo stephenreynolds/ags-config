@@ -1,32 +1,35 @@
 import PopupWindow from "../misc/PopupWindow.js";
-import Workspace from "./Workspace.js";
-import { Utils, App, Widget, Hyprland } from "../imports.js";
+import Applauncher from "./Applauncher.js";
+import Notifications from "./Notifications.js";
+import Calendar from "./Calendar.js";
+import { Widget } from "../imports.js";
 
-const update = box => {
-    Utils.execAsync("hyprctl -j clients")
-        .then(clients => {
-            const json = JSON.parse(clients);
-            box.children.forEach(ch => ch.update(json));
-        })
-        .catch(console.error);
-};
+const Overview = () => Widget.CenterBox({
+    className: "overview",
+    spacing: 20,
+    startWidget: Widget.Box({
+        className: "left",
+    }),
+    centerWidget: Widget.Box({
+        className: "center",
+        children: [
+            Applauncher(),
+        ],
+    }),
+    endWidget: Widget.Box({
+        className: "right",
+        vertical: true,
+        halign: "end",
+        children: [
+            Notifications(),
+            Calendar(),
+        ],
+    }),
+});
 
 export default () => PopupWindow({
     name: "overview",
-    content: Widget.Box({
-        className: "overview",
-        setup: update,
-        connections: [[Hyprland, box => {
-            if (!App.getWindow("overview").visible)
-                return;
-
-            box.children = Hyprland.workspaces.map(w => {
-                if (w.id !== -99) {
-                    return Workspace(w.id);
-                }
-            });
-
-            update(box);
-        }]],
-    }),
+    expand: true,
+    layer: "overlay",
+    content: Overview(),
 });

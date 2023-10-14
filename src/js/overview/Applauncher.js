@@ -1,14 +1,11 @@
 import { Widget, App, Applications } from "../imports.js";
 import Separator from "../misc/Separator.js";
-import PopupWindow from "../misc/PopupWindow.js";
 import icons from "../icons.js";
-
-const WINDOW_NAME = "applauncher";
 
 const AppItem = app => Widget.Button({
     className: "app",
     onClicked: () => {
-        App.closeWindow(WINDOW_NAME);
+        App.closeWindow("overview");
         app.launch();
     },
     child: Widget.Box({
@@ -41,11 +38,11 @@ const AppItem = app => Widget.Button({
     }),
 });
 
-const Applauncher = () => {
+export default () => {
     const list = Widget.Box({ vertical: true });
 
     const placeholder = Widget.Label({
-        label: " Couldn't find a match",
+        label: "    Couldn't find a match",
         className: "placeholder",
     });
 
@@ -56,7 +53,7 @@ const Applauncher = () => {
         onAccept: ({ text }) => {
             const list = Applications.query(text);
             if (list[0]) {
-                App.toggleWindow(WINDOW_NAME);
+                App.toggleWindow("overview");
                 list[0].launch();
             }
         },
@@ -86,6 +83,8 @@ const Applauncher = () => {
             }),
             Widget.Scrollable({
                 hscroll: "never",
+                hexpand: true,
+                vexpand: true,
                 child: Widget.Box({
                     vertical: true,
                     children: [list, placeholder],
@@ -93,7 +92,7 @@ const Applauncher = () => {
             }),
         ],
         connections: [[App, (_, name, visible) => {
-            if (name !== WINDOW_NAME)
+            if (name !== "overview")
                 return;
 
             entry.set_text("");
@@ -102,8 +101,3 @@ const Applauncher = () => {
         }]],
     });
 };
-
-export default () => PopupWindow({
-    name: WINDOW_NAME,
-    content: Applauncher(),
-});

@@ -1,85 +1,87 @@
 window.desktop {
-    .clock-box-shadow {
-        border: 5px solid $wallpaper_fg;
-        border-radius: $radii;
+  .clock-box-shadow {
+    border: 5px solid $wallpaper_fg;
+    border-radius: $radii;
 
-        .clock-box {
-            border-radius: max($radii - 5px, 0);
-            padding: 0 14px;
+    .clock-box {
+      border-radius: max($radii - 5px, 0);
+      padding: 0 14px;
 
-            .clock {
-                color: $wallpaper_fg;
-                font-size: 140px;
-            }
-
-            .separator-box {
-                padding: 24px 12px;
-
-                separator {
-                    border-radius: $radii;
-                    min-width: 16px;
-                    min-height: 16px;
-                    background-color: $wallpaper_fg;
-                }
-            }
-        }
-    }
-
-    .date {
+      .clock {
         color: $wallpaper_fg;
-        font-size: 48px;
-    }
+        font-size: 140px;
+      }
 
-    @if $drop_shadow {
-        .clock-box-shadow, separator {
-            box-shadow: 2px 2px 2px 0 $shadow;
-        }
-
-        .clock-box {
-            box-shadow: inset 2px 2px 2px 0 $shadow;
-        }
-
-        label {
-            text-shadow: $text_shadow;
-        }
-    } @else {
-        .clock-box-shadow{
-            box-shadow: 0 0 0 $border_width $border_color,
-                        inset 0 0 0 $border_width $border_color;
-        }
+      .separator-box {
+        padding: 24px 12px;
 
         separator {
-            border: $border;
+          border-radius: $radii;
+          min-width: 16px;
+          min-height: 16px;
+          background-color: $wallpaper_fg;
         }
-
-        label {
-            @include text_border;
-        }
+      }
     }
+  }
+
+  .date {
+    color: $wallpaper_fg;
+    font-size: 48px;
+  }
+
+  @if $drop_shadow {
+    .clock-box-shadow,
+    separator {
+      box-shadow: 2px 2px 2px 0 $shadow;
+    }
+
+    .clock-box {
+      box-shadow: inset 2px 2px 2px 0 $shadow;
+    }
+
+    label {
+      text-shadow: $text_shadow;
+    }
+  } @else {
+    .clock-box-shadow {
+      box-shadow:
+        0 0 0 $border_width $border_color,
+        inset 0 0 0 $border_width $border_color;
+    }
+
+    separator {
+      border: $border;
+    }
+
+    label {
+      @include text_border;
+    }
+  }
 }
 
 .desktop-menu {
-    image {
-        margin-left: -14px;
-        margin-right: 6px;
-    }
+  image {
+    margin-left: -14px;
+    margin-right: 6px;
+  }
 }
 
 window.indicator .progress {
-    @include floating_widget;
-    padding: $spacing/2;
+  @include floating_widget;
+  padding: $spacing/2;
 
-    .fill {
-        border-radius: max($popover_radius - $spacing/2, 0);
-        background-color: $accent;
-        color: $accent_fg;
+  .fill {
+    border-radius: max($popover_radius - $spacing/2, 0);
+    background-color: $accent;
+    color: $accent_fg;
 
-        image {
-            -gtk-icon-transform: scale(0.7);
-        }
-
-        .font-icon {
-            font-size: 34px;
-        }
+    image {
+      -gtk-icon-transform: scale(0.7);
     }
+
+    .font-icon {
+      font-size: 34px;
+    }
+  }
 }
