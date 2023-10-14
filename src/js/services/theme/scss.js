@@ -28,7 +28,7 @@ $hover: transparentize(${t.widget_bg}, ${Math.max((t.widget_opacity * 0.90) / 10
 $widget_bg: transparentize(${t.widget_bg}, ${t.widget_opacity / 100});
 $active_gradient: linear-gradient(${t.active_gradient});
 
-$float_bg: color.change(${t.bg_color}, $alpha: ${t.float_opacity / 100});
+$float_bg: transparentize(${t.bg_color}, ${t.float_opacity / 100});
 
 $border_color: transparentize(${t.border_color}, ${t.border_opacity / 100});
 $border_width: ${t.border_width}px;

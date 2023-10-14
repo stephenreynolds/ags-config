@@ -42,7 +42,7 @@ const colors = {
     accent_fg: "#141414",
     widget_bg: "$fg_color",
     widget_opacity: 94,
-    float_opacity: 80,
+    float_opacity: 20,
     active_gradient: "to right, $accent, lighten($accent, 6%)",
     border_color: "$fg_color",
     border_opacity: 97,
