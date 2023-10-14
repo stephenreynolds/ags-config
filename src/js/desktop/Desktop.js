@@ -2,7 +2,7 @@ import Separator from "../misc/Separator.js";
 import Theme from "../services/theme/theme.js";
 import Clock from "../misc/Clock.js";
 import DesktopMenu from "./DesktopMenu.js";
-import { App, Widget } from "../imports.js";
+import { Widget } from "../imports.js";
 
 const DesktopClock = () => Widget.Box({
     className: "clock-box-shadow",
@@ -48,15 +48,12 @@ const Desktop = () => Widget.EventBox({
             box.valign = imports.gi.Gtk.Align[valign.toUpperCase()];
             box.setStyle(`margin: ${Number(offset)}px;`);
         }]],
-        child: Widget.EventBox({
-            onPrimaryClick: () => App.openWindow("dashboard"),
-            child: Widget.Box({
-                vertical: true,
-                children: [
-                    DesktopClock(),
-                    Clock({ format: "%A %B %e", className: "date" }),
-                ],
-            }),
+        child: Widget.Box({
+            vertical: true,
+            children: [
+                DesktopClock(),
+                Clock({ format: "%A %B %e", className: "date" }),
+            ],
         }),
     }),
 });
