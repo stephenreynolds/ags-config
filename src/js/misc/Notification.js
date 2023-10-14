@@ -101,7 +101,7 @@ export default notification => {
                         useMarkup: true,
                         xalign: 0,
                         justification: "left",
-                        label: notification.body,
+                        label: notification.body.replace(/&/g, "&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"),
                         wrap: true,
                     }),
                 ],
