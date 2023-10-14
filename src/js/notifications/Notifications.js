@@ -56,6 +56,6 @@ const PopupList = ({ transition = "slide_up" } = {}) => Widget.Box({
 export default monitor => Widget.Window({
     monitor,
     name: `notifications-${monitor}`,
-    anchor: ["bottom", "right"],
+    anchor: ["bottom"],
     child: PopupList(),
 });
