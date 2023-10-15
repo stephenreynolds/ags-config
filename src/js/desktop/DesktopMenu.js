@@ -22,7 +22,7 @@ const Item = (label, icon, onActivate) => Widget.MenuItem({
 export default () => Widget.Menu({
     className: "desktop-menu",
     children: [
-        Item("Applications", icons.apps.apps, () => App.openWindow("applauncher")),
+        Item("Overview", icons.apps.apps, () => App.openWindow("overview")),
         Widget.MenuItem({
             child: Widget.Box({
                 children: [
