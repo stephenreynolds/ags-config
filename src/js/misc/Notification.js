@@ -84,7 +84,7 @@ export default notification => {
                             Widget.Label({
                                 className: "time",
                                 valign: "start",
-                                label: GLib.DateTime.new_from_unix_local(notification.time).format("%-I:%M"),
+                                label: GLib.DateTime.new_from_unix_local(notification.time).format("%-I:%M %p"),
                             }),
                             Widget.Button({
                                 onHover: hover,
