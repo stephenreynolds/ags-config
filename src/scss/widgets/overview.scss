@@ -46,6 +46,72 @@ window#overview .overview {
   min-width: 1920px;
   min-height: 1080px;
 
+  .row {
+    margin-top: $spacing;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .left {
+    padding: 20px 10px 20px 20px;
+
+    .volume {
+      .mixer-item {
+        margin: 0 $spacing;
+        scale {
+          @include slider($width: 7px);
+        }
+        > box {
+          padding: $spacing;
+        }
+        label:last-child {
+          min-width: 3em;
+        }
+        image {
+          font-size: 20px;
+        }
+      }
+
+
+        .menu {
+          background-color: rgba(0, 0, 0, 0);
+          border: $border_width solid $popover_border_color;
+          border-radius: $radii;
+        }
+      }
+
+      .slider-box {
+        @include widget;
+        padding: $spacing;
+
+        > box:last-child {
+          margin-bottom: 0;
+        }
+
+        .slider > * {
+          margin-left: $spacing;
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+
+        button,
+        .icon {
+          @include button($flat: true);
+          padding: $spacing/2;
+        }
+
+        scale {
+          @include slider;
+
+          &:last-child {
+            margin-right: $spacing/2;
+          }
+        }
+  }
+    }
+
   .center {
     padding: 20px 10px;
 
@@ -134,7 +200,6 @@ window#overview .overview {
         }
       }
     }
-
   }
 
   .right {

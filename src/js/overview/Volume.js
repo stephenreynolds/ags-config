@@ -3,7 +3,7 @@ import FontIcon from "../misc/FontIcon.js";
 import Separator from "../misc/Separator.js";
 import { getAudioTypeIcon } from "../utils.js";
 import { Arrow, Menu } from "./ToggleButton.js";
-import { Audio, Widget, Utils } from "../imports.js";
+import { App, Audio, Widget, Utils } from "../imports.js";
 
 const TypeIndicator = () => Widget.Button({
     onClicked: () => Audio.speaker.isMuted = !Audio.speaker.isMuted,
@@ -87,6 +87,7 @@ const SinkItem = stream => Widget.Button({
     hexpand: true,
     onClicked: () => Audio.speaker = stream,
     child: Widget.Box({
+        spacing: 4,
         children: [
             Widget.Icon({
                 icon: getAudioTypeIcon(stream.iconName),
@@ -106,7 +107,10 @@ const SinkItem = stream => Widget.Button({
 });
 
 const SettingsButton = () => Widget.Button({
-    onClicked: "pavucontrol",
+    onClicked: () => {
+        App.closeWindow("overview");
+        Utils.execAsync("pavucontrol");
+    },
     hexpand: true,
     child: Widget.Box({
         children: [

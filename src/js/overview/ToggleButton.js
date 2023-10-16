@@ -72,6 +72,7 @@ export const Menu = ({ name, icon, title, content }) => Widget.Revealer({
         children: [
             Widget.Box({
                 className: "title",
+                spacing: 4,
                 children: [icon, title],
             }),
             Separator({ orientation: "horizontal" }),
