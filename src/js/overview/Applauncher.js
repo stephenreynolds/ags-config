@@ -1,12 +1,13 @@
 import { Widget, App, Applications } from "../imports.js";
 import Separator from "../misc/Separator.js";
 import icons from "../icons.js";
+import { launchApp } from "../utils.js";
 
 const AppItem = app => Widget.Button({
     className: "app",
     onClicked: () => {
         App.closeWindow("overview");
-        app.launch();
+        launchApp(app);
     },
     child: Widget.Box({
         children: [
@@ -54,7 +55,7 @@ export default () => {
             const list = Applications.query(text);
             if (list[0]) {
                 App.toggleWindow("overview");
-                list[0].launch();
+                launchApp(list[0]);
             }
         },
         onChange: ({ text }) => {

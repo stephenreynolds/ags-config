@@ -6,6 +6,7 @@ import Media from "./Media.js";
 import { NetworkToggle, WifiSelection } from "./Network.js";
 import { BluetoothToggle, BluetoothDevices } from "./Bluetooth.js";
 import DND from "./DND.js";
+import Dock from "./Dock.js";
 import { Volume, SinkSelector, AppMixer } from "./Volume.js";
 import { Widget } from "../imports.js";
 
@@ -54,8 +55,10 @@ const Overview = () => Widget.CenterBox({
     }),
     centerWidget: Widget.Box({
         className: "center",
+        vertical: true,
         children: [
             Applauncher(),
+            Dock(),
         ],
     }),
     endWidget: Widget.Box({
