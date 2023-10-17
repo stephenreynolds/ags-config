@@ -56,6 +56,11 @@ window#overview .overview {
   .left {
     padding: 20px 10px 20px 20px;
 
+    .media .player {
+      @include media;
+      margin-top: $spacing;
+    }
+
     .volume {
       .mixer-item {
         margin: 0 $spacing;
@@ -109,8 +114,22 @@ window#overview .overview {
             margin-right: $spacing/2;
           }
         }
-  }
     }
+
+    .network-widget {
+      @include widget;
+      button, .icon {
+          @include button($flat: true);
+          padding: $spacing / 1.5;
+      }
+
+        .menu {
+          background-color: rgba(0, 0, 0, 0);
+          border: $border_width solid $popover_border_color;
+          border-radius: $radii;
+        }
+    }
+  }
 
   .center {
     padding: 20px 10px;
