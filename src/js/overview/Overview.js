@@ -2,7 +2,6 @@ import PopupWindow from "../misc/PopupWindow.js";
 import Applauncher from "./Applauncher.js";
 import Notifications from "./Notifications.js";
 import Calendar from "./Calendar.js";
-import Media from "./Media.js";
 import { NetworkToggle, WifiSelection } from "./Network.js";
 import { BluetoothToggle, BluetoothDevices } from "./Bluetooth.js";
 import DND from "./DND.js";
@@ -35,7 +34,6 @@ const Overview = () => Widget.CenterBox({
         halign: "start",
         spacing: 10,
         children: [
-            Media(),
             Widget.Box({
                 className: "volume slider-box",
                 valign: "start",
