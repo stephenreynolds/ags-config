@@ -62,6 +62,7 @@ const MixerItem = stream => Widget.Box({
                         Widget.Label({
                             xalign: 0,
                             truncate: "end",
+                            maxWidthChars: 28,
                             binds: [["label", stream, "description"]],
                         }),
                         Widget.Slider({
