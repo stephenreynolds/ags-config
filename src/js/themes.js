@@ -20,7 +20,8 @@ const dark = {
 };
 
 const misc = {
-    wm_gaps: 10,
+    wm_gaps: 0,
+    wm_rounding: 0,
     radii: 9,
     spacing: 9,
     shadow: "rgba(0, 0, 0, 0.6)",
@@ -105,7 +106,8 @@ const rose_pine = {
     teal: "#9ccfd8",
     orange: "#ebbcba",
     wallpaper_fg: "$fg_color",
-    hypr_inactive_border: "rgba(00000000)",
+    hypr_active_border: "$green",
+    hypr_inactive_border: "$bg_color",
     hypr_group_active: "rgba(ebbcbaFF)",
     hypr_group_inactive: "rgba(6e6a86FF)",
     hypr_group_locked_active: "rgba(eb6f92FF)",

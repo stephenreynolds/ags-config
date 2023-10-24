@@ -10,7 +10,7 @@ export default function({
     hypr_group_active,
     hypr_group_inactive,
     hypr_group_locked_active,
-    radii,
+    wm_rounding,
     drop_shadow,
 }) {
     try {
@@ -41,7 +41,7 @@ export default function({
         Utils.execAsync(`hyprctl keyword group:groupbar:col.active ${hypr_group_active}`);
         Utils.execAsync(`hyprctl keyword group:groupbar:col.inactive ${hypr_group_inactive}`);
         Utils.execAsync(`hyprctl keyword group:groupbar:col.locked_active ${hypr_group_locked_active}`);
-        Utils.execAsync(`hyprctl keyword decoration:rounding ${radii}`);
+        Utils.execAsync(`hyprctl keyword decoration:rounding ${wm_rounding}`);
         Utils.execAsync(`hyprctl keyword decoration:drop_shadow ${drop_shadow ? "yes" : "no"}`);
     } catch (error) {
         console.error(error);
