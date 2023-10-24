@@ -5,7 +5,7 @@ import { Utils, App } from "./imports.js";
 
 export function forMonitors(widget) {
     const ws = JSON.parse(Utils.exec("hyprctl -j monitors"));
-    return ws.map(mon => widget(mon.id));
+    return ws.map((mon) => widget(mon.id));
 }
 
 export function createSurfaceFromWidget(widget) {
@@ -33,26 +33,32 @@ export function getAudioTypeIcon(icon) {
     ];
 
     for (const [from, to] of substitues) {
-        if (from === icon)
-            return to;
+        if (from === icon) return to;
     }
 
     return icon;
 }
 
 export function scssWatcher() {
-    return Utils.subprocess([
-        "inotifywait",
-        "--recursive",
-        "--event", "create,modify",
-        "-m", App.configDir + "/scss",
-    ], () => Theme.setup());
+    return Utils.subprocess(
+        [
+            "inotifywait",
+            "--recursive",
+            "--event",
+            "create,modify",
+            "-m",
+            App.configDir + "/scss",
+        ],
+        () => Theme.setup(),
+    );
 }
 
 export async function globalServices() {
     globalThis.ags = await import("./imports.js");
     globalThis.recorder = (await import("./services/screenrecord.js")).default;
-    globalThis.indicator = (await import("./services/onScreenIndicator.js")).default;
+    globalThis.indicator = (
+        await import("./services/onScreenIndicator.js")
+    ).default;
     globalThis.theme = (await import("./services/theme/theme.js")).default;
     globalThis.audio = globalThis.ags.Audio;
     globalThis.mpris = globalThis.ags.Mpris;

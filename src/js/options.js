@@ -9,12 +9,6 @@ export default {
 
     dock: {
         iconSize: 56,
-        pinnedApps: [
-            "firefox",
-            "nemo",
-            "obsidian",
-            "discord",
-            "steam",
-        ],
+        pinnedApps: ["firefox", "nemo", "obsidian", "discord", "steam"],
     },
 };
