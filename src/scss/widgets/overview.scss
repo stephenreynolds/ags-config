@@ -78,56 +78,68 @@ window#overview .overview {
         }
       }
 
+      .menu {
+        background-color: rgba(0, 0, 0, 0);
+        border: $border_width solid $popover_border_color;
+        border-radius: $radii;
+      }
+    }
 
-        .menu {
-          background-color: rgba(0, 0, 0, 0);
-          border: $border_width solid $popover_border_color;
-          border-radius: $radii;
+    .slider-box {
+      @include widget;
+      padding: $spacing;
+
+      > box:last-child {
+        margin-bottom: 0;
+      }
+
+      .slider > * {
+        margin-left: $spacing;
+        &:first-child {
+          margin-left: 0;
         }
       }
 
-      .slider-box {
-        @include widget;
-        padding: $spacing;
+      button,
+      .icon {
+        @include button($flat: true);
+        padding: $spacing/2;
+      }
 
-        > box:last-child {
-          margin-bottom: 0;
+      scale {
+        @include slider;
+
+        &:last-child {
+          margin-right: $spacing/2;
         }
-
-        .slider > * {
-          margin-left: $spacing;
-          &:first-child {
-            margin-left: 0;
-          }
-        }
-
-        button,
-        .icon {
-          @include button($flat: true);
-          padding: $spacing/2;
-        }
-
-        scale {
-          @include slider;
-
-          &:last-child {
-            margin-right: $spacing/2;
-          }
-        }
+      }
     }
 
     .network-widget {
       @include widget;
-      button, .icon {
-          @include button($flat: true);
-          padding: $spacing / 1.5;
+      button,
+      .icon {
+        @include button($flat: true);
+        padding: $spacing / 1.5;
       }
 
-        .menu {
-          background-color: rgba(0, 0, 0, 0);
-          border: $border_width solid $popover_border_color;
-          border-radius: $radii;
-        }
+      .menu {
+        background-color: rgba(0, 0, 0, 0);
+        border: $border_width solid $popover_border_color;
+        border-radius: $radii;
+      }
+    }
+
+    .system-tray {
+      @include floating_widget;
+      margin-bottom: 0;
+      padding: $spacing / 2;
+      background-color: rgba(0, 0, 0, 0);
+
+      .panel-button {
+        all: unset;
+        padding: $spacing;
+      }
     }
   }
 
@@ -308,62 +320,86 @@ window#overview .overview {
 }
 
 @mixin dock($spacing: $spacing * 0.7) {
+  separator {
+    border-radius: $radii;
+    background-color: transparentize($widget_bg, 0.8);
+    margin: 0 $spacing;
+  }
+
+  &.horizontal {
     separator {
-        border-radius: $radii;
-        background-color: transparentize($widget_bg, 0.8);
-        margin: 0 $spacing;
+      min-width: 2px;
+      min-height: 2em;
     }
 
-    &.horizontal {
-        separator {
-            min-width: 2px;
-            min-height: 2em;
-        }
+    button.focused .indicator {
+      min-width: 18px;
+    }
+  }
 
-        button.focused .indicator {
-            min-width: 18px;
-        }
+  button {
+    @include accs_button($flat: true);
+
+    image,
+    .box {
+      margin: $spacing;
+
+      @if $theme == "light" {
+        -gtk-icon-shadow: $text_shadow;
+      }
     }
 
-    button {
-        @include accs_button($flat: true);
-
-        image, .box {
-            margin: $spacing;
-
-            @if $theme == 'light' {
-                -gtk-icon-shadow: $text_shadow;
-            }
-        }
-
-        .indicator {
-            min-width: 6px;
-            min-height: 6px;
-            background-color: $fg_color;
-            border-radius: $radii;
-            margin-bottom: 2px;
-        }
-
-        &.single .indicator, &.nonrunning .indicator {
-            background-color: transparent;
-        }
-
-        &.focused {
-            .indicator {
-                background-image: $active_gradient;
-            }
-        }
+    .indicator {
+      min-width: 6px;
+      min-height: 6px;
+      background-color: $fg_color;
+      border-radius: $radii;
+      margin-bottom: 2px;
     }
+
+    &.single .indicator,
+    &.nonrunning .indicator {
+      background-color: transparent;
+    }
+
+    &.focused {
+      .indicator {
+        background-image: $active_gradient;
+      }
+    }
+  }
 }
 
 .dock {
-    @include dock;
-    @include floating_widget;
-    background-color: rgba(0, 0, 0, 0);
-    padding: $spacing / 2;
-    margin-bottom: 0;
+  @include dock;
+  @include floating_widget;
+  background-color: rgba(0, 0, 0, 0);
+  padding: $spacing / 2;
+  margin-bottom: 0;
 
-    button image {
-        font-size: 48px;
-    }
+  button image {
+    font-size: 48px;
+  }
+}
+
+@mixin panel_button($flat: false, $reactive: true) {
+  all: unset;
+
+  @include accs_button($flat, $reactive);
+  > * {
+    margin: $float;
+  }
+
+  label {
+    font-size: $font-size;
+    font-weight: bold;
+  }
+
+  image {
+    font-size: $font-size * 1.2;
+  }
+
+  > * {
+    padding: 0.3em 0.5em;
+  }
 }

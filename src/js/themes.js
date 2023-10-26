@@ -113,8 +113,4 @@ const rose_pine = {
     hypr_group_locked_active: "rgba(eb6f92FF)",
 };
 
-export default [
-    catppuccin_mocha,
-    kitty_dark,
-    rose_pine,
-];
+export default [catppuccin_mocha, kitty_dark, rose_pine];

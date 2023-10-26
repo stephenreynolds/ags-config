@@ -55,7 +55,7 @@ export default () => {
             const list = Applications.query(text);
             if (list[0]) {
                 App.toggleWindow("overview");
-                launchApp(list[0]);
+                list[0].launch();
             }
         },
         onChange: ({ text }) => {

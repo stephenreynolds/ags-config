@@ -8,9 +8,13 @@ import { Service, Utils } from "../../imports.js";
 const THEME_CACHE = Utils.CACHE_DIR + "/theme-overrides.json";
 
 class ThemeService extends Service {
-    static { Service.register(this); }
+    static {
+        Service.register(this);
+    }
 
-    get themes() { return themes; }
+    get themes() {
+        return themes;
+    }
 
     _defaultAvatar = `/home/${Utils.USER}/Pictures/Watashi/Avatars/swan-avatar.png`;
     _defaultTheme = themes[0].name;
@@ -18,12 +22,11 @@ class ThemeService extends Service {
     constructor() {
         super();
         Utils.exec("swww init");
-        this.setup();
+        this.setup(true);
     }
 
     openSettings() {
-        if (!this._dialog)
-            this._dialog = SettingsDialog();
+        if (!this._dialog) this._dialog = SettingsDialog();
 
         this._dialog.hide();
         this._dialog.present();
@@ -37,7 +40,7 @@ class ThemeService extends Service {
         return themes.find(({ name }) => name === this.getSetting("theme"));
     }
 
-    setup() {
+    setup(firstStart) {
         const theme = {
             ...this.getTheme(),
             ...this.settings,
@@ -45,7 +48,7 @@ class ThemeService extends Service {
         setupScss(theme);
         setupHyprland(theme);
         this.setupOther();
-        this.setupWallpaper();
+        this.setupWallpaper(firstStart);
     }
 
     reset() {
@@ -59,21 +62,26 @@ class ThemeService extends Service {
         const darkmode = this.getSetting("color_scheme") === "dark";
 
         if (Utils.exec("which gsettings")) {
-            const gsettings = "gsettings set org.gnome.desktop.interface color-scheme";
-            Utils.execAsync(`${gsettings} "prefer-${darkmode ? "dark" : "light"}"`).catch(print);
+            const gsettings =
+                "gsettings set org.gnome.desktop.interface color-scheme";
+            Utils.execAsync(
+                `${gsettings} "prefer-${darkmode ? "dark" : "light"}"`,
+            ).catch(print);
         }
     }
 
-    setupWallpaper() {
+    setupWallpaper(firstStart = false) {
         Utils.execAsync([
-            "swww", "img",
+            "swww",
+            "img",
+            "--transition-type",
+            `${firstStart ? "none" : "wipe"}`,
             this.getSetting("wallpaper"),
         ]).catch(print);
     }
 
     get settings() {
-        if (this._settings)
-            return this._settings;
+        if (this._settings) return this._settings;
 
         try {
             this._settings = JSON.parse(Utils.readFile(THEME_CACHE));
@@ -87,14 +95,19 @@ class ThemeService extends Service {
     setSetting(prop, value) {
         const settings = this.settings;
         settings[prop] = value;
-        Utils.writeFile(JSON.stringify(settings, null, 2), THEME_CACHE).catch(print);
+        Utils.writeFile(JSON.stringify(settings, null, 2), THEME_CACHE).catch(
+            print,
+        );
         this._settings = settings;
         this.emit("changed");
 
         if (prop === "layout") {
             if (!this._notiSent) {
                 this._notiSent = true;
-                Utils.execAsync(["notify-send", "Layout Change Needs a Reload"]);
+                Utils.execAsync([
+                    "notify-send",
+                    "Layout Change Needs a Reload",
+                ]);
             }
             return;
         }
@@ -103,8 +116,7 @@ class ThemeService extends Service {
     }
 
     getSetting(prop) {
-        if (prop === "theme")
-            return this.settings.theme || this._defaultTheme;
+        if (prop === "theme") return this.settings.theme || this._defaultTheme;
 
         if (prop === "avatar")
             return this.settings.avatar || this._defaultAvatar;
