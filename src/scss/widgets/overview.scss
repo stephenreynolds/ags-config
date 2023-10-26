@@ -129,6 +129,18 @@ window#overview .overview {
         border-radius: $radii;
       }
     }
+
+    .system-tray {
+      @include floating_widget;
+      margin-bottom: 0;
+      padding: $spacing / 2;
+      background-color: rgba(0, 0, 0, 0);
+
+      .panel-button {
+        all: unset;
+        padding: $spacing;
+      }
+    }
   }
 
   .center {
@@ -367,5 +379,27 @@ window#overview .overview {
 
   button image {
     font-size: 48px;
+  }
+}
+
+@mixin panel_button($flat: false, $reactive: true) {
+  all: unset;
+
+  @include accs_button($flat, $reactive);
+  > * {
+    margin: $float;
+  }
+
+  label {
+    font-size: $font-size;
+    font-weight: bold;
+  }
+
+  image {
+    font-size: $font-size * 1.2;
+  }
+
+  > * {
+    padding: 0.3em 0.5em;
   }
 }

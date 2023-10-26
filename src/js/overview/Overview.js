@@ -6,6 +6,7 @@ import { NetworkToggle, WifiSelection } from "./Network.js";
 import { BluetoothToggle, BluetoothDevices } from "./Bluetooth.js";
 import DND from "./DND.js";
 import Dock from "./Dock.js";
+import SystemTray from "./SystemTray.js";
 import { Volume, SinkSelector, AppMixer } from "./Volume.js";
 import { Widget } from "../imports.js";
 
@@ -38,19 +39,35 @@ const Overview = () =>
             spacing: 10,
             children: [
                 Widget.Box({
-                    className: "volume slider-box",
-                    valign: "start",
-                    child: Row([Volume()], [SinkSelector(), AppMixer()]),
+                    vertical: true,
+                    spacing: 10,
+                    vexpand: true,
+                    children: [
+                        Widget.Box({
+                            className: "volume slider-box",
+                            valign: "start",
+                            child: Row(
+                                [Volume()],
+                                [SinkSelector(), AppMixer()],
+                            ),
+                        }),
+                        Widget.Box({
+                            className: "network-widget",
+                            child: Row(
+                                [
+                                    Homogeneous([
+                                        NetworkToggle(),
+                                        BluetoothToggle(),
+                                    ]),
+                                    DND(),
+                                ],
+                                [WifiSelection(), BluetoothDevices()],
+                            ),
+                        }),
+                    ],
                 }),
                 Widget.Box({
-                    className: "network-widget",
-                    child: Row(
-                        [
-                            Homogeneous([NetworkToggle(), BluetoothToggle()]),
-                            DND(),
-                        ],
-                        [WifiSelection(), BluetoothDevices()],
-                    ),
+                    children: [SystemTray()],
                 }),
             ],
         }),
