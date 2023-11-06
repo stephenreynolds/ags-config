@@ -20,7 +20,7 @@ const Item = (label, icon, onActivate) => Widget.MenuItem({
 });
 
 export default () => Widget.Menu({
-    className: "desktop-menu",
+    class_name: "desktop-menu",
     children: [
         Item("Overview", icons.apps.apps, () => App.openWindow("overview")),
         Widget.MenuItem({
@@ -44,7 +44,7 @@ export default () => Widget.Menu({
                 ],
             }),
         }),
-        Widget({ type: Gtk.SeparatorMenuItem }),
+        new Gtk.SeparatorMenuItem,
         Item("Settings", icons.settings, () => Theme.openSettings()),
     ],
 });

@@ -17,23 +17,23 @@ function getDayString(time) {
 }
 
 export default () => Widget.Box({
-    className: "datemenu",
+    class_name: "datemenu",
     vertical: true,
-    halign: "end",
+    hpack: "end",
     children: [
         Widget.Label({
-            className: "date",
+            class_name: "date",
             xalign: 0,
             connections: [[1000, label =>
                 label.label = GLib.DateTime.new_now_local().format("%A, %B %e"),
             ]],
         }),
         Widget.Box({
-            className: "timezones",
+            class_name: "timezones",
             spacing: 20,
             children: [
                 Widget.Label({
-                    className: "tz-local",
+                    class_name: "tz-local",
                     connections: [[1000, label =>
                         label.label = GLib.DateTime.new_now_local().format(TIME_FORMAT),
                     ]],
@@ -43,15 +43,15 @@ export default () => Widget.Box({
                         Widget.Box({
                             vertical: true,
                             hexpand: true,
-                            halign: "start",
+                            hpack: "start",
                             children: [
                                 Widget.Label({
-                                    className: "tz-label",
+                                    class_name: "tz-label",
                                     label: "UTC",
                                     xalign: 0,
                                 }),
                                 Widget.Label({
-                                    className: "tz-label",
+                                    class_name: "tz-label",
                                     label: "Japan",
                                     xalign: 0,
                                 }),
@@ -60,10 +60,10 @@ export default () => Widget.Box({
                         Widget.Box({
                             vertical: true,
                             hexpand: true,
-                            halign: "start",
+                            hpack: "start",
                             children: [
                                 Widget.Label({
-                                    className: "tz-utc",
+                                    class_name: "tz-utc",
                                     xalign: 0,
                                     connections: [[1000, label => {
                                         const time = GLib.DateTime.new_now_utc();
@@ -72,7 +72,7 @@ export default () => Widget.Box({
                                     }]],
                                 }),
                                 Widget.Label({
-                                    className: "tz-jst",
+                                    class_name: "tz-jst",
                                     xalign: 0,
                                     connections: [[1000, label => {
                                         const time = GLib.DateTime.new_now(GLib.TimeZone.new("Asia/Tokyo"));
@@ -87,13 +87,12 @@ export default () => Widget.Box({
             ],
         }),
         Widget.Box({
-            className: "calendar",
-            halign: "end",
+            class_name: "calendar",
+            hpack: "end",
             children: [
-                Widget({
-                    type: imports.gi.Gtk.Calendar,
+                Widget.Calendar({
                     hexpand: true,
-                    halign: "center",
+                    hpack: "center",
                 }),
             ],
         }),

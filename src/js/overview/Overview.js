@@ -12,7 +12,7 @@ import { Widget } from "../imports.js";
 
 const Row = (toggles, menus = []) =>
     Widget.Box({
-        className: "row",
+        class_name: "row",
         vertical: true,
         children: [
             Widget.Box({
@@ -30,12 +30,12 @@ const Homogeneous = (toggles) =>
 
 const Overview = () =>
     Widget.CenterBox({
-        className: "overview",
+        class_name: "overview",
         spacing: 20,
         startWidget: Widget.Box({
-            className: "left",
+            class_name: "left",
             vertical: true,
-            halign: "start",
+            hpack: "start",
             spacing: 10,
             children: [
                 Widget.Box({
@@ -44,15 +44,15 @@ const Overview = () =>
                     vexpand: true,
                     children: [
                         Widget.Box({
-                            className: "volume slider-box",
-                            valign: "start",
+                            class_name: "volume slider-box",
+                            vpack: "start",
                             child: Row(
                                 [Volume()],
                                 [SinkSelector(), AppMixer()],
                             ),
                         }),
                         Widget.Box({
-                            className: "network-widget",
+                            class_name: "network-widget",
                             child: Row(
                                 [
                                     Homogeneous([
@@ -72,14 +72,14 @@ const Overview = () =>
             ],
         }),
         centerWidget: Widget.Box({
-            className: "center",
+            class_name: "center",
             vertical: true,
             children: [Applauncher(), Dock()],
         }),
         endWidget: Widget.Box({
-            className: "right",
+            class_name: "right",
             vertical: true,
-            halign: "end",
+            hpack: "end",
             children: [Notifications(), Calendar()],
         }),
     });

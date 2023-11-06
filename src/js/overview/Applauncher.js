@@ -4,8 +4,8 @@ import icons from "../icons.js";
 import { launchApp } from "../utils.js";
 
 const AppItem = app => Widget.Button({
-    className: "app",
-    onClicked: () => {
+    class_name: "app",
+    on_clicked: () => {
         App.closeWindow("overview");
         launchApp(app);
     },
@@ -19,19 +19,19 @@ const AppItem = app => Widget.Button({
                 vertical: true,
                 children: [
                     Widget.Label({
-                        className: "title",
+                        class_name: "title",
                         label: app.name,
                         xalign: 0,
-                        valign: "center",
+                        vpack: "center",
                         ellipsize: 3,
                     }),
                     Widget.Label({
-                        className: "description",
+                        class_name: "description",
                         label: app.description || "",
                         wrap: true,
                         xalign: 0,
                         justification: "left",
-                        valign: "center",
+                        vpack: "center",
                     }),
                 ],
             }),
@@ -44,7 +44,7 @@ export default () => {
 
     const placeholder = Widget.Label({
         label: "    Couldn't find a match",
-        className: "placeholder",
+        class_name: "placeholder",
     });
 
     const entry = Widget.Entry({
@@ -71,12 +71,12 @@ export default () => {
     });
 
     return Widget.Box({
-        className: "applauncher",
+        class_name: "applauncher",
         properties: [["list", list]],
         vertical: true,
         children: [
             Widget.Box({
-                className: "header",
+                class_name: "header",
                 children: [
                     Widget.Icon(icons.apps.search),
                     entry,

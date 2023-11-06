@@ -20,7 +20,7 @@ function substitute(str) {
 }
 
 const Client = ({ address, size: [w, h], class: c, title } = {}) => Widget.Button({
-    className: "client",
+    class_name: "client",
     child: Widget.Icon({
         style: `
             min-width: ${w * SCALE}px;
@@ -30,7 +30,7 @@ const Client = ({ address, size: [w, h], class: c, title } = {}) => Widget.Butto
     }),
     tooltipText: title,
     onSecondaryClick: () => Utils.execAsync(`hyprctl dispatch closewindow address:${address}`).catch(print),
-    onClicked: () => {
+    on_clicked: () => {
         Utils.execAsync(`hyprctl dispatch focuswindow address:${address}`)
             .then(() => App.closeWindow("overview"))
             .catch(print);
@@ -50,8 +50,8 @@ export default index => {
     const fixed = Gtk.Fixed.new();
 
     const widget = Widget.Box({
-        className: "workspace",
-        valign: "center",
+        class_name: "workspace",
+        vpack: "center",
         style: `
             min-width: ${1920 * SCALE}px;
             min-height: ${1080 * SCALE}px;

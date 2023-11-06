@@ -6,8 +6,7 @@ export default () => {
         style: 'font-size: 1.2em;',
     });
 
-    const flowbox = Widget({
-        type: Gtk.FlowBox,
+    const flowbox = Widget.FlowBox({
         min_children_per_line: 10,
         connections: [['child-activated', (_, { child }) => {
             selected.label = child.iconName;
@@ -30,9 +29,8 @@ export default () => {
         }),
     });
 
-    return Widget({
+    return Widget.Window({
         name: 'icons',
-        type: Gtk.Window,
         visible: true,
         child: Widget.Box({
             style: 'padding: 30px;',

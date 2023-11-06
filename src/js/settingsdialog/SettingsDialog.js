@@ -6,18 +6,18 @@ import { Widget, Variable } from "../imports.js";
 
 const Row = (title, child) =>
     Widget.Box({
-        className: "row",
+        class_name: "row",
         children: [Widget.Label(`${title}: `), child],
     });
 
 const Img = (title, prop) =>
     Row(
         title,
-        Widget({
+        Widget.FileChooserButton({
             title,
             type: Gtk.FileChooserButton,
             hexpand: true,
-            halign: "end",
+            hpack: "end",
             connections: [
                 [
                     "selection-changed",
@@ -34,14 +34,14 @@ const Img = (title, prop) =>
 const SpinButton = (title, prop, max = 100, min = 0) =>
     Row(
         title,
-        Widget({
+        Widget.SpinButton({
             type: Gtk.SpinButton,
             setup: (w) => {
                 w.set_range(min, max);
                 w.set_increments(1, 1);
             },
             hexpand: true,
-            halign: "end",
+            hpack: "end",
             connections: [
                 [
                     "value-changed",
@@ -62,9 +62,8 @@ const SpinButton = (title, prop, max = 100, min = 0) =>
 const SwitchButton = (title, prop) =>
     Row(
         title,
-        Widget({
-            type: Gtk.Switch,
-            halign: "end",
+        Widget.Switch({
+            hpack: "end",
             hexpand: true,
             connections: [
                 [
@@ -88,20 +87,19 @@ const Color = (title, prop) =>
         title,
         Widget.Box({
             hexpand: true,
-            halign: "end",
-            className: "color",
+            hpack: "end",
+            class_name: "color",
             children: [
                 Widget.Entry({
                     onAccept: ({ text }) => Theme.setSetting(prop, text),
-                    valign: "center",
+                    vpack: "center",
                     connections: [
                         [Theme, (w) => (w.text = Theme.getSetting(prop))],
                     ],
                 }),
-                Widget({
-                    type: Gtk.ColorButton,
+                Widget.ColorButton({
                     alpha: true,
-                    valign: "center",
+                    vpack: "center",
                     connections: [
                         [
                             "color-set",
@@ -122,9 +120,9 @@ const Text = (title, prop) =>
     Row(
         title,
         Widget.Entry({
-            className: "text",
+            class_name: "text",
             hexpand: true,
-            halign: "end",
+            hpack: "end",
             connections: [[Theme, (w) => (w.text = Theme.getSetting(prop))]],
             onAccept: ({ text }) => Theme.setSetting(prop, text),
         }),
@@ -134,9 +132,9 @@ const TextSpinButton = (title, prop, list) =>
     Row(
         title,
         Widget.Box({
-            className: "text-spin",
+            class_name: "text-spin",
             hexpand: true,
-            halign: "end",
+            hpack: "end",
             properties: [
                 ["values", list],
                 [
@@ -186,10 +184,9 @@ const TextSpinButton = (title, prop, list) =>
 const FontButton = (title, prop) =>
     Row(
         title,
-        Widget({
-            type: Gtk.FontButton,
+        Widget.FontButton({
             hexpand: true,
-            halign: "end",
+            hpack: "end",
             useSize: false,
             showSize: false,
             fontName: Theme.getSetting(prop),
@@ -210,7 +207,7 @@ const showPage = (p) => (page.value = p);
 const Tab = (name) =>
     Widget.Button({
         hexpand: true,
-        className: "tab",
+        class_name: "tab",
         onClicked: () => showPage(name),
         child: Widget.Label(name),
         connections: [
@@ -221,18 +218,18 @@ const Tab = (name) =>
 const Layout = (pages) =>
     Widget.Box({
         vertical: true,
-        className: "settings",
+        class_name: "settings",
         hexpand: false,
         children: [
             Widget.Box({
-                className: "headerbar",
-                valign: "start",
+                class_name: "headerbar",
+                vpack: "start",
                 child: Widget.Box({
-                    className: "tabs",
+                    class_name: "tabs",
                     children: [
                         ...Object.keys(pages).map((page) => Tab(page)),
                         Widget.Button({
-                            className: "tab",
+                            class_name: "tab",
                             onClicked: () => Theme.reset(),
                             child: Widget.Label("󰦛 Reset"),
                             hexpand: true,
@@ -241,7 +238,7 @@ const Layout = (pages) =>
                 }),
             }),
             Widget.Box({
-                className: "content",
+                class_name: "content",
                 child: Widget.Stack({
                     transition: "slide_left_right",
                     items: Object.keys(pages).map((page) => [
@@ -253,7 +250,7 @@ const Layout = (pages) =>
             }),
             Widget.Label({
                 wrap: true,
-                className: "disclaimer",
+                class_name: "disclaimer",
                 label:
                     "These settings override all preset themes. " +
                     "To make them permanent: edit ~/.config/ags/theme/themes.js",
@@ -270,13 +267,12 @@ const Page = (children) =>
     });
 
 export default () =>
-    Widget({
-        type: Gtk.Window,
+    Widget.Window({
         name: "settings",
         child: Layout({
             "󰒓 General": Page([
                 Wallpaper({
-                    className: "row",
+                    class_name: "row",
                     hexpand: true,
                     vexpand: true,
                 }),

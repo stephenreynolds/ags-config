@@ -3,16 +3,16 @@ import { Widget } from '../imports.js';
 
 export default ({ shader = true, ...props } = {}) => Widget.Box({
     ...props,
-    className: 'avatar',
+    class_name: 'avatar',
     connections: [[Theme, box => {
-        box.setStyle(`
+        box.setCss(`
             background-image: url('${Theme.getSetting('avatar')}');
             background-size: cover;
         `);
     }]],
     children: [
         shader && Widget.Box({
-            className: 'shader',
+            class_name: 'shader',
             vexpand: true,
             hexpand: true,
         }),

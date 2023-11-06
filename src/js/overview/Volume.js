@@ -6,7 +6,7 @@ import { Arrow, Menu } from "./ToggleButton.js";
 import { App, Audio, Widget, Utils } from "../imports.js";
 
 const TypeIndicator = () => Widget.Button({
-    onClicked: () => Audio.speaker.isMuted = !Audio.speaker.isMuted,
+    on_clicked: () => Audio.speaker.isMuted = !Audio.speaker.isMuted,
     child: Widget.Icon({
         connections: [[Audio, icon => {
             if (!Audio.speaker)
@@ -28,7 +28,7 @@ const VolumeSlider = () => Widget.Slider({
 });
 
 export const Volume = () => Widget.Box({
-    className: "slider",
+    class_name: "slider",
     children: [
         TypeIndicator(),
         VolumeSlider(),
@@ -44,7 +44,7 @@ export const Volume = () => Widget.Box({
 
 const MixerItem = stream => Widget.Box({
     hexpand: true,
-    className: "mixer-item",
+    class_name: "mixer-item",
     children: [
         Widget.Icon({
             binds: [["tooltipText", stream, "name"]],
@@ -86,7 +86,7 @@ const MixerItem = stream => Widget.Box({
 
 const SinkItem = stream => Widget.Button({
     hexpand: true,
-    onClicked: () => Audio.speaker = stream,
+    on_clicked: () => Audio.speaker = stream,
     child: Widget.Box({
         spacing: 4,
         children: [
@@ -98,7 +98,7 @@ const SinkItem = stream => Widget.Button({
             Widget.Icon({
                 icon: icons.tick,
                 hexpand: true,
-                halign: "end",
+                hpack: "end",
                 connections: [["draw", icon => {
                     icon.visible = Audio.speaker === stream;
                 }]],
@@ -108,7 +108,7 @@ const SinkItem = stream => Widget.Button({
 });
 
 const SettingsButton = () => Widget.Button({
-    onClicked: () => {
+    on_clicked: () => {
         App.closeWindow("overview");
         Utils.execAsync("pavucontrol");
     },
@@ -126,7 +126,7 @@ export const AppMixer = () => Menu({
     icon: FontIcon(icons.audio.mixer),
     title: Widget.Label("App Mixer"),
     content: Widget.Box({
-        className: "app-mixer",
+        class_name: "app-mixer",
         vertical: true,
         children: [
             Widget.Box({
@@ -144,7 +144,7 @@ export const SinkSelector = () => Menu({
     icon: Widget.Icon(icons.audio.type.headset),
     title: Widget.Label("Sink Selector"),
     content: Widget.Box({
-        className: "sink-selector",
+        class_name: "sink-selector",
         vertical: true,
         children: [
             Widget.Box({

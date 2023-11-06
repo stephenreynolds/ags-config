@@ -6,13 +6,13 @@ import { launchApp } from "../utils.js";
 const AppButton = ({ icon, ...rest }) => Widget.Button({
     ...rest,
     child: Widget.Box({
-        className: "box",
+        class_name: "box",
         child: Widget.Overlay({
             child: Widget.Icon({ icon, size: options.dock.iconSize }),
             overlays: [Widget.Box({
-                className: "indicator",
-                valign: "end",
-                halign: "center",
+                class_name: "indicator",
+                vpack: "end",
+                hpack: "center",
             })],
         }),
     }),
@@ -38,7 +38,7 @@ const Taskbar = () => Widget.Box({
 });
 
 const PinnedApps = () => Widget.Box({
-    className: "pins",
+    class_name: "pins",
     homogeneous: true,
     children: options.dock.pinnedApps
         .map(term => ({ app: Applications.query(term)?.[0], term }))
@@ -79,13 +79,13 @@ export default () => {
     const pinnedapps = PinnedApps();
     const taskbar = Taskbar();
     const separator = Separator({
-        valign: "center",
-        halign: "center",
+        vpack: "center",
+        hpack: "center",
         orientation: "vertical",
         connections: [[Hyprland, box => box.visible = taskbar.children.length > 0]],
     });
     return Widget.Box({
-        className: "dock",
+        class_name: "dock",
         children: [pinnedapps, separator, taskbar],
     });
 };

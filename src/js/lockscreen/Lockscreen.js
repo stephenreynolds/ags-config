@@ -6,27 +6,27 @@ import Layer from "gi://GtkLayerShell";
 
 export default monitor => Widget.Window({
     name: `lockscreen${monitor}`,
-    className: "lockscreen",
+    class_name: "lockscreen",
     monitor,
     layer: "overlay",
     visible: false,
     setup: self => Layer.set_keyboard_mode(self, Layer.KeyboardMode.EXCLUSIVE),
     connections: [[Lockscreen, (w, lock) => w.visible = lock, "lock"]],
     child: Widget.Box({
-        style: "min-width: 3000px; min-height: 2000px;",
-        className: "shader",
+        css: "min-width: 3000px; min-height: 2000px;",
+        class_name: "shader",
         child: Widget.Box({
-            className: "content",
+            class_name: "content",
             vertical: true,
             hexpand: true,
             vexpand: true,
-            halign: "center",
-            valign: "center",
+            hpack: "center",
+            vpack: "center",
             children: [
                 Avatar({
                     shader: false,
-                    halign: "center",
-                    valign: "center",
+                    hpack: "center",
+                    vpack: "center",
                 }),
                 Widget.Box({
                     children: [
@@ -35,11 +35,11 @@ export default monitor => Widget.Window({
                             visibility: false,
                             placeholderText: "Password",
                             onAccept: ({ text }) => Lockscreen.auth(text),
-                            halign: "center",
+                            hpack: "center",
                             hexpand: true,
                         }),
                         Spinner({
-                            valign: "center",
+                            vpack: "center",
                             connections: [[Lockscreen, (w, auth) => w.visible = auth, "authenticating"]],
                         }),
                     ],

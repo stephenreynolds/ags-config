@@ -24,6 +24,6 @@ const SysTrayItem = (item) =>
 
 export default () =>
     Widget.Box({
-        className: "system-tray",
+        class_name: "system-tray",
         binds: [["children", SystemTray, "items", (i) => i.map(SysTrayItem)]],
     });

@@ -19,13 +19,13 @@ export const Arrow = (name, activate) => Widget.Button({
                 for (let i = 0; i < 9; ++i) {
                     Utils.timeout(15 * i, () => {
                         icon._deg += step;
-                        icon.setStyle(`-gtk-icon-transform: rotate(${icon._deg}deg);`);
+                        icon.setCss(`-gtk-icon-transform: rotate(${icon._deg}deg);`);
                     });
                 }
             }
         }]],
     }),
-    onClicked: () => {
+    on_clicked: () => {
         opened.value = opened.value === name ? "" : name;
         if (activate)
             activate();
@@ -37,7 +37,7 @@ export const ArrowToggleButton = ({
     activateOnArrow = true,
     connection: [service, condition],
 }) => Widget.Box({
-    className: "toggle-button",
+    class_name: "toggle-button",
     connections: [[service, box => {
         box.toggleClassName("active", condition());
     }]],
@@ -47,7 +47,7 @@ export const ArrowToggleButton = ({
                 hexpand: true,
                 children: [icon, label],
             }),
-            onClicked: () => {
+            on_clicked: () => {
                 if (condition()) {
                     deactivate();
                     if (opened.value === name)
@@ -67,17 +67,17 @@ export const Menu = ({ name, icon, title, content }) => Widget.Revealer({
         revealer.revealChild = opened.value === name;
     }]],
     child: Widget.Box({
-        className: "menu",
+        class_name: "menu",
         vertical: true,
         children: [
             Widget.Box({
-                className: "title",
+                class_name: "title",
                 spacing: 4,
                 children: [icon, title],
             }),
             Separator({ orientation: "horizontal" }),
             Widget.Box({
-                className: "content",
+                class_name: "content",
                 children: [content],
             }),
         ],
@@ -88,12 +88,12 @@ export const SimpleToggleButton = ({
     icon, label, toggle,
     connection: [service, condition],
 }) => Widget.Button({
-    className: "simple-toggle",
+    class_name: "simple-toggle",
     connections: [[service, box => {
         box.toggleClassName("active", condition());
     }]],
     child: Widget.Box({
         children: [icon, label],
     }),
-    onClicked: toggle,
+    on_clicked: toggle,
 });
