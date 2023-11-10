@@ -1,6 +1,6 @@
 import { App, Utils } from "../../imports.js";
 
-const noAlphaignore = ["verification", "powermenu", "lockscreen", "overview"];
+const noAlphaignore = ["verification", "powermenu", "overview"];
 
 export default function ({
     wm_gaps,
