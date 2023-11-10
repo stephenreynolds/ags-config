@@ -1,7 +1,7 @@
 import Theme from "../services/theme/theme.js";
 import PowerMenu from "../services/powermenu.js";
 import icons from "../icons.js";
-import { App, Widget } from "../imports.js";
+import { App, Utils, Widget } from "../imports.js";
 import Gtk from "gi://Gtk";
 
 const Item = (label, icon, onActivate) =>
