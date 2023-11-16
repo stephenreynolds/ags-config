@@ -28,7 +28,7 @@ const misc = {
     drop_shadow: false,
     transition: 200,
     desktop_clock: "center center",
-    font: "Inter",
+    font: "SF Pro Display",
     mono_font: "CaskaydiaCove Nerd Font",
     font_size: 16,
 };

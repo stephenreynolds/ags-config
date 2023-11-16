@@ -2,7 +2,7 @@ import Cairo from "cairo";
 import icons from "./icons.js";
 import Theme from "./services/theme/theme.js";
 import Gdk from "gi://Gdk";
-import { Utils, App } from "./imports.js";
+import { Hyprland, Utils, App } from "./imports.js";
 
 export function range(length, start = 1) {
     return Array.from({ length }, (_, i) => i + start);
@@ -60,7 +60,6 @@ export function scssWatcher() {
 
 export async function globalServices() {
     globalThis.ags = await import("./imports.js");
-    globalThis.recorder = (await import("./services/screenrecord.js")).default;
     globalThis.indicator = (
         await import("./services/onScreenIndicator.js")
     ).default;
@@ -69,7 +68,7 @@ export async function globalServices() {
     globalThis.mpris = globalThis.ags.Mpris;
 }
 
-export function launchApp(app) {
-    Utils.execAsync(`hyprctl dispatch exec ${app.executable}`);
+export async function launchApp(app) {
+    await Hyprland.sendMessage(`dispatch exec ${app.executable}`);
     app.frequency += 1;
 }

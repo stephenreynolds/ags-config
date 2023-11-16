@@ -1,5 +1,5 @@
 import options from "./options.js";
-import { Variable, Utils } from "./imports.js";
+import { Variable } from "./imports.js";
 
 const prettyUptime = (str) => {
     if (str.length >= 4) return str;
@@ -16,32 +16,6 @@ export const uptime = Variable(0, {
         (line) => prettyUptime(line.split(/\s+/)[2].replace(",", "")),
     ],
 });
-
-export const distro = Utils.exec("cat /etc/os-release")
-    .split("\n")
-    .find((line) => line.startsWith("ID"))
-    .split("=")[1];
-
-export const distroIcon = (() => {
-    switch (distro) {
-        case "fedora":
-            return "";
-        case "arch":
-            return "";
-        case "nixos":
-            return "";
-        case "debian":
-            return "";
-        case "opensuse-tumbleweed":
-            return "";
-        case "ubuntu":
-            return "";
-        case "endeavouros":
-            return "";
-        default:
-            return "";
-    }
-})();
 
 const divide = ([total, free]) => free / total;
 export const cpu = Variable(0, {
