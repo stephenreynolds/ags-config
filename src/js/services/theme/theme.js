@@ -16,7 +16,6 @@ class ThemeService extends Service {
         return themes;
     }
 
-    _defaultAvatar = `/home/${Utils.USER}/Pictures/Watashi/Avatars/swan-avatar.png`;
     _defaultTheme = themes[0].name;
 
     constructor() {
@@ -117,9 +116,6 @@ class ThemeService extends Service {
 
     getSetting(prop) {
         if (prop === "theme") return this.settings.theme || this._defaultTheme;
-
-        if (prop === "avatar")
-            return this.settings.avatar || this._defaultAvatar;
 
         return this.settings[prop] !== undefined
             ? this.settings[prop]
