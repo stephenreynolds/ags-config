@@ -59,7 +59,7 @@ export default async function(theme) {
     try {
         await Utils.writeFile(generated(scss(theme)), `${tmp}/generated.scss`);
         await Utils.writeFile(generated(theme.additional_scss || ""), `${tmp}/additional.scss`);
-        Utils.exec(`sassc ${App.configDir}/scss/main.scss ${tmp}/style.css`);
+        Utils.exec(`sass ${App.configDir}/scss/main.scss ${tmp}/style.css`);
         App.resetCss();
         App.applyCss(`${tmp}/style.css`);
     } catch (error) {
