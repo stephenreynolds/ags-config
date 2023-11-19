@@ -131,10 +131,9 @@ window#overview .overview {
     }
 
     .system-tray {
-      @include floating_widget;
+      @include widget;
       margin-bottom: 0;
       padding: $spacing / 2;
-      background-color: rgba(0, 0, 0, 0);
 
       .panel-button {
         all: unset;
