@@ -10,7 +10,7 @@ const ClearButton = () =>
         on_clicked: () => Notifications.clear(),
         binds: [
             [
-                "sensitive",
+                "visible",
                 Notifications,
                 "notifications",
                 (n) => hasNotifications(n),
