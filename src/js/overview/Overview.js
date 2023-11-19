@@ -1,6 +1,6 @@
 import PopupWindow from "../misc/PopupWindow.js";
 import Applauncher from "./Applauncher.js";
-import Notifications from "./Notifications.js";
+import NotificationList from "./NotificationList.js";
 import Calendar from "./Calendar.js";
 import { NetworkToggle, WifiSelection } from "./Network.js";
 import { BluetoothToggle, BluetoothDevices } from "./Bluetooth.js";
@@ -79,7 +79,7 @@ const Overview = () =>
             class_name: "right",
             vertical: true,
             hpack: "end",
-            children: [Notifications(), Calendar()],
+            children: [NotificationList(), Calendar()],
         }),
     });
 
