@@ -5,7 +5,6 @@ import Calendar from "./Calendar.js";
 import { NetworkToggle, WifiSelection } from "./Network.js";
 import { BluetoothToggle, BluetoothDevices } from "./Bluetooth.js";
 import DND from "./DND.js";
-import Dock from "./Dock.js";
 import SystemTray from "./SystemTray.js";
 import { Volume, SinkSelector, AppMixer } from "./Volume.js";
 import { Widget } from "../imports.js";
@@ -74,7 +73,7 @@ const Overview = () =>
         centerWidget: Widget.Box({
             class_name: "center",
             vertical: true,
-            children: [Applauncher(), Dock()],
+            children: [Applauncher()],
         }),
         endWidget: Widget.Box({
             class_name: "right",

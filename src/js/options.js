@@ -6,9 +6,4 @@ export default {
 
     // at what intervals should cpu, ram, temperature refresh
     systemFetchInterval: 5000,
-
-    dock: {
-        iconSize: 56,
-        pinnedApps: ["firefox", "nemo", "obsidian", "discord", "steam"],
-    },
 };
