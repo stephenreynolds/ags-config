@@ -1,0 +1,77 @@
+@use "../../lib/mixins";
+@use "../../lib/colors";
+@use "../../lib/material";
+
+$spacing: 9px;
+$popover-padding: 16px;
+
+.applauncher {
+  @include mixins.elevation-border;
+  @include mixins.normal-rounding;
+  background-color: colors.$t_surface;
+
+  .header {
+    margin: $popover-padding;
+    margin-bottom: $popover-padding / 2;
+
+    image,
+    entry {
+      all: unset;
+      font-size: 1em;
+      font-family: Inter, sans-serif;
+      @include mixins.small-rounding;
+      @include mixins.elevation-border;
+      background-color: colors.$t_surfaceVariant;
+      padding: $spacing / 2;
+    }
+
+    entry {
+      padding-left: $spacing;
+    }
+
+    image {
+      margin-right: $spacing;
+      -gtk-icon-transform: scale(0.8);
+      font-size: 1.6em;
+    }
+  }
+
+  scrolledwindow {
+    @include mixins.scrollbar;
+    padding: $popover-padding;
+    min-width: 500px;
+    min-height: 350px;
+  }
+
+  .placeholder {
+    margin-top: $spacing;
+    color: colors.$t_onSurface;
+    font-size: 1.2em;
+  }
+
+  .app {
+    all: unset;
+    margin: $spacing / 2 0;
+
+    label {
+      &.title {
+        color: material.$onSurface;
+      }
+
+      &.description {
+        color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 67%);
+      }
+    }
+
+    image {
+      margin-right: $spacing;
+    }
+
+    &:hover,
+    &:focus {
+      @include mixins.small-rounding;
+      @include mixins.elevation-border;
+      background-color: colors.$t_surfaceVariant;
+    }
+  }
+}
