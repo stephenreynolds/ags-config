@@ -1,5 +1,4 @@
 import { Widget, App, Applications } from "../imports.js";
-import Separator from "../misc/Separator.js";
 import icons from "../icons.js";
 import { launchApp } from "../utils.js";
 import Fuse from "../lib/fuse.js";
@@ -102,10 +101,7 @@ export default () => {
             } else {
                 items = filterApps(text);
             }
-            list.children = items
-                .map((app) => [Separator(), AppItem(app)])
-                .flat();
-            list.add(Separator());
+            list.children = items.map((app) => [AppItem(app)]).flat();
             list.show_all();
 
             placeholder.visible = list.children.length === 1;
