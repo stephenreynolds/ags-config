@@ -61,5 +61,6 @@ export default (monitor) =>
         monitor,
         name: `notifications-${monitor}`,
         anchor: ["top"],
+        layer: "overlay",
         child: PopupList(),
     });
