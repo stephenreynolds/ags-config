@@ -51,15 +51,6 @@ const colors = {
 };
 
 // themes
-const kitty_dark = {
-    wallpaper: WP + "kitty.jpeg",
-    name: "kitty_dark",
-    icon: "󰄛",
-    ...dark,
-    ...misc,
-    ...colors,
-};
-
 const catppuccin_mocha = {
     wallpaper: WP + "1212315.jpg",
     name: "catppuccin_mocha",
@@ -113,4 +104,4 @@ const rose_pine = {
     hypr_group_locked_active: "rgba(eb6f92FF)",
 };
 
-export default [catppuccin_mocha, kitty_dark, rose_pine];
+export default [catppuccin_mocha, rose_pine];
