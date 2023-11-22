@@ -1,6 +1,6 @@
 @use "../../lib/colors";
 @use "applauncher";
-@use "notifications";
+@use "notification-list";
 
 @mixin calendar {
   @include widget;

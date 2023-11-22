@@ -1,107 +1,110 @@
-import icons from "../icons.js";
+import Gtk from "gi://Gtk";
+import { Notifications, Widget } from "../imports.js";
+import MaterialIcon from "../misc/MaterialIcon.js";
+import { setupCursorHover } from "../misc/cursorHover.js";
 import Notification from "../misc/Notification.js";
-import { Widget, Notifications } from "../imports.js";
 
-const hasNotifications = (n) =>
-    n.length > 0 && !n.some((n) => n.hints.transient);
+const NotificationList = Widget.Box({
+    className: "spacing-v-5-revealer",
+    vertical: true,
+    vpack: "start",
+    connections: [
+        [Notifications, (box, id) => {
+            if (box.children.length === 0) {
+                Notifications.notifications
+                    .forEach(notification => {
+                        box.pack_end(Notification({
+                            notification,
+                            isPopup: false,
+                        }), false, false, 0);
+                    });
+                box.show_all();
+            }
+            else if (id) {
+                const notification = Notifications.getNotification(id);
+                const newNotification = Notification({
+                    notification,
+                    isPopup: false,
+                });
+                if (newNotification) {
+                    box.pack_end(newNotification, false, false, 0);
+                    box.show_all();
+                }
+            }
+        }, "notified"],
 
-const ClearButton = () =>
-    Widget.Button({
-        on_clicked: () => Notifications.clear(),
-        binds: [
-            [
-                "visible",
-                Notifications,
-                "notifications",
-                (n) => hasNotifications(n),
-            ],
-        ],
+        [Notifications, (box, id) => {
+            if (!id) {
+                return;
+            }
+
+            for (const ch of box.children) {
+                if (ch._id === id) {
+                    ch._destroyWithAnims();
+                }
+            }
+        }, "closed"],
+
+        [Notifications, box => box.visible = Notifications.notifications.length > 0],
+    ]
+});
+
+export default () => {
+    const listTitle = Widget.Revealer({
+        revealChild: false,
+        connections: [[Notifications, (revealer) => {
+            revealer.revealChild = Notifications.notifications.length > 0;
+        }]],
         child: Widget.Box({
+            vpack: "start",
+            className: "text",
             children: [
-                Widget.Label("Clear "),
-                Widget.Icon({
-                    binds: [
-                        [
-                            "icon",
-                            Notifications,
-                            "notifications",
-                            (n) =>
-                                n.length > 0
-                                    ? icons.trash.full
-                                    : icons.trash.empty,
-                        ],
-                    ],
+                Widget.Label({
+                    className: "text-xl",
+                    hexpand: true,
+                    xalign: 0,
+                    label: "Notifications"
                 }),
-            ],
+                Widget.Button({
+                    className: "notification-closeall-btn",
+                    onClicked: () => Notifications.clear(),
+                    child: Widget.Box({
+                        className: "spacing-h-5",
+                        children: [
+                            MaterialIcon("clear_all", "base"),
+                            Widget.Label({
+                                className: "text-lg",
+                                label: "Clear",
+                            })
+                        ]
+                    }),
+                    setup: button => setupCursorHover(button)
+                })
+            ]
+        })
+    });
+
+    const listContents = Widget.Scrollable({
+        hexpand: true,
+        hscroll: "never",
+        vscroll: "automatic",
+        child: Widget.Box({
+            vexpand: true,
+            children: [NotificationList]
         }),
     });
 
-const Header = () =>
-    Widget.Box({
-        class_name: "header",
-        children: [
-            Widget.Label({ label: "Notifications", hexpand: true, xalign: 0 }),
-            ClearButton(),
-        ],
-    });
+    listContents.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+    const vScrollbar = listContents.get_vscrollbar();
+    vScrollbar.get_style_context().add_class("notification-list-scrollbar");
 
-const NotificationList = () =>
-    Widget.Box({
+    return Widget.Box({
+        className: "notification-list spacing-v-5",
         vertical: true,
         vexpand: true,
-        connections: [
-            [
-                Notifications,
-                (box) => {
-                    box.children = Notifications.notifications
-                        .filter((n) => !n.hints.transient)
-                        .reverse()
-                        .map(Notification);
-
-                    box.visible = hasNotifications(Notifications.notifications);
-                },
-            ],
-        ],
-    });
-
-const Placeholder = () =>
-    Widget.Box({
-        class_name: "placeholder",
-        vertical: true,
-        vpack: "center",
-        hpack: "center",
-        vexpand: true,
-        hexpand: true,
         children: [
-            Widget.Icon(icons.notifications.silent),
-            Widget.Label("Your inbox is empty"),
-        ],
-        binds: [
-            [
-                "visible",
-                Notifications,
-                "notifications",
-                (n) => n.length === 0 || n.every((n) => n.hints.transient),
-            ],
-        ],
+            listTitle,
+            listContents
+        ]
     });
-
-export default () =>
-    Widget.Box({
-        class_name: "notifications",
-        vertical: true,
-        children: [
-            Header(),
-            Widget.Scrollable({
-                vexpand: true,
-                class_name: "notification-scrollable",
-                hscroll: "never",
-                vscroll: "automatic",
-                child: Widget.Box({
-                    class_name: "notification-list",
-                    vertical: true,
-                    children: [NotificationList(), Placeholder()],
-                }),
-            }),
-        ],
-    });
+};

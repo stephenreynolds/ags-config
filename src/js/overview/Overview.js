@@ -11,7 +11,7 @@ import { Widget } from "../imports.js";
 
 const Row = (toggles, menus = []) =>
     Widget.Box({
-        class_name: "row",
+        className: "row",
         vertical: true,
         children: [
             Widget.Box({
@@ -29,7 +29,7 @@ const Homogeneous = (toggles) =>
 
 const Overview = () =>
     Widget.CenterBox({
-        class_name: "overview",
+        className: "overview",
         spacing: 20,
         startWidget: Widget.Box({
             class_name: "left",
@@ -71,12 +71,12 @@ const Overview = () =>
             ],
         }),
         centerWidget: Widget.Box({
-            class_name: "center",
+            className: "center",
             vertical: true,
             children: [Applauncher()],
         }),
         endWidget: Widget.Box({
-            class_name: "right",
+            className: "right",
             vertical: true,
             hpack: "end",
             children: [NotificationList(), Calendar()],
@@ -86,7 +86,6 @@ const Overview = () =>
 export default () =>
     PopupWindow({
         name: "overview",
-        expand: true,
         layer: "overlay",
         content: Overview(),
     });
