@@ -1,5 +1,6 @@
 import Notification from "../misc/Notification.js";
-import { Notifications, Widget } from "../imports.js";
+import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 
 const Popups = () =>
     Widget.Box({

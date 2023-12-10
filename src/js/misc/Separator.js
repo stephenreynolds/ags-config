@@ -1,5 +1,5 @@
 import Gtk from "gi://Gtk";
-import { Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 
 export default ({ orientation = "vertical", ...rest } = {}) =>
     Widget.Separator({

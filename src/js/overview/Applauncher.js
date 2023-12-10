@@ -1,4 +1,6 @@
-import { Widget, App, Applications } from "../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Applications from "resource:///com/github/Aylur/ags/service/applications.js";
 import icons from "../icons.js";
 import { launchApp } from "../utils.js";
 import Fuse from "../lib/fuse.js";

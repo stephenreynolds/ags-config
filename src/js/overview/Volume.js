@@ -3,7 +3,10 @@ import FontIcon from "../misc/FontIcon.js";
 import Separator from "../misc/Separator.js";
 import { getAudioTypeIcon } from "../utils.js";
 import { Arrow, Menu } from "./ToggleButton.js";
-import { App, Audio, Widget, Utils } from "../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 
 const TypeIndicator = () => Widget.Button({
     on_clicked: () => Audio.speaker.isMuted = !Audio.speaker.isMuted,

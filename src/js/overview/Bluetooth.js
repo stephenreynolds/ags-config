@@ -1,7 +1,8 @@
 import icons from "../icons.js";
 import Spinner from "../misc/Spinner.js";
 import { Menu, ArrowToggleButton } from "./ToggleButton.js";
-import { Bluetooth, Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Bluetooth from "resource:///com/github/Aylur/ags/service/bluetooth.js";
 
 export const BluetoothToggle = () => ArrowToggleButton({
     name: "bluetooth",

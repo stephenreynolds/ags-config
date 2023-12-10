@@ -1,5 +1,6 @@
 import PanelButton from "./PanelButton.js";
-import { SystemTray, Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import SystemTray from "resource:///com/github/Aylur/ags/service/systemtray.js";
 import Gdk from "gi://Gdk";
 
 const onTrayItemClick = (item, btn) =>

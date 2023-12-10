@@ -44,6 +44,7 @@
             '')
             nodejs
             nodePackages_latest.eslint
+            typescript
           ] ++ runtimeDependencies.${system};
         };
       });
