@@ -1,4 +1,5 @@
-import { App, Service } from "../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Service from "resource:///com/github/Aylur/ags/service.js";
 
 class PowerMenu extends Service {
     static {

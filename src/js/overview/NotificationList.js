@@ -1,5 +1,6 @@
 import Gtk from "gi://Gtk";
-import { Notifications, Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import MaterialIcon from "../misc/MaterialIcon.js";
 import { setupCursorHover } from "../misc/cursorHover.js";
 import Notification from "../misc/Notification.js";

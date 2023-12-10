@@ -1,7 +1,7 @@
 import icons from "../icons.js";
 import PowerMenu from "../services/powermenu.js";
 import PopupWindow from "../misc/PopupWindow.js";
-import { Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 
 const SysButton = (action, label) =>
     Widget.Button({

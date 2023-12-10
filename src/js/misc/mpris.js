@@ -1,5 +1,6 @@
 import icons from "../icons.js";
-import { Utils, Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import GLib from "gi://GLib";
 
 const MEDIA_CACHE_PATH = Utils.CACHE_DIR + "/media";

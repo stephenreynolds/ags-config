@@ -1,7 +1,9 @@
 import Theme from "../services/theme/theme.js";
 import PowerMenu from "../services/powermenu.js";
 import icons from "../icons.js";
-import { App, Utils, Widget } from "../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Gtk from "gi://Gtk";
 
 const Item = (label, icon, onActivate) =>

@@ -2,7 +2,7 @@ import Separator from "../misc/Separator.js";
 import Theme from "../services/theme/theme.js";
 import Clock from "../misc/Clock.js";
 import DesktopMenu from "./DesktopMenu.js";
-import { Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 
 const DesktopClock = () => Widget.Box({
     class_name: "clock-box-shadow",

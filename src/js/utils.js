@@ -2,7 +2,9 @@ import Cairo from "cairo";
 import icons from "./icons.js";
 import Theme from "./services/theme/theme.js";
 import Gdk from "gi://Gdk";
-import { Hyprland, Utils, App } from "./imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 
 export function range(length, start = 1) {
     return Array.from({ length }, (_, i) => i + start);
@@ -56,16 +58,6 @@ export function scssWatcher() {
         ],
         () => Theme.setup(),
     );
-}
-
-export async function globalServices() {
-    globalThis.ags = await import("./imports.js");
-    globalThis.indicator = (
-        await import("./services/onScreenIndicator.js")
-    ).default;
-    globalThis.theme = (await import("./services/theme/theme.js")).default;
-    globalThis.audio = globalThis.ags.Audio;
-    globalThis.mpris = globalThis.ags.Mpris;
 }
 
 export async function launchApp(app) {

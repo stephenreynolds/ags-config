@@ -1,9 +1,10 @@
-import { Widget, Utils } from '../imports.js';
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 
 export default ({
     indicator,
     child,
-    direction = 'left',
+    direction = "left",
     duration = 300,
     connections,
     eventboxConnections,
@@ -11,9 +12,9 @@ export default ({
     ...rest
 }) => {
     let open = false;
-    const vertical = direction === 'down' || direction === 'up';
-    const posStart = direction === 'down' || direction === 'right';
-    const posEnd = direction === 'up' || direction === 'left';
+    const vertical = direction === "down" || direction === "up";
+    const posStart = direction === "down" || direction === "right";
+    const posEnd = direction === "up" || direction === "left";
 
     const revealer = Widget.Revealer({
         transition: `slide_${direction}`,

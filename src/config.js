@@ -9,7 +9,6 @@ import * as setup from "./js/utils.js";
 import { forMonitors } from "./js/utils.js";
 
 setup.scssWatcher();
-setup.globalServices();
 
 export default {
     maxStreamVolume: 1.05,

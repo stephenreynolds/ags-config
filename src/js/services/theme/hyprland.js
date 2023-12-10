@@ -1,8 +1,9 @@
-import { App, Hyprland } from "../../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 
 const noAlphaignore = ["verification", "powermenu", "overview"];
 
-export default async function ({
+export default async function({
     wm_gaps,
     border_width,
     hypr_active_border,

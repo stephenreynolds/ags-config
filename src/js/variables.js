@@ -1,5 +1,5 @@
 import options from "./options.js";
-import { Variable } from "./imports.js";
+import Variable from "resource:///com/github/Aylur/ags/variable.js";
 
 const prettyUptime = (str) => {
     if (str.length >= 4) return str;

@@ -1,6 +1,7 @@
 import icons from "../icons.js";
 import { Menu, ArrowToggleButton } from "./ToggleButton.js";
-import { Network, Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Network from "resource:///com/github/Aylur/ags/service/network.js";
 
 export const NetworkToggle = () => ArrowToggleButton({
     name: "network",

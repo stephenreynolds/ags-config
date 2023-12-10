@@ -1,6 +1,9 @@
 import icons from "../icons.js";
 import Separator from "../misc/Separator.js";
-import { Utils, Widget, App, Variable } from "../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Variable from "resource:///com/github/Aylur/ags/variable.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 
 export const opened = Variable("");
 App.connect("window-toggled", (_, name, visible) => {

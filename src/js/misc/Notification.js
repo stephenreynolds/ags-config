@@ -1,6 +1,7 @@
 import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk";
-import { Utils, Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import MaterialIcon from "./MaterialIcon.js";
 import AnimatedCircProg from "./AnimatedCircProg.js";
 import { setupCursorHover } from "./cursorHover.js";

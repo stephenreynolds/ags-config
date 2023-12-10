@@ -7,7 +7,7 @@ import { BluetoothToggle, BluetoothDevices } from "./Bluetooth.js";
 import DND from "./DND.js";
 import SystemTray from "./SystemTray.js";
 import { Volume, SinkSelector, AppMixer } from "./Volume.js";
-import { Widget } from "../imports.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 
 const Row = (toggles, menus = []) =>
     Widget.Box({
