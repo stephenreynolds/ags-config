@@ -1,31 +1,26 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import App from "resource:///com/github/Aylur/ags/app.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import PopupWindow from "../misc/PopupWindow.js";
 import PowerMenu from "../services/powermenu.js";
-import ShadedPopup from "./ShadedPopup.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 
-export default () => ShadedPopup({
+export default () => PopupWindow({
     name: "verification",
     expand: true,
-    child: Widget.Box({
+    content: Widget.Box({
+        class_name: "verification",
         vertical: true,
         children: [
-            Widget.Box({
-                class_name: "text-box",
-                vertical: true,
-                children: [
-                    Widget.Label({
-                        className: "title",
-                        binds: [["label", PowerMenu, "title"]],
-                    }),
-                    Widget.Label({
-                        className: "desc",
-                        label: "Are you sure?",
-                    }),
-                ],
+            Widget.Label({
+                class_name: "title",
+                binds: [["label", PowerMenu, "title"]],
+            }),
+            Widget.Label({
+                class_name: "desc",
+                label: "Are you sure?",
             }),
             Widget.Box({
-                className: "buttons horizontal",
+                class_name: "buttons",
                 vexpand: true,
                 vpack: "end",
                 homogeneous: true,
