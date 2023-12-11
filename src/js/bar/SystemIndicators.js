@@ -1,7 +1,22 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import Network from "resource:///com/github/Aylur/ags/service/network.js";
+import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import icons from "../icons.js";
+
+const MicrophoneMuteIndicator = () => Widget.Icon({
+    icon: icons.audio.mic.muted,
+    connections: [[Audio, icon => {
+        icon.visible = Audio.microphone?.isMuted;
+    }, "microphone-changed"]],
+});
+
+const DNDIndicator = () => Widget.Icon({
+    icon: icons.notifications.silent,
+    connections: [[Notifications, icon => {
+        icon.visible = Notifications.dnd;
+    }]],
+});
 
 const NetworkIndicator = () => Widget.Stack({
     items: [
@@ -49,6 +64,8 @@ export default () => Widget.Button({
     child: Widget.Box({
         spacing: 10,
         children: [
+            MicrophoneMuteIndicator(),
+            DNDIndicator(),
             NetworkIndicator(),
             AudioIndicator()
         ]
