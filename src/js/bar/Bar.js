@@ -1,13 +1,20 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Workspaces from "./Workspaces.js";
-import options from "../options.js";
 import OverviewButton from "./OverviewButton.js";
+import SystemTray from "./SystemTray.js";
+import options from "../options.js";
 
 /** @param {number} monitor */
 const Bar = (monitor) => Widget.CenterBox({
     className: "bar",
     startWidget: Workspaces(monitor),
     centerWidget: OverviewButton(monitor),
+    endWidget: Widget.Box({
+        hpack: "end",
+        children: [
+            monitor === options.primaryMonitor ? SystemTray() : null
+        ],
+    }),
 });
 
 /** @param {number} monitor */
