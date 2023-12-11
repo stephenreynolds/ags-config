@@ -1,13 +1,13 @@
 import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
 import Workspaces from "./Workspaces.js";
-import Clock from "./Clock.js";
 import options from "../options.js";
+import OverviewButton from "./OverviewButton.js";
 
 /** @param {number} monitor */
 const Bar = (monitor) => Widget.CenterBox({
     className: "bar",
     startWidget: Workspaces(monitor),
-    centerWidget: Clock(),
+    centerWidget: OverviewButton(monitor),
 });
 
 /** @param {number} monitor */
