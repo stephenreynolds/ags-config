@@ -1,6 +1,6 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Workspaces from "./Workspaces.js";
-import OverviewButton from "./OverviewButton.js";
+import DashboardButton from "./DashboardButton.js";
 import SystemTray from "./SystemTray.js";
 import SystemIndicators from "./SystemIndicators.js";
 import options from "../options.js";
@@ -9,7 +9,7 @@ import options from "../options.js";
 const Bar = (monitor) => Widget.CenterBox({
     className: "bar",
     startWidget: Workspaces(monitor),
-    centerWidget: OverviewButton(monitor),
+    centerWidget: DashboardButton(monitor),
     endWidget: Widget.Box({
         hpack: "end",
         spacing: 20,
