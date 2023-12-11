@@ -14,6 +14,7 @@ const NotificationIcon = () => MaterialIcon("notifications_unread", "base", {
 
 export default (monitor) => Widget.Button({
     onClicked: () => console.log("OverviewButton clicked"),
+    className: "overview-button",
     cursor: "pointer",
     child: Widget.Box({
         spacing: 8,
