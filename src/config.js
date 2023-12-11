@@ -1,3 +1,4 @@
+import Bar from "./js/bar/Bar.js";
 import Overview from "./js/overview/Overview.js";
 import OSD from "./js/osd/OSD.js";
 import PowerMenu from "./js/powermenu/PowerMenu.js";
@@ -16,6 +17,7 @@ export default {
     windows: [
         forMonitors(OSD),
         forMonitors(Desktop),
+        forMonitors(Bar),
         Notifications(options.primaryMonitor),
         Overview(),
         PowerMenu(),

@@ -167,7 +167,7 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
                     Widget.Label({
                         className: `text-base notification-body-${notification.urgency}`,
                         xalign: 0,
-                        useMarkup: true,
+                        useMarkup: notification.body.startsWith("<"),
                         justify: Gtk.Justification.LEFT,
                         wrap: true,
                         label: notification.body,

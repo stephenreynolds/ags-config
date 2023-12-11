@@ -6,4 +6,8 @@ export default {
 
     // at what intervals should cpu, ram, temperature refresh
     systemFetchInterval: 5000,
+
+    bar: {
+        position: "top",
+    }
 };
