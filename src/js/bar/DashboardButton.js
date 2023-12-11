@@ -1,4 +1,5 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import Clock from "./Clock.js";
 import MaterialIcon from "../misc/MaterialIcon.js";
@@ -7,14 +8,13 @@ import options from "../options.js";
 const NotificationIcon = () => MaterialIcon("notifications_unread", "base", {
     vpack: "center",
     connections: [[Notifications, icon => {
-        const visible = Notifications.notifications.length > 0;
-        icon.css = `opacity: ${visible ? 1 : 0};`;
+        icon.visible = Notifications.notifications.length > 0;
     }]]
 });
 
 export default (monitor) => Widget.Button({
-    onClicked: () => console.log("OverviewButton clicked"),
-    className: "overview-button",
+    className: "dashboard-button",
+    onClicked: () => App.toggleWindow("dashboard"),
     cursor: "pointer",
     child: Widget.Box({
         spacing: 8,
