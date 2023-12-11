@@ -8,6 +8,8 @@ export default {
     systemFetchInterval: 5000,
 
     bar: {
-        position: "top",
-    }
+        position: "bottom",
+    },
+
+    transition: 200,
 };

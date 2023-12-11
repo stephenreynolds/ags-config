@@ -83,9 +83,7 @@ const Overview = () =>
         }),
     });
 
-export default () =>
-    PopupWindow({
-        name: "overview",
-        layer: "overlay",
-        content: Overview(),
-    });
+export default () => PopupWindow({
+    name: "overview",
+    child: Overview(),
+});

@@ -9,13 +9,13 @@ import options from "../options.js";
 const Bar = (monitor) => Widget.CenterBox({
     className: "bar",
     startWidget: Workspaces(monitor),
-    centerWidget: DashboardButton(monitor),
     endWidget: Widget.Box({
         hpack: "end",
         spacing: 20,
         children: [
             monitor === options.primaryMonitor ? SystemTray() : null,
-            SystemIndicators(),
+            monitor === options.primaryMonitor ? SystemIndicators() : null,
+            DashboardButton(monitor),
         ],
     }),
 });

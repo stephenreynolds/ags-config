@@ -28,7 +28,7 @@ const Workspaces = (monitor) => Widget.Box({
 
 export default (monitor) => Widget.EventBox({
     className: "workspaces",
-    onScrollUp: () => Hyprland.sendMessage("dispatch workspace r+1"),
-    onScrollDown: () => Hyprland.sendMessage("dispatch workspace r-1"),
+    onScrollUp: () => Hyprland.sendMessage("dispatch workspace m+1"),
+    onScrollDown: () => Hyprland.sendMessage("dispatch workspace m-1"),
     child: Workspaces(monitor),
 });
