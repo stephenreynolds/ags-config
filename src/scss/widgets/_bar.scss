@@ -40,4 +40,14 @@
       min-height: $indicatorSize + 2px;
     }
   }
+
+  .overview-button {
+    padding: 0 0.5rem;
+    border-radius: 7px;
+    transition: $transition;
+
+    &:hover {
+      background-color: color.scale(material.$onBackground, $alpha: -75%);
+    }
+  }
 }
