@@ -1,0 +1,58 @@
+@use "../lib/material";
+@use "../lib/colors";
+@use "../lib/mixins";
+
+.osd-bg {
+  min-width: 10rem;
+  min-height: 3.409rem;
+}
+
+.osd-value {
+  background-color: colors.$t_background;
+  border-radius: 1.023rem;
+  padding: 0.625rem 1.023rem;
+  margin: 10px;
+  @include mixins.elevation2;
+}
+
+.osd-progress {
+  min-height: 0.955rem;
+  min-width: 0.068rem;
+  padding: 0;
+  border-radius: 10rem;
+  @include mixins.fluent_decel;
+
+  trough {
+    min-height: 0.954rem;
+    min-width: 0.068rem;
+    border-radius: 10rem;
+    background-color: material.$secondaryContainer;
+  }
+
+  progress {
+    @include mixins.fluent_decel;
+    min-height: 0.68rem;
+    min-width: 0.068rem;
+    margin: 0 0.137rem;
+    border-radius: 10rem;
+    background-color: material.$onSecondaryContainer;
+  }
+}
+
+.osd-icon {
+  color: material.$onPrimaryContainer;
+}
+
+.osd-label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: material.$onBackground;
+  margin-top: 0.45rem;
+}
+
+.osd-value-txt {
+  @include mixins.titlefont;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: material.$onBackground;
+}

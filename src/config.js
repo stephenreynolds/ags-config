@@ -10,12 +10,14 @@ import { forMonitors } from "./js/utils.js";
 
 setup.scssWatcher();
 
+globalThis.audio = (await import("resource:///com/github/Aylur/ags/service/audio.js")).default;
+
 export default {
     maxStreamVolume: 1.05,
     cacheNotificationActions: true,
     windows: [
-        forMonitors(OSD),
         forMonitors(Desktop),
+        OSD(options.primaryMonitor),
         Notifications(options.primaryMonitor),
         Overview(),
         PowerMenu(),
