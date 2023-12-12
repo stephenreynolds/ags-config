@@ -24,7 +24,7 @@ class IndicatorService extends Service {
         });
     }
 
-    #workspaceDelay = 500;
+    #workspaceDelay = 1000;
     #workspaceCount = 0;
 
     workspace() {
