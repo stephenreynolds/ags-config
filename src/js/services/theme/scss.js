@@ -1,5 +1,5 @@
-import App from "resource:///com/github/Aylur/ags/app.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 const generated = str => `// THIS FILE IS GENERATED
 ${str}`;
@@ -55,11 +55,11 @@ $shader_fg: white;
 $layout: ${t.layout};`;
 
 export default async function(theme) {
-    const tmp = "/tmp/ags/scss";
+    const tmp = '/tmp/ags/scss';
     Utils.ensureDirectory(tmp);
     try {
         await Utils.writeFile(generated(scss(theme)), `${tmp}/generated.scss`);
-        await Utils.writeFile(generated(theme.additional_scss || ""), `${tmp}/additional.scss`);
+        await Utils.writeFile(generated(theme.additional_scss || ''), `${tmp}/additional.scss`);
         Utils.exec(`sass ${App.configDir}/scss/main.scss ${tmp}/style.css`);
         App.resetCss();
         App.applyCss(`${tmp}/style.css`);

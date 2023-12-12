@@ -1,19 +1,19 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import Gtk from "gi://Gtk";
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import Gtk from 'gi://Gtk';
 
 export default () => {
     const selected = Widget.Label({
-        style: "font-size: 1.2em;",
+        style: 'font-size: 1.2em;',
     });
 
     const flowbox = Widget.FlowBox({
         min_children_per_line: 10,
-        connections: [["child-activated", (_, { child }) => {
+        connections: [[ 'child-activated', (_, { child }) => {
             selected.label = child.iconName;
-        }]],
+        } ]],
         setup: self => {
             Gtk.IconTheme.get_default().list_icons(null).sort().map(icon => {
-                !icon.endsWith(".symbolic") && self.insert(Widget.Icon({
+                !icon.endsWith('.symbolic') && self.insert(Widget.Icon({
                     icon,
                     size: 38,
                 }), -1);
@@ -30,22 +30,22 @@ export default () => {
     });
 
     return Widget.Window({
-        name: "icons",
+        name: 'icons',
         visible: true,
         child: Widget.Box({
-            style: "padding: 30px;",
+            style: 'padding: 30px;',
             spacing: 20,
             vertical: true,
             children: [
                 entry,
                 Widget.Scrollable({
-                    hscroll: "never",
-                    vscroll: "always",
+                    hscroll: 'never',
+                    vscroll: 'always',
                     hexpand: true,
                     vexpand: true,
                     style:
-                        "min-width: 500px;" +
-                        "min-height: 500px;",
+                        'min-width: 500px;' +
+                        'min-height: 500px;',
                     child: flowbox,
                 }),
                 selected,

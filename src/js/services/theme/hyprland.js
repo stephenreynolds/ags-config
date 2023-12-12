@@ -1,7 +1,7 @@
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 
-const noAlphaignore = ["verification", "powermenu", "overview"];
+const noAlphaignore = [ 'verification', 'powermenu', 'overview' ];
 
 export default async function({
     wm_gaps,
@@ -15,24 +15,24 @@ export default async function({
     drop_shadow,
 }) {
     try {
-        App.connect("config-parsed", () => {
-            for (const [name] of App.windows) {
+        App.connect('config-parsed', () => {
+            for (const [ name ] of App.windows) {
                 Hyprland.sendMessage([
-                    "keyword",
-                    "layerrule",
+                    'keyword',
+                    'layerrule',
                     `unset, ${name}`,
-                ]).then(async () => {
+                ]).then(async() => {
                     await Hyprland.sendMessage([
-                        "keyword",
-                        "layerrule",
+                        'keyword',
+                        'layerrule',
                         `blur, ${name}`,
                     ]);
                     if (!noAlphaignore.every((skip) => !name.includes(skip)))
-                        return;
+                    {return;}
 
                     await Hyprland.sendMessage([
-                        "keyword",
-                        "layerrule",
+                        'keyword',
+                        'layerrule',
                         `ignorealpha 0.6, ${name}`,
                     ]);
                 });
@@ -72,7 +72,7 @@ export default async function({
             `keyword decoration:rounding ${wm_rounding}`,
         );
         await Hyprland.sendMessage(
-            `keyword decoration:drop_shadow ${drop_shadow ? "yes" : "no"}`,
+            `keyword decoration:drop_shadow ${drop_shadow ? 'yes' : 'no'}`,
         );
     } catch (error) {
         console.error(error);

@@ -1,17 +1,17 @@
-import Notification from "../misc/Notification.js";
-import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Notification from '../misc/Notification.js';
+import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 const Popups = () =>
     Widget.Box({
-        className: "notification-popups spacing-v-5-revealer",
+        className: 'notification-popups spacing-v-5-revealer',
         vertical: true,
         margin: 1,
         properties: [
-            ["map", new Map()],
+            [ 'map', new Map() ],
 
-            ["dismiss", (box, id, force = false) => {
-                if (!id) return;
+            [ 'dismiss', (box, id, force = false) => {
+                if (!id) {return;}
 
                 const notification = box._map.get(id);
 
@@ -21,14 +21,14 @@ const Popups = () =>
 
                 notification.revealChild = false;
                 notification._destroyWithAnims();
-            }],
+            } ],
 
-            ["notify", (box, id) => {
-                if (!id || Notifications.dnd) return;
+            [ 'notify', (box, id) => {
+                if (!id || Notifications.dnd) {return;}
 
                 const notification = Notifications.getNotification(id);
 
-                if (!notification) return;
+                if (!notification) {return;}
 
                 box._map.delete(id);
 
@@ -40,12 +40,12 @@ const Popups = () =>
                 box._map.set(id, newNotification);
                 box.pack_end(box._map.get(id), false, false, 0);
                 box.show_all();
-            }],
+            } ],
         ],
         connections: [
-            [Notifications, (box, id) => box._notify(box, id), "notified"],
-            [Notifications, (box, id) => box._dismiss(box, id), "dismissed"],
-            [Notifications, (box, id) => box._dismiss(box, id, true), "closed"],
+            [ Notifications, (box, id) => box._notify(box, id), 'notified' ],
+            [ Notifications, (box, id) => box._dismiss(box, id), 'dismissed' ],
+            [ Notifications, (box, id) => box._dismiss(box, id, true), 'closed' ],
         ],
     });
 
@@ -53,7 +53,7 @@ export default (monitor) =>
     Widget.Window({
         monitor,
         name: `notifications-${monitor}`,
-        anchor: ["top"],
-        layer: "overlay",
+        anchor: [ 'top' ],
+        layer: 'overlay',
         child: Popups(),
     });

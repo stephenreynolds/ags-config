@@ -1,16 +1,16 @@
-import Gtk from "gi://Gtk";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
-import MaterialIcon from "../misc/MaterialIcon.js";
-import { setupCursorHover } from "../misc/cursorHover.js";
-import Notification from "../misc/Notification.js";
+import Gtk from 'gi://Gtk';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
+import MaterialIcon from '../misc/MaterialIcon.js';
+import { setupCursorHover } from '../misc/cursorHover.js';
+import Notification from '../misc/Notification.js';
 
 const NotificationList = Widget.Box({
-    className: "spacing-v-5-revealer",
+    className: 'spacing-v-5-revealer',
     vertical: true,
-    vpack: "start",
+    vpack: 'start',
     connections: [
-        [Notifications, (box, id) => {
+        [ Notifications, (box, id) => {
             if (box.children.length === 0) {
                 Notifications.notifications
                     .forEach(notification => {
@@ -32,9 +32,9 @@ const NotificationList = Widget.Box({
                     box.show_all();
                 }
             }
-        }, "notified"],
+        }, 'notified' ],
 
-        [Notifications, (box, id) => {
+        [ Notifications, (box, id) => {
             if (!id) {
                 return;
             }
@@ -44,68 +44,68 @@ const NotificationList = Widget.Box({
                     ch._destroyWithAnims();
                 }
             }
-        }, "closed"],
+        }, 'closed' ],
 
-        [Notifications, box => box.visible = Notifications.notifications.length > 0],
-    ]
+        [ Notifications, box => box.visible = Notifications.notifications.length > 0 ],
+    ],
 });
 
 export default () => {
     const listTitle = Widget.Revealer({
         revealChild: false,
-        connections: [[Notifications, (revealer) => {
+        connections: [[ Notifications, (revealer) => {
             revealer.revealChild = Notifications.notifications.length > 0;
-        }]],
+        } ]],
         child: Widget.Box({
-            vpack: "start",
-            className: "text",
+            vpack: 'start',
+            className: 'text',
             children: [
                 Widget.Label({
-                    className: "text-xl",
+                    className: 'text-xl',
                     hexpand: true,
                     xalign: 0,
-                    label: "Notifications"
+                    label: 'Notifications',
                 }),
                 Widget.Button({
-                    className: "notification-closeall-btn",
+                    className: 'notification-closeall-btn',
                     onClicked: () => Notifications.clear(),
                     child: Widget.Box({
-                        className: "spacing-h-5",
+                        className: 'spacing-h-5',
                         children: [
-                            MaterialIcon("clear_all", "base"),
+                            MaterialIcon('clear_all', 'base'),
                             Widget.Label({
-                                className: "text-lg",
-                                label: "Clear",
-                            })
-                        ]
+                                className: 'text-lg',
+                                label: 'Clear',
+                            }),
+                        ],
                     }),
-                    setup: button => setupCursorHover(button)
-                })
-            ]
-        })
+                    setup: button => setupCursorHover(button),
+                }),
+            ],
+        }),
     });
 
     const listContents = Widget.Scrollable({
         hexpand: true,
-        hscroll: "never",
-        vscroll: "automatic",
+        hscroll: 'never',
+        vscroll: 'automatic',
         child: Widget.Box({
             vexpand: true,
-            children: [NotificationList]
+            children: [ NotificationList ],
         }),
     });
 
     listContents.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
     const vScrollbar = listContents.get_vscrollbar();
-    vScrollbar.get_style_context().add_class("notification-list-scrollbar");
+    vScrollbar.get_style_context().add_class('notification-list-scrollbar');
 
     return Widget.Box({
-        className: "notification-list spacing-v-5",
+        className: 'notification-list spacing-v-5',
         vertical: true,
         vexpand: true,
         children: [
             listTitle,
-            listContents
-        ]
+            listContents,
+        ],
     });
 };

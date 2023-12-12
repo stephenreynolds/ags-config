@@ -1,14 +1,14 @@
-import Gtk from "gi://Gtk";
-import Theme from "../services/theme/theme.js";
-import themes from "../themes.js";
-import Wallpaper from "../misc/Wallpaper.js";
-import Variable from "resource:///com/github/Aylur/ags/variable.js";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Gtk from 'gi://Gtk';
+import Theme from '../services/theme/theme.js';
+import themes from '../themes.js';
+import Wallpaper from '../misc/Wallpaper.js';
+import Variable from 'resource:///com/github/Aylur/ags/variable.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 const Row = (title, child) =>
     Widget.Box({
-        class_name: "row",
-        children: [Widget.Label(`${title}: `), child],
+        class_name: 'row',
+        children: [ Widget.Label(`${title}: `), child ],
     });
 
 const Img = (title, prop) =>
@@ -18,14 +18,14 @@ const Img = (title, prop) =>
             title,
             type: Gtk.FileChooserButton,
             hexpand: true,
-            hpack: "end",
+            hpack: 'end',
             connections: [
                 [
-                    "selection-changed",
+                    'selection-changed',
                     (w) =>
                         Theme.setSetting(
                             prop,
-                            w.get_uri().replace("file://", ""),
+                            w.get_uri().replace('file://', ''),
                         ),
                 ],
             ],
@@ -42,10 +42,10 @@ const SpinButton = (title, prop, max = 100, min = 0) =>
                 w.set_increments(1, 1);
             },
             hexpand: true,
-            hpack: "end",
+            hpack: 'end',
             connections: [
                 [
-                    "value-changed",
+                    'value-changed',
                     (b) => !b._block && Theme.setSetting(prop, b.value),
                 ],
                 [
@@ -64,7 +64,7 @@ const SwitchButton = (title, prop) =>
     Row(
         title,
         Widget.Switch({
-            hpack: "end",
+            hpack: 'end',
             hexpand: true,
             connections: [
                 [
@@ -76,7 +76,7 @@ const SwitchButton = (title, prop) =>
                     },
                 ],
                 [
-                    "notify::active",
+                    'notify::active',
                     (s) => !s._block && Theme.setSetting(prop, s.active),
                 ],
             ],
@@ -88,22 +88,22 @@ const Color = (title, prop) =>
         title,
         Widget.Box({
             hexpand: true,
-            hpack: "end",
-            class_name: "color",
+            hpack: 'end',
+            class_name: 'color',
             children: [
                 Widget.Entry({
                     onAccept: ({ text }) => Theme.setSetting(prop, text),
-                    vpack: "center",
+                    vpack: 'center',
                     connections: [
-                        [Theme, (w) => (w.text = Theme.getSetting(prop))],
+                        [ Theme, (w) => (w.text = Theme.getSetting(prop)) ],
                     ],
                 }),
                 Widget.ColorButton({
                     alpha: true,
-                    vpack: "center",
+                    vpack: 'center',
                     connections: [
                         [
-                            "color-set",
+                            'color-set',
                             (w) => {
                                 w.get_parent().children[0].set_text(
                                     w.rgba.to_string(),
@@ -121,10 +121,10 @@ const Text = (title, prop) =>
     Row(
         title,
         Widget.Entry({
-            class_name: "text",
+            class_name: 'text',
             hexpand: true,
-            hpack: "end",
-            connections: [[Theme, (w) => (w.text = Theme.getSetting(prop))]],
+            hpack: 'end',
+            connections: [[ Theme, (w) => (w.text = Theme.getSetting(prop)) ]],
             onAccept: ({ text }) => Theme.setSetting(prop, text),
         }),
     );
@@ -133,21 +133,21 @@ const TextSpinButton = (title, prop, list) =>
     Row(
         title,
         Widget.Box({
-            class_name: "text-spin",
+            class_name: 'text-spin',
             hexpand: true,
-            hpack: "end",
+            hpack: 'end',
             properties: [
-                ["values", list],
+                [ 'values', list ],
                 [
-                    "step",
+                    'step',
                     (box, step) => {
                         const label = box.get_children()[0];
                         const max = box._values.length - 1;
                         let index = box._values.indexOf(label.label) + step;
 
-                        if (index > max) index = 0;
+                        if (index > max) {index = 0;}
 
-                        if (index < 0) index = max;
+                        if (index < 0) {index = max;}
 
                         const value = box._values[index];
                         label.label = value;
@@ -165,14 +165,14 @@ const TextSpinButton = (title, prop, list) =>
                     ],
                 }),
                 Widget.Button({
-                    child: Widget.Icon("pan-down-symbolic"),
+                    child: Widget.Icon('pan-down-symbolic'),
                     onClicked: (btn) => {
                         const box = btn.get_parent();
                         box._step(box, -1);
                     },
                 }),
                 Widget.Button({
-                    child: Widget.Icon("pan-up-symbolic"),
+                    child: Widget.Icon('pan-up-symbolic'),
                     onClicked: (btn) => {
                         const box = btn.get_parent();
                         box._step(box, +1);
@@ -187,13 +187,13 @@ const FontButton = (title, prop) =>
         title,
         Widget.FontButton({
             hexpand: true,
-            hpack: "end",
+            hpack: 'end',
             useSize: false,
             showSize: false,
             fontName: Theme.getSetting(prop),
             connections: [
                 [
-                    "font-set",
+                    'font-set',
                     ({ fontName }) => {
                         Theme.setSetting(prop, fontName);
                     },
@@ -202,59 +202,59 @@ const FontButton = (title, prop) =>
         }),
     );
 
-const page = Variable("󰒓 General");
+const page = Variable('󰒓 General');
 const showPage = (p) => (page.value = p);
 
 const Tab = (name) =>
     Widget.Button({
         hexpand: true,
-        class_name: "tab",
+        class_name: 'tab',
         onClicked: () => showPage(name),
         child: Widget.Label(name),
         connections: [
-            [page, (b) => b.toggleClassName("active", page.value === name)],
+            [ page, (b) => b.toggleClassName('active', page.value === name) ],
         ],
     });
 
 const Layout = (pages) =>
     Widget.Box({
         vertical: true,
-        class_name: "settings",
+        class_name: 'settings',
         hexpand: false,
         children: [
             Widget.Box({
-                class_name: "headerbar",
-                vpack: "start",
+                class_name: 'headerbar',
+                vpack: 'start',
                 child: Widget.Box({
-                    class_name: "tabs",
+                    class_name: 'tabs',
                     children: [
                         ...Object.keys(pages).map((page) => Tab(page)),
                         Widget.Button({
-                            class_name: "tab",
+                            class_name: 'tab',
                             onClicked: () => Theme.reset(),
-                            child: Widget.Label("󰦛 Reset"),
+                            child: Widget.Label('󰦛 Reset'),
                             hexpand: true,
                         }),
                     ],
                 }),
             }),
             Widget.Box({
-                class_name: "content",
+                class_name: 'content',
                 child: Widget.Stack({
-                    transition: "slide_left_right",
+                    transition: 'slide_left_right',
                     items: Object.keys(pages).map((page) => [
                         page,
                         pages[page],
                     ]),
-                    binds: [["shown", page]],
+                    binds: [[ 'shown', page ]],
                 }),
             }),
             Widget.Label({
                 wrap: true,
-                class_name: "disclaimer",
+                class_name: 'disclaimer',
                 label:
-                    "These settings override all preset themes. " +
-                    "To make them permanent: edit ~/.config/ags/theme/themes.js",
+                    'These settings override all preset themes. ' +
+                    'To make them permanent: edit ~/.config/ags/theme/themes.js',
             }),
         ],
     });
@@ -269,68 +269,68 @@ const Page = (children) =>
 
 export default () =>
     Widget.Window({
-        name: "settings",
+        name: 'settings',
         child: Layout({
-            "󰒓 General": Page([
+            '󰒓 General': Page([
                 Wallpaper({
-                    class_name: "row",
+                    class_name: 'row',
                     hexpand: true,
                     vexpand: true,
                 }),
-                Img("Wallpaper", "wallpaper"),
-                SpinButton("Useless Gaps", "wm_gaps", 128),
-                SpinButton("Spacing", "spacing", 18),
-                SpinButton("Roundness", "radii", 36),
+                Img('Wallpaper', 'wallpaper'),
+                SpinButton('Useless Gaps', 'wm_gaps', 128),
+                SpinButton('Spacing', 'spacing', 18),
+                SpinButton('Roundness', 'radii', 36),
             ]),
-            "󰏘 Colors": Page([
-                TextSpinButton("Color Theme", "color_scheme", [
-                    "light",
-                    "dark",
+            '󰏘 Colors': Page([
+                TextSpinButton('Color Theme', 'color_scheme', [
+                    'light',
+                    'dark',
                 ]),
                 ...[
-                    "Red",
-                    "Green",
-                    "Yellow",
-                    "Blue",
-                    "Magenta",
-                    "Teal",
-                    "Orange",
+                    'Red',
+                    'Green',
+                    'Yellow',
+                    'Blue',
+                    'Magenta',
+                    'Teal',
+                    'Orange',
                 ].map((c) => Color(c, c.toLowerCase())),
             ]),
-            "󰃟 Theme": Page([
+            '󰃟 Theme': Page([
                 TextSpinButton(
-                    "Theme",
-                    "theme",
+                    'Theme',
+                    'theme',
                     themes.map((t) => t.name),
                 ),
-                Color("Background Color", "bg_color"),
-                Color("Foreground Color", "fg_color"),
-                Color("Hovered Foreground Color", "hover_fg"),
-                Text("Hyprland Active Border Color", "hypr_active_border"),
-                Text("Hyprland Inactive Border Color", "hypr_inactive_border"),
-                Color("Accent Color", "accent"),
-                Color("Accent Foreground", "accent_fg"),
-                Text("Active Gradient", "active_gradient"),
-                Color("Widget Background", "widget_bg"),
-                SpinButton("Widget Opacity", "widget_opacity"),
-                Color("Border Color", "border_color"),
-                SpinButton("Border Width", "border_width"),
-                SpinButton("Border Opacity", "border_opacity"),
+                Color('Background Color', 'bg_color'),
+                Color('Foreground Color', 'fg_color'),
+                Color('Hovered Foreground Color', 'hover_fg'),
+                Text('Hyprland Active Border Color', 'hypr_active_border'),
+                Text('Hyprland Inactive Border Color', 'hypr_inactive_border'),
+                Color('Accent Color', 'accent'),
+                Color('Accent Foreground', 'accent_fg'),
+                Text('Active Gradient', 'active_gradient'),
+                Color('Widget Background', 'widget_bg'),
+                SpinButton('Widget Opacity', 'widget_opacity'),
+                Color('Border Color', 'border_color'),
+                SpinButton('Border Width', 'border_width'),
+                SpinButton('Border Opacity', 'border_opacity'),
             ]),
-            "󰠱 Miscellaneous": Page([
-                Color("Shadow", "shadow"),
-                SwitchButton("Drop Shadow", "drop_shadow"),
-                SpinButton("Transition", "transition", 1000),
-                Text("Desktop Clock Position", "desktop_clock"),
-                Color("Wallpaper Foreground Color", "wallpaper_fg"),
-                FontButton("Font", "font"),
-                FontButton("Mono Font", "mono_font"),
-                SpinButton("Font Size", "font_size"),
+            '󰠱 Miscellaneous': Page([
+                Color('Shadow', 'shadow'),
+                SwitchButton('Drop Shadow', 'drop_shadow'),
+                SpinButton('Transition', 'transition', 1000),
+                Text('Desktop Clock Position', 'desktop_clock'),
+                Color('Wallpaper Foreground Color', 'wallpaper_fg'),
+                FontButton('Font', 'font'),
+                FontButton('Mono Font', 'mono_font'),
+                SpinButton('Font Size', 'font_size'),
             ]),
         }),
         connections: [
             [
-                "delete-event",
+                'delete-event',
                 (win) => {
                     win.hide();
                     return true;

@@ -1,5 +1,5 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 export default ({
     height = 18,
@@ -9,27 +9,27 @@ export default ({
     ...props
 }) => {
     const fill = Widget.Box({
-        class_name: "fill",
+        class_name: 'fill',
         hexpand: vertical,
         vexpand: !vertical,
-        hpack: vertical ? "fill" : "start",
-        vpack: vertical ? "end" : "fill",
-        children: [child],
+        hpack: vertical ? 'fill' : 'start',
+        vpack: vertical ? 'end' : 'fill',
+        children: [ child ],
     });
 
     return Widget.Box({
         ...props,
-        class_name: "progress",
+        class_name: 'progress',
         css: `
             min-width: ${width}px;
             min-height: ${height}px;
         `,
-        children: [fill],
+        children: [ fill ],
         setup: progress => progress.setValue = value => {
             if (value < 0)
-                return;
+            {return;}
 
-            const axis = vertical ? "height" : "width";
+            const axis = vertical ? 'height' : 'width';
             const axisv = vertical ? height : width;
             const min = vertical ? width : height;
             const preferred = (axisv - min) * value + min;

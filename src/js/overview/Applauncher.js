@@ -1,15 +1,15 @@
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import Applications from "resource:///com/github/Aylur/ags/service/applications.js";
-import icons from "../icons.js";
-import { launchApp } from "../utils.js";
-import Fuse from "../lib/fuse.js";
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
+import icons from '../icons.js';
+import { launchApp } from '../utils.js';
+import Fuse from '../lib/fuse.js';
 
 const AppItem = (app) =>
     Widget.Button({
-        class_name: "app",
+        class_name: 'app',
         on_clicked: () => {
-            App.closeWindow("overview");
+            App.closeWindow('overview');
             launchApp(app);
         },
         child: Widget.Box({
@@ -22,19 +22,19 @@ const AppItem = (app) =>
                     vertical: true,
                     children: [
                         Widget.Label({
-                            class_name: "title",
+                            class_name: 'title',
                             label: app.name,
                             xalign: 0,
-                            vpack: "center",
+                            vpack: 'center',
                             ellipsize: 3,
                         }),
                         Widget.Label({
-                            class_name: "description",
-                            label: app.description || "",
+                            class_name: 'description',
+                            label: app.description || '',
                             wrap: true,
                             xalign: 0,
-                            justification: "left",
-                            vpack: "center",
+                            justification: 'left',
+                            vpack: 'center',
                         }),
                     ],
                 }),
@@ -44,8 +44,8 @@ const AppItem = (app) =>
 
 const fuseOptions = {
     keys: [
-        { name: "name", weight: 5 },
-        { name: "description", weight: 1 },
+        { name: 'name', weight: 5 },
+        { name: 'description', weight: 1 },
     ],
     includeScore: true,
     sortFn: (a, b) => {
@@ -82,28 +82,28 @@ export default () => {
 
     const placeholder = Widget.Label({
         label: "    Couldn't find a match",
-        class_name: "placeholder",
+        class_name: 'placeholder',
     });
 
     const entry = Widget.Entry({
         hexpand: true,
-        text: "-",
-        placeholderText: "Search",
+        text: '-',
+        placeholderText: 'Search',
         onAccept: ({ text }) => {
             const list = Applications.query(text);
             if (list[0]) {
-                App.toggleWindow("overview");
+                App.toggleWindow('overview');
                 list[0].launch();
             }
         },
         onChange: ({ text }) => {
             let items = [];
-            if (text === "") {
+            if (text === '') {
                 items = Applications.query(text);
             } else {
                 items = filterApps(text);
             }
-            list.children = items.map((app) => [AppItem(app)]).flat();
+            list.children = items.map((app) => [ AppItem(app) ]).flat();
             list.show_all();
 
             placeholder.visible = list.children.length === 1;
@@ -111,21 +111,21 @@ export default () => {
     });
 
     return Widget.Box({
-        class_name: "applauncher",
-        properties: [["list", list]],
+        class_name: 'applauncher',
+        properties: [[ 'list', list ]],
         vertical: true,
         children: [
             Widget.Box({
-                class_name: "header",
-                children: [Widget.Icon(icons.apps.search), entry],
+                class_name: 'header',
+                children: [ Widget.Icon(icons.apps.search), entry ],
             }),
             Widget.Scrollable({
-                hscroll: "never",
+                hscroll: 'never',
                 hexpand: true,
                 vexpand: true,
                 child: Widget.Box({
                     vertical: true,
-                    children: [list, placeholder],
+                    children: [ list, placeholder ],
                 }),
             }),
         ],
@@ -133,10 +133,10 @@ export default () => {
             [
                 App,
                 (_, name, visible) => {
-                    if (name !== "overview") return;
+                    if (name !== 'overview') {return;}
 
-                    entry.set_text("");
-                    if (visible) entry.grab_focus();
+                    entry.set_text('');
+                    if (visible) {entry.grab_focus();}
                 },
             ],
         ],

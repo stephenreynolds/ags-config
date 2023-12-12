@@ -1,10 +1,10 @@
-import Cairo from "cairo";
-import icons from "./icons.js";
-import Theme from "./services/theme/theme.js";
-import Gdk from "gi://Gdk";
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Cairo from 'cairo';
+import icons from './icons.js';
+import Theme from './services/theme/theme.js';
+import Gdk from 'gi://Gdk';
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 export function range(length, start = 1) {
     return Array.from({ length }, (_, i) => i + start);
@@ -33,14 +33,14 @@ export function createSurfaceFromWidget(widget) {
 
 export function getAudioTypeIcon(icon) {
     const substitues = [
-        ["audio-headset-bluetooth", icons.audio.type.headset],
-        ["audio-headset-analog-usb", icons.audio.type.headset],
-        ["audio-card-analog-usb", icons.audio.type.speaker],
-        ["audio-card-analog-pci", icons.audio.type.card],
+        [ 'audio-headset-bluetooth', icons.audio.type.headset ],
+        [ 'audio-headset-analog-usb', icons.audio.type.headset ],
+        [ 'audio-card-analog-usb', icons.audio.type.speaker ],
+        [ 'audio-card-analog-pci', icons.audio.type.card ],
     ];
 
-    for (const [from, to] of substitues) {
-        if (from === icon) return to;
+    for (const [ from, to ] of substitues) {
+        if (from === icon) {return to;}
     }
 
     return icon;
@@ -49,12 +49,12 @@ export function getAudioTypeIcon(icon) {
 export function scssWatcher() {
     return Utils.subprocess(
         [
-            "inotifywait",
-            "--recursive",
-            "--event",
-            "create,modify",
-            "-m",
-            App.configDir + "/scss",
+            'inotifywait',
+            '--recursive',
+            '--event',
+            'create,modify',
+            '-m',
+            App.configDir + '/scss',
         ],
         () => Theme.setup(),
     );

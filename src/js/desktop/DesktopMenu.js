@@ -1,10 +1,10 @@
-import Theme from "../services/theme/theme.js";
-import PowerMenu from "../services/powermenu.js";
-import icons from "../icons.js";
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
-import Gtk from "gi://Gtk";
+import Theme from '../services/theme/theme.js';
+import PowerMenu from '../services/powermenu.js';
+import icons from '../icons.js';
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+import Gtk from 'gi://Gtk';
 
 const Item = (label, icon, onActivate) =>
     Widget.MenuItem({
@@ -23,15 +23,15 @@ const Item = (label, icon, onActivate) =>
 
 export default () =>
     Widget.Menu({
-        class_name: "desktop-menu",
+        class_name: 'desktop-menu',
         children: [
-            Item("Overview", icons.apps.apps, () => App.openWindow("overview")),
+            Item('Overview', icons.apps.apps, () => App.openWindow('overview')),
             Widget.MenuItem({
                 child: Widget.Box({
                     children: [
                         Widget.Icon(icons.powermenu.shutdown),
                         Widget.Label({
-                            label: "System",
+                            label: 'System',
                             hexpand: true,
                             xalign: 0,
                         }),
@@ -39,25 +39,25 @@ export default () =>
                 }),
                 submenu: Widget.Menu({
                     children: [
-                        Item("Lock", icons.powermenu.lock, () =>
-                            Utils.exec("lock"),
+                        Item('Lock', icons.powermenu.lock, () =>
+                            Utils.exec('lock'),
                         ),
-                        Item("Log Out", icons.powermenu.logout, () =>
-                            PowerMenu.action("logout"),
+                        Item('Log Out', icons.powermenu.logout, () =>
+                            PowerMenu.action('logout'),
                         ),
-                        Item("Sleep", icons.powermenu.sleep, () =>
-                            PowerMenu.action("sleep"),
+                        Item('Sleep', icons.powermenu.sleep, () =>
+                            PowerMenu.action('sleep'),
                         ),
-                        Item("Reboot", icons.powermenu.reboot, () =>
-                            PowerMenu.action("reboot"),
+                        Item('Reboot', icons.powermenu.reboot, () =>
+                            PowerMenu.action('reboot'),
                         ),
-                        Item("Shutdown", icons.powermenu.shutdown, () =>
-                            PowerMenu.action("shutdown"),
+                        Item('Shutdown', icons.powermenu.shutdown, () =>
+                            PowerMenu.action('shutdown'),
                         ),
                     ],
                 }),
             }),
             new Gtk.SeparatorMenuItem(),
-            Item("Settings", icons.settings, () => Theme.openSettings()),
+            Item('Settings', icons.settings, () => Theme.openSettings()),
         ],
     });

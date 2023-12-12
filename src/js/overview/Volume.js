@@ -1,23 +1,23 @@
-import icons from "../icons.js";
-import FontIcon from "../misc/FontIcon.js";
-import Separator from "../misc/Separator.js";
-import { getAudioTypeIcon } from "../utils.js";
-import { Arrow, Menu } from "./ToggleButton.js";
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import icons from '../icons.js';
+import FontIcon from '../misc/FontIcon.js';
+import Separator from '../misc/Separator.js';
+import { getAudioTypeIcon } from '../utils.js';
+import { Arrow, Menu } from './ToggleButton.js';
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 const TypeIndicator = () => Widget.Button({
     on_clicked: () => Audio.speaker.isMuted = !Audio.speaker.isMuted,
     child: Widget.Icon({
-        connections: [[Audio, icon => {
+        connections: [[ Audio, icon => {
             if (!Audio.speaker)
-                return;
+            {return;}
 
             icon.icon = getAudioTypeIcon(Audio.speaker.iconName);
             icon.tooltipText = `Volume ${Math.floor(Audio.speaker.volume * 100)}%`;
-        }, "speaker-changed"]],
+        }, 'speaker-changed' ]],
     }),
 });
 
@@ -25,37 +25,37 @@ const VolumeSlider = () => Widget.Slider({
     hexpand: true,
     drawValue: false,
     onChange: ({ value }) => Audio.speaker.volume = value,
-    connections: [[Audio, slider => {
+    connections: [[ Audio, slider => {
         slider.value = Audio.speaker?.volume;
-    }, "speaker-changed"]],
+    }, 'speaker-changed' ]],
 });
 
 export const Volume = () => Widget.Box({
-    class_name: "slider",
+    class_name: 'slider',
     children: [
         TypeIndicator(),
         VolumeSlider(),
-        Arrow("sink-selector"),
+        Arrow('sink-selector'),
         Widget.Box({
-            child: Arrow("app-mixer"),
-            connections: [[Audio, box => {
+            child: Arrow('app-mixer'),
+            connections: [[ Audio, box => {
                 box.visible = Array.from(Audio.apps).length > 0;
-            }]],
+            } ]],
         }),
     ],
 });
 
 const MixerItem = stream => Widget.Box({
     hexpand: true,
-    class_name: "mixer-item",
+    class_name: 'mixer-item',
     children: [
         Widget.Icon({
-            binds: [["tooltipText", stream, "name"]],
-            connections: [[stream, icon => {
+            binds: [[ 'tooltipText', stream, 'name' ]],
+            connections: [[ stream, icon => {
                 icon.icon = Utils.lookUpIcon(stream.name)
                     ? stream.name
                     : icons.mpris.fallback;
-            }]],
+            } ]],
         }),
         Widget.Box({
             children: [
@@ -64,23 +64,23 @@ const MixerItem = stream => Widget.Box({
                     children: [
                         Widget.Label({
                             xalign: 0,
-                            truncate: "end",
+                            truncate: 'end',
                             maxWidthChars: 28,
-                            binds: [["label", stream, "description"]],
+                            binds: [[ 'label', stream, 'description' ]],
                         }),
                         Widget.Slider({
                             hexpand: true,
                             drawValue: false,
-                            binds: [["value", stream, "volume"]],
+                            binds: [[ 'value', stream, 'volume' ]],
                             onChange: ({ value }) => stream.volume = value,
                         }),
                     ],
                 }),
                 Widget.Label({
                     xalign: 1,
-                    connections: [[stream, l => {
+                    connections: [[ stream, l => {
                         l.label = `${Math.floor(stream.volume * 100)}%`;
-                    }]],
+                    } ]],
                 }),
             ],
         }),
@@ -97,14 +97,14 @@ const SinkItem = stream => Widget.Button({
                 icon: getAudioTypeIcon(stream.iconName),
                 tooltipText: stream.iconName,
             }),
-            Widget.Label(stream.description.split(" ").slice(0, 4).join(" ")),
+            Widget.Label(stream.description.split(' ').slice(0, 4).join(' ')),
             Widget.Icon({
                 icon: icons.tick,
                 hexpand: true,
-                hpack: "end",
-                connections: [["draw", icon => {
+                hpack: 'end',
+                connections: [[ 'draw', icon => {
                     icon.visible = Audio.speaker === stream;
-                }]],
+                } ]],
             }),
         ],
     }),
@@ -112,51 +112,51 @@ const SinkItem = stream => Widget.Button({
 
 const SettingsButton = () => Widget.Button({
     on_clicked: () => {
-        App.closeWindow("overview");
-        Utils.execAsync("pavucontrol");
+        App.closeWindow('overview');
+        Utils.execAsync('pavucontrol');
     },
     hexpand: true,
     child: Widget.Box({
         children: [
             Widget.Icon(icons.settings),
-            Widget.Label("Settings"),
+            Widget.Label('Settings'),
         ],
     }),
 });
 
 export const AppMixer = () => Menu({
-    name: "app-mixer",
+    name: 'app-mixer',
     icon: FontIcon(icons.audio.mixer),
-    title: Widget.Label("App Mixer"),
+    title: Widget.Label('App Mixer'),
     content: Widget.Box({
-        class_name: "app-mixer",
+        class_name: 'app-mixer',
         vertical: true,
         children: [
             Widget.Box({
                 vertical: true,
-                binds: [["children", Audio, "apps", a => a.map(MixerItem)]],
+                binds: [[ 'children', Audio, 'apps', a => a.map(MixerItem) ]],
             }),
-            Separator({ orientation: "horizontal" }),
+            Separator({ orientation: 'horizontal' }),
             SettingsButton(),
         ],
     }),
 });
 
 export const SinkSelector = () => Menu({
-    name: "sink-selector",
+    name: 'sink-selector',
     icon: Widget.Icon(icons.audio.type.headset),
-    title: Widget.Label("Sink Selector"),
+    title: Widget.Label('Sink Selector'),
     content: Widget.Box({
-        class_name: "sink-selector",
+        class_name: 'sink-selector',
         vertical: true,
         children: [
             Widget.Box({
                 vertical: true,
-                connections: [[Audio, box => {
+                connections: [[ Audio, box => {
                     box.children = Audio.speakers.map(SinkItem);
-                }, "notify::speakers"]],
+                }, 'notify::speakers' ]],
             }),
-            Separator({ orientation: "horizontal" }),
+            Separator({ orientation: 'horizontal' }),
             SettingsButton(),
         ],
     }),

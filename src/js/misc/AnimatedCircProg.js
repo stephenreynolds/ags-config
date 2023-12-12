@@ -1,6 +1,6 @@
-import Gtk from "gi://Gtk";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Gtk from 'gi://Gtk';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 export default ({
     initFrom = 0,
@@ -9,11 +9,11 @@ export default ({
     ...rest
 }) => Widget.DrawingArea({
     ...rest,
-    css: `${initFrom !== initTo ? "font-size: " + initFrom + "px; transition: " + initAnimTime + "ms linear;" : ""}`,
+    css: `${initFrom !== initTo ? 'font-size: ' + initFrom + 'px; transition: ' + initAnimTime + 'ms linear;' : ''}`,
     setup: (area) => {
         const styleContext = area.get_style_context();
-        const width = styleContext.get_property("min-height", Gtk.StateFlags.NORMAL);
-        const height = styleContext.get_property("min-height", Gtk.StateFlags.NORMAL);
+        const width = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
+        const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
         const marginLeft = styleContext.get_margin(Gtk.StateFlags.NORMAL).left;
         const marginRight = styleContext.get_margin(Gtk.StateFlags.NORMAL).right;
         const marginTop = styleContext.get_margin(Gtk.StateFlags.NORMAL).top;
@@ -22,8 +22,8 @@ export default ({
 
         const draw = (area, cr) => {
             const styleContext = area.get_style_context();
-            const width = styleContext.get_property("min-height", Gtk.StateFlags.NORMAL);
-            const height = styleContext.get_property("min-height", Gtk.StateFlags.NORMAL);
+            const width = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
+            const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
             const padding = styleContext.get_padding(Gtk.StateFlags.NORMAL).left;
             const marginLeft = styleContext.get_margin(Gtk.StateFlags.NORMAL).left;
             const marginRight = styleContext.get_margin(Gtk.StateFlags.NORMAL).right;
@@ -31,9 +31,9 @@ export default ({
             const marginBottom = styleContext.get_margin(Gtk.StateFlags.NORMAL).bottom;
             area.set_size_request(width + marginLeft + marginRight, height + marginTop + marginBottom);
 
-            const progressValue = styleContext.get_property("font-size", Gtk.StateFlags.NORMAL) / 100.0;
+            const progressValue = styleContext.get_property('font-size', Gtk.StateFlags.NORMAL) / 100.0;
 
-            const bg_stroke = styleContext.get_property("min-width", Gtk.StateFlags.NORMAL);
+            const bg_stroke = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
             const fg_stroke = bg_stroke - padding;
             const radius = Math.min(width, height) / 2.0 - Math.max(bg_stroke, fg_stroke) / 2.0;
             const center_x = width / 2.0 + marginLeft;
@@ -46,16 +46,16 @@ export default ({
             const end_y = center_y + Math.sin(end_angle) * radius;
 
             // Draw background
-            const background_color = styleContext.get_property("background-color", Gtk.StateFlags.NORMAL);
+            const background_color = styleContext.get_property('background-color', Gtk.StateFlags.NORMAL);
             cr.setSourceRGBA(background_color.red, background_color.green, background_color.blue, background_color.alpha);
             cr.arc(center_x, center_y, radius, 0, 2 * Math.PI);
             cr.setLineWidth(bg_stroke);
             cr.stroke();
 
-            if (progressValue == 0) return;
+            if (progressValue == 0) {return;}
 
             // Draw progress
-            const color = styleContext.get_property("color", Gtk.StateFlags.NORMAL);
+            const color = styleContext.get_property('color', Gtk.StateFlags.NORMAL);
             cr.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
             cr.arc(center_x, center_y, radius, start_angle, end_angle);
             cr.setLineWidth(fg_stroke);
@@ -69,13 +69,13 @@ export default ({
             cr.fill();
         };
 
-        area.connect("draw", draw.bind(area));
+        area.connect('draw', draw.bind(area));
 
         if (initFrom !== initTo) {
             Utils.timeout(20, () => {
                 area.css = `font-size: ${initTo}px;`;
             });
         }
-        else area.css = "font-size: 0px;";
+        else {area.css = 'font-size: 0px;';}
     },
 });
