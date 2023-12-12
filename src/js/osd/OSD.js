@@ -1,52 +1,72 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
-import FontIcon from "../misc/FontIcon.js";
-import Progress from "../misc/Progress.js";
+import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import Indicator from "../services/onScreenIndicator.js";
 
-export const OnScreenIndicator = ({ height = 300, width = 48 } = {}) => Widget.Box({
-    class_name: "indicator",
-    css: "padding: 1px;",
-    child: Widget.Revealer({
-        transition: "slide_left",
-        connections: [[Indicator, (revealer, value) => {
-            revealer.revealChild = value > -1;
-        }]],
-        child: Progress({
-            width,
-            height,
-            vertical: true,
-            connections: [[Indicator, (progress, value) => progress.setValue(value)]],
-            child: Widget.Stack({
-                vpack: "start",
-                hpack: "center",
-                hexpand: false,
-                items: [
-                    ["true", Widget.Icon({
-                        hpack: "center",
-                        size: width,
-                        connections: [[Indicator, (icon, _v, name) => icon.icon = name || ""]],
-                    })],
-                    ["false", FontIcon({
-                        hpack: "center",
-                        hexpand: true,
-                        css: `font-size: ${width}px;`,
-                        connections: [[Indicator, (icon, _v, name) => icon.icon = name || ""]],
-                    })],
-                ],
-                connections: [[Indicator, (stack, _v, name) => {
-                    stack.shown = `${!!Utils.lookUpIcon(name)}`;
-                }]],
-            }),
+const OsdValue = (name, labelConnections, progressConnections, props = {}) => Widget.Box({ // Volume
+    ...props,
+    vertical: true,
+    className: "osd-bg osd-value",
+    hexpand: true,
+    children: [
+        Widget.Box({
+            vexpand: true,
+            children: [
+                Widget.Label({
+                    xalign: 0, yalign: 0, hexpand: true,
+                    className: "osd-label",
+                    label: `${name}`,
+                }),
+                Widget.Label({
+                    hexpand: false, className: "osd-value-txt",
+                    label: "100",
+                    connections: labelConnections,
+                }),
+            ]
         }),
-    }),
+        Widget.ProgressBar({
+            className: "osd-progress",
+            hexpand: true,
+            vertical: false,
+            connections: progressConnections,
+        })
+    ],
 });
 
-export default monitor => Widget.Window({
-    name: `indicator${monitor}`,
+const VolumeIndicator = OsdValue("Volume",
+    [[Audio, (label) => {
+        label.label = `${Math.round(Audio.speaker?.volume * 100)}`;
+    }]],
+    [[Audio, (progress) => {
+        const updateValue = Audio.speaker?.volume;
+        if (!isNaN(updateValue)) progress.value = updateValue;
+    }]],
+);
+
+export default (monitor) => Widget.Window({
+    name: `indicator-${monitor}`,
     monitor,
-    class_name: "indicator",
+    className: "indicator",
     layer: "overlay",
-    anchor: ["right"],
-    child: OnScreenIndicator(),
+    visible: true,
+    anchor: ["bottom"],
+    child: Widget.Box({
+        vertical: true,
+        css: "min-height: 2px;",
+        children: [
+            Widget.Revealer({
+                transition: "slide_up",
+                connections: [
+                    [Indicator, (revealer, value) => {
+                        revealer.revealChild = (value > -1);
+                    }, "popup"]
+                ],
+                child: Widget.Box({
+                    hpack: "center",
+                    children: [
+                        VolumeIndicator
+                    ]
+                })
+            })
+        ]
+    })
 });
