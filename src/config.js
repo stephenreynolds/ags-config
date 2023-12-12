@@ -14,7 +14,7 @@ globalThis.audio = (await import("resource:///com/github/Aylur/ags/service/audio
 
 const windows = () => [
     forMonitors(Desktop),
-    OSD(options.primaryMonitor),
+    forMonitors(OSD),
     Notifications(options.primaryMonitor),
     Overview(),
     PowerMenu(),
