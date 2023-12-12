@@ -12,15 +12,17 @@ setup.scssWatcher();
 
 globalThis.audio = (await import("resource:///com/github/Aylur/ags/service/audio.js")).default;
 
+const windows = () => [
+    forMonitors(Desktop),
+    OSD(options.primaryMonitor),
+    Notifications(options.primaryMonitor),
+    Overview(),
+    PowerMenu(),
+    Verification(),
+];
+
 export default {
     maxStreamVolume: 1.05,
     cacheNotificationActions: true,
-    windows: [
-        forMonitors(Desktop),
-        OSD(options.primaryMonitor),
-        Notifications(options.primaryMonitor),
-        Overview(),
-        PowerMenu(),
-        Verification(),
-    ].flat(2),
+    windows: windows().flat(1),
 };
