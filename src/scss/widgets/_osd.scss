@@ -3,7 +3,7 @@
 @use "../lib/mixins";
 
 .osd-bg {
-  min-width: 10rem;
+  min-width: 20rem;
   min-height: 3.409rem;
 }
 
@@ -15,7 +15,7 @@
   @include mixins.elevation2;
 }
 
-.osd-progress {
+.osd-volume-slider {
   min-height: 0.955rem;
   min-width: 0.068rem;
   padding: 0;
@@ -29,7 +29,7 @@
     background-color: material.$secondaryContainer;
   }
 
-  progress {
+  highlight {
     @include mixins.fluent_decel;
     min-height: 0.68rem;
     min-width: 0.068rem;
