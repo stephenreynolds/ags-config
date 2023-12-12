@@ -1,11 +1,40 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
+import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import Indicator from "../services/onScreenIndicator.js";
 import icons from "../icons.js";
+import options from "../options.js";
 
-const VolumeIndicator = Widget.Box({
+const WorkspaceIndicator = (monitor) => Widget.Box({
+    className: "osd-workspace",
+    child: Widget.Box({
+        className: "workspaces",
+        connections: [[Hyprland.active.workspace, self => {
+            const workspaces = Hyprland.workspaces
+                .filter(ws =>
+                    ws.monitorID === monitor &&
+                    ws.id !== -99 &&
+                    (ws.windows > 0 || ws.id === Hyprland.active.workspace.id));
+
+            self.children = workspaces.map(ws => Widget.Button({
+                onClicked: () => Hyprland.sendMessage(`dispatch workspace ${ws.id}`),
+                child: Widget.Label({
+                    label: `${ws.id}`,
+                    className: "indicator",
+                    vpack: "center"
+                }),
+                connections: [[Hyprland.active.workspace, btn => {
+                    btn.toggleClassName("visible", Hyprland.getMonitor(monitor).activeWorkspace.id === ws.id);
+                    btn.toggleClassName("active", Hyprland.active.workspace.id === ws.id);
+                }]]
+            }));
+        }]],
+    })
+});
+
+const VolumeIndicator = () => Widget.Box({
     vertical: true,
-    className: "osd-bg osd-value",
+    className: "osd-volume",
     hexpand: true,
     spacing: 5,
     children: [
@@ -28,7 +57,7 @@ const VolumeIndicator = Widget.Box({
                     spacing: 5,
                     children: [
                         Widget.Label({
-                            hexpand: false, className: "osd-value-txt",
+                            hexpand: false, className: "osd-volume-value-label",
                             label: "100",
                             connections: [[Audio, (label) => {
                                 label.label = `${Math.round(Audio.speaker?.volume * 100)}`;
@@ -49,7 +78,7 @@ const VolumeIndicator = Widget.Box({
                             }, "speaker-changed"]],
                         })
                     ]
-                }),
+                })
             ]
         }),
         Widget.Label({
@@ -61,6 +90,9 @@ const VolumeIndicator = Widget.Box({
         }),
     ],
 });
+
+const isActiveMonitor = (monitor) =>
+    monitor === Hyprland.monitors.find(m => m.name === Hyprland.active.monitor).id;
 
 export default (monitor) => Widget.Window({
     name: `indicator-${monitor}`,
@@ -75,18 +107,33 @@ export default (monitor) => Widget.Window({
         children: [
             Widget.Revealer({
                 transition: "slide_up",
+                transitionDuration: options.transitionDuration,
                 connections: [
-                    [Indicator, (revealer, value) => {
-                        revealer.revealChild = (value > -1);
-                    }, "popup"]
+                    [Indicator, (self, value) => {
+                        if (!isActiveMonitor(monitor)) {
+                            self.revealChild = false;
+                            return;
+                        }
+                        self.revealChild = value > -1;
+                    }, "popup-volume"]
                 ],
-                child: Widget.Box({
-                    hpack: "center",
-                    children: [
-                        VolumeIndicator
-                    ]
-                })
-            })
-        ]
+                child: VolumeIndicator(),
+            }),
+            Widget.Revealer({
+                transition: "slide_up",
+                transitionDuration: options.transitionDuration,
+                hpack: "center",
+                connections: [
+                    [Indicator, (self, reveal) => {
+                        if (!reveal || !isActiveMonitor(monitor)) {
+                            self.revealChild = false;
+                            return;
+                        }
+                        self.revealChild = true;
+                    }, "popup-workspace"]
+                ],
+                child: WorkspaceIndicator(monitor),
+            }),
+        ],
     })
 });

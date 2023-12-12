@@ -1,4 +1,3 @@
-import { getAudioTypeIcon } from "../utils.js";
 import Service from "resource:///com/github/Aylur/ags/service.js";
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
@@ -6,33 +5,37 @@ import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 class IndicatorService extends Service {
     static {
         Service.register(this, {
-            "popup": ["double", "string"],
+            "popup-volume": ["double"],
+            "popup-workspace": ["boolean"],
         });
     }
 
-    #delay = 1500;
-    #count = 0;
-
-    /**
-     * @param {number} value - 0 < v < 1
-     * @param {string} icon
-     */
-    popup(value, icon) {
-        this.emit("popup", value, icon);
-        this.#count++;
-        Utils.timeout(this.#delay, () => {
-            this.#count--;
-
-            if (this.#count === 0)
-                this.emit("popup", -1, icon);
-        });
-    }
+    #speakerDelay = 1500;
+    #speakerCount = 0;
 
     speaker() {
-        this.popup(
-            Audio.speaker?.volume || 0,
-            getAudioTypeIcon(Audio.speaker?.iconName || ""),
-        );
+        this.emit("popup-volume", Audio.speaker?.volume);
+        this.#speakerCount++;
+        Utils.timeout(this.#speakerDelay, () => {
+            this.#speakerCount--;
+
+            if (this.#speakerCount === 0)
+                this.emit("popup-volume", -1);
+        });
+    }
+
+    #workspaceDelay = 500;
+    #workspaceCount = 0;
+
+    workspace() {
+        this.emit("popup-workspace", true);
+        this.#workspaceCount++;
+        Utils.timeout(this.#workspaceDelay, () => {
+            this.#workspaceCount--;
+
+            if (this.#workspaceCount === 0)
+                this.emit("popup-workspace", false);
+        });
     }
 
     connect(event = "popup", callback) {

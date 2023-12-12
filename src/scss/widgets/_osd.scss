@@ -1,58 +1,88 @@
 @use "../lib/material";
 @use "../lib/colors";
 @use "../lib/mixins";
+@use "sass:color";
 
-.osd-bg {
+.osd-volume {
   min-width: 20rem;
   min-height: 3.409rem;
-}
-
-.osd-value {
   background-color: colors.$t_background;
   border-radius: 1.023rem;
   padding: 0.625rem 1.023rem;
   margin: 10px;
   @include mixins.elevation2;
-}
 
-.osd-volume-slider {
-  min-height: 0.955rem;
-  min-width: 0.068rem;
-  padding: 0;
-  border-radius: 10rem;
-  @include mixins.fluent_decel;
-
-  trough {
-    min-height: 0.954rem;
+  .osd-volume-slider {
+    min-height: 0.955rem;
     min-width: 0.068rem;
+    padding: 0;
     border-radius: 10rem;
-    background-color: material.$secondaryContainer;
-  }
-
-  highlight {
     @include mixins.fluent_decel;
-    min-height: 0.68rem;
-    min-width: 0.068rem;
-    margin: 0 0.137rem;
-    border-radius: 10rem;
-    background-color: material.$onSecondaryContainer;
+
+    trough {
+      min-height: 0.954rem;
+      min-width: 0.068rem;
+      border-radius: 10rem;
+      background-color: material.$secondaryContainer;
+    }
+
+    highlight {
+      @include mixins.fluent_decel;
+      min-height: 0.68rem;
+      min-width: 0.068rem;
+      margin: 0 0.137rem;
+      border-radius: 10rem;
+      background-color: material.$onSecondaryContainer;
+    }
+  }
+
+  .osd-volume-value-label {
+    @include mixins.titlefont;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: material.$onBackground;
   }
 }
 
-.osd-icon {
-  color: material.$onPrimaryContainer;
-}
+.osd-workspace {
+  background-color: colors.$t_background;
+  border-radius: 1.023rem;
+  padding: 0.625rem 1.023rem;
+  margin: 10px;
+  @include mixins.elevation2;
 
-.osd-label {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: material.$onBackground;
-  margin-top: 0.45rem;
-}
+  .workspaces button {
+    $indicatorSize: 0.68rem;
+    $color: color.scale(material.$onBackground, $blackness: 66%);
+    margin: 0 0.325rem;
 
-.osd-value-txt {
-  @include mixins.titlefont;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: material.$onBackground;
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    .indicator {
+      font-size: 0;
+      min-width: $indicatorSize;
+      min-height: $indicatorSize;
+      border-radius: $indicatorSize;
+      box-shadow: inset 0 0 0 1px $color;
+      transition: $transition / 2;
+      background-color: $color;
+    }
+
+    &.visible .indicator,
+    &:hover .indicator {
+      background-color: material.$onBackground;
+      box-shadow: inset 0 0 0 1px material.$onBackground;
+    }
+
+    &.active .indicator {
+      min-width: 2rem;
+      min-height: $indicatorSize + 0.125rem;
+    }
+  }
 }
