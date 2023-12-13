@@ -3,12 +3,8 @@
 @use "../../lib/material";
 
 .sidebar-center {
-    @include mixins.menu_decel;
-    @include mixins.small-rounding;
-    @include mixins.elevation-border;
-    @include mixins.elevation2;
-    min-width: 36.5rem;
-    background-color: colors.$t_background;
+  @include mixins.menu_decel;
+  min-width: 36.5rem;
 }
 
 .sidecenter-show {
@@ -19,6 +15,18 @@
   @include mixins.menu_accel;
   margin-top: 30.682rem;
   margin-bottom: -30.682rem;
+}
+
+.sidecenter-group {
+  @include mixins.menu_decel;
+  @include mixins.small-rounding;
+  @include mixins.elevation-border;
+  @include mixins.elevation2;
+  background-color: colors.$t_background;
+
+  .applauncher {
+    min-height: 36.5rem;
+  }
 }
 
 .applauncher {
@@ -73,4 +81,8 @@
       background-color: colors.$t_surfaceVariant;
     }
   }
+}
+
+.system-tray {
+  padding: 1.023rem;
 }
