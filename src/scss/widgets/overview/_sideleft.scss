@@ -11,11 +11,7 @@
     padding: 1.023rem;
 }
 
-.sideleft-show {
-  @include mixins.menu_decel;
-}
-
-.sideleft-hide {
+.overview-hide .sidebar-left {
   @include mixins.menu_accel;
   margin-left: -30.682rem;
 }

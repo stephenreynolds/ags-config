@@ -5,6 +5,15 @@
 @use "../../lib/colors";
 @use "../../lib/material";
 
+.overview {
+  transition: background-color 160ms ease;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.overview-hide {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 @mixin group-padding {
   padding: 0.341rem;
 }
