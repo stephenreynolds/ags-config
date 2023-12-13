@@ -70,9 +70,8 @@ const NotificationIcon = (notification) => {
                 });
             }
             else {
-                // FIXME: release_alert icon is missing, using error for now
                 iconName = notification.urgency === 'critical'
-                    ? 'error'
+                    ? 'release_alert'
                     : guessMessageType(notification.summary.toLowerCase());
                 icon = MaterialIcon(iconName, '3xl', {
                     hexpand: true,
@@ -186,6 +185,7 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
                     Widget.Button({
                         className: 'notification-close-btn',
                         onClicked: () => destroyWithAnims,
+                        vpack: 'center',
                         child: MaterialIcon('close', 'xl', {
                             vpack: 'center',
                         }),

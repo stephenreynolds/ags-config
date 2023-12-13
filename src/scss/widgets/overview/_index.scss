@@ -1,3 +1,37 @@
 @use "sideleft";
 @use "sidecenter";
 @use "sideright";
+@use "../../lib/mixins";
+@use "../../lib/colors";
+@use "../../lib/material";
+
+@mixin group-padding {
+  padding: 0.341rem;
+}
+
+.sidebar-group-invisible {
+  @include group-padding;
+}
+
+.sidebar-scrollbar {
+    trough {
+        @include mixins.full-rounding;
+        min-width: 0.545rem;
+        background-color: transparent;
+    }
+
+    slider {
+        @include mixins.full-rounding;
+        min-width: 0.273rem;
+        min-height: 2.045rem;
+        background-color: colors.$t_onSurfaceVariant;
+    }
+
+    slider:hover {
+        background-color: mix(colors.$t_onSurfaceVariant, material.$onSurfaceVariant, 80%);
+    }
+
+    slider:active {
+        background-color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 50%);
+    }
+}

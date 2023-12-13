@@ -5,7 +5,7 @@ import SidebarRight from './sideright/SidebarRight.js';
 import PopupWindow from '../misc/PopupWindow.js';
 
 const Overview = () => Widget.Box({
-    homogeneous: false,
+    homogeneous: true,
     children: [
         SidebarLeft(),
         SidebarCenter(),

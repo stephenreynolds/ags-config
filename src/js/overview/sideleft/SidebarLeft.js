@@ -5,6 +5,7 @@ export default () => Widget.Box({
     class_name: 'sidebar-left sideleft-show sideleft-hide',
     vertical: true,
     vexpand: true,
+    hpack: 'start',
     children: [
         Widget.Label({ label: 'test' }),
     ],
