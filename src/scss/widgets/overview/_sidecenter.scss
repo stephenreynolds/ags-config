@@ -1,6 +1,6 @@
-@use "../lib/mixins";
-@use "../lib/colors";
-@use "../lib/material";
+@use "../../lib/mixins";
+@use "../../lib/colors";
+@use "../../lib/material";
 
 .sidebar-center {
     @include mixins.menu_decel;

@@ -1,5 +1,5 @@
-@use "../lib/mixins";
-@use "../lib/colors";
+@use "../../lib/mixins";
+@use "../../lib/colors";
 
 .sidebar-left {
     @include mixins.menu_decel;
