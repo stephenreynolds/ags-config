@@ -20,8 +20,10 @@ const dark = {
 };
 
 const misc = {
-    wm_gaps: 0,
-    wm_rounding: 0,
+    wm_gaps_in: 4,
+    wm_gaps_out: 5,
+    wm_gaps_workspaces: 50,
+    wm_rounding: 10,
     radii: 9,
     spacing: 9,
     shadow: 'rgba(0, 0, 0, 0.6)',

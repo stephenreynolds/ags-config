@@ -1,0 +1,21 @@
+@use "../lib/mixins";
+@use "../lib/colors";
+
+.sidebar-left {
+    @include mixins.menu_decel;
+    @include mixins.small-rounding;
+    @include mixins.elevation-border;
+    @include mixins.elevation2;
+    min-width: 27.818rem;
+    background-color: colors.$t_background;
+    padding: 1.023rem;
+}
+
+.sideleft-show {
+  @include mixins.menu_decel;
+}
+
+.sideleft-hide {
+  @include mixins.menu_accel;
+  margin-left: -30.682rem;
+}

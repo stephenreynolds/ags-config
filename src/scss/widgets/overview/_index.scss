@@ -1,4 +1,5 @@
 @use "../../lib/colors";
+@use "../../lib/mixins";
 @use "applauncher";
 @use "notification-list";
 
@@ -58,6 +59,11 @@ window#overview .overview {
   }
 
   .left {
+    @include mixins.menu_decel;
+    @include mixins.large-rounding;
+    @include mixins.elevation-border;
+    @include mixins.elevation2;
+    background-color: colors.$t_background;
     padding: 20px 10px 20px 20px;
 
     .media .player {
@@ -147,10 +153,21 @@ window#overview .overview {
   }
 
   .center {
+    @include mixins.menu_decel;
+    @include mixins.large-rounding;
+    @include mixins.elevation-border;
+    @include mixins.elevation2;
+    background-color: colors.$t_background;
     padding: 20px 10px;
   }
 
   .right {
+    @include mixins.menu_decel;
+    @include mixins.large-rounding;
+    @include mixins.elevation-border;
+    @include mixins.elevation2;
+    background-color: colors.$t_background;
+
     padding: 20px 20px 20px 10px;
 
     .datemenu {
