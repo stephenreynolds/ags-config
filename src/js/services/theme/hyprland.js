@@ -1,7 +1,6 @@
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-
-const noAlphaignore = [ 'verification', 'powermenu' ];
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 function sendBatch(batch) {
     const command = batch
@@ -12,7 +11,7 @@ function sendBatch(batch) {
     Hyprland.sendMessage(`[[BATCH]]/${command}`);
 }
 
-export default async function({
+function initConfig({
     wm_gaps_in,
     wm_gaps_out,
     wm_gaps_workspaces,
@@ -25,6 +24,27 @@ export default async function({
     wm_rounding,
     drop_shadow,
 }) {
+    sendBatch([
+        `general:border_size ${border_width}`,
+        `general:gaps_in ${wm_gaps_in}`,
+        `general:gaps_out ${wm_gaps_out}`,
+        `general:gaps_workspaces ${wm_gaps_workspaces}`,
+        `general:col.active_border ${hypr_active_border}`,
+        `general:col.inactive_border ${hypr_inactive_border}`,
+        `general:col.border_active ${hypr_group_active}`,
+        `general:col.border_inactive ${hypr_inactive_border}`,
+        `general:col.border_locked_active ${hypr_group_locked_active}`,
+        `group:groupbar:col.active ${hypr_group_active}`,
+        `group:groupbar:col.inactive ${hypr_group_inactive}`,
+        `group:groupbar:col.locked_active ${hypr_group_locked_active}`,
+        `decoration:rounding ${wm_rounding}`,
+        `decoration:drop_shadow ${drop_shadow ? 'yes' : 'no'}`,
+    ]);
+}
+
+const noAlphaignore = [ 'verification', 'powermenu' ];
+
+function listenMatchingAlphaIgnore() {
     App.connect('config-parsed', () => {
         const batch = [];
 
@@ -42,25 +62,66 @@ export default async function({
 
         sendBatch(batch);
     });
+}
 
-    const batch = [];
+const noGaps = [ 'firefox' ];
 
-    batch.push(
-        `general:border_size ${border_width}`,
-        `general:gaps_in ${wm_gaps_in}`,
-        `general:gaps_out ${wm_gaps_out}`,
-        `general:gaps_workspaces ${wm_gaps_workspaces}`,
-        `general:col.active_border ${hypr_active_border}`,
-        `general:col.inactive_border ${hypr_inactive_border}`,
-        `general:col.border_active ${hypr_group_active}`,
-        `general:col.border_inactive ${hypr_inactive_border}`,
-        `general:col.border_locked_active ${hypr_group_locked_active}`,
-        `group:groupbar:col.active ${hypr_group_active}`,
-        `group:groupbar:col.inactive ${hypr_group_inactive}`,
-        `group:groupbar:col.locked_active ${hypr_group_locked_active}`,
-        `decoration:rounding ${wm_rounding}`,
-        `decoration:drop_shadow ${drop_shadow ? 'yes' : 'no'}`,
-    );
+function disableGaps(id) {
+    Hyprland.sendMessage(`keyword workspace ${id},gapsout:0,rounding:false,border:false`).catch(() => {});
+}
 
-    sendBatch(batch);
+function resetGaps(id, gapsout) {
+    Hyprland.sendMessage(`keyword workspace ${id},gapsout:${gapsout},rounding:true,border:true`).catch(() => {});
+}
+
+function listenMatchingSingleClient(gapsout) {
+    Hyprland.connect('changed', () => {
+        Utils.timeout(10, () => {
+            Hyprland.workspaces.map((workspace) => {
+                if (workspace.windows === 1) {
+                    const client = Hyprland.clients.find((c) => c.workspace.id === workspace.id);
+                    if (client) {
+                        const removeGaps = noGaps.some((c) => client.class === c);
+                        if (removeGaps) {
+                            disableGaps(workspace.id);
+                            return;
+                        }
+                    }
+                }
+                resetGaps(workspace.id, gapsout);
+            });
+        });
+    });
+}
+
+export default async function({
+    wm_gaps_in,
+    wm_gaps_out,
+    wm_gaps_workspaces,
+    border_width,
+    hypr_active_border,
+    hypr_inactive_border,
+    hypr_group_active,
+    hypr_group_inactive,
+    hypr_group_locked_active,
+    wm_rounding,
+    drop_shadow,
+}) {
+    initConfig({
+        wm_gaps_in,
+        wm_gaps_out,
+        wm_gaps_workspaces,
+        border_width,
+        hypr_active_border,
+        hypr_inactive_border,
+        hypr_group_active,
+        hypr_group_inactive,
+        hypr_group_locked_active,
+        wm_rounding,
+        drop_shadow,
+    });
+
+    listenMatchingAlphaIgnore();
+
+    listenMatchingSingleClient(wm_gaps_out);
 }
