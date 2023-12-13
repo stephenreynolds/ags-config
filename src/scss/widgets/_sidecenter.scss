@@ -1,14 +1,14 @@
 @use "../lib/mixins";
 @use "../lib/colors";
+@use "../lib/material";
 
 .sidebar-center {
     @include mixins.menu_decel;
     @include mixins.small-rounding;
     @include mixins.elevation-border;
     @include mixins.elevation2;
-    min-width: 34.5rem;
+    min-width: 36.5rem;
     background-color: colors.$t_background;
-    padding: 1.023rem;
 }
 
 .sidecenter-show {
@@ -19,4 +19,58 @@
   @include mixins.menu_accel;
   margin-top: 30.682rem;
   margin-bottom: -30.682rem;
+}
+
+.applauncher {
+  .header {
+    margin: 16px;
+    margin-bottom: 8px;
+
+    image, entry {
+      @include mixins.small-rounding;
+      @include mixins.elevation-border;
+      background-color: colors.$t_surfaceVariant;
+      padding: 4px;
+    }
+
+    entry {
+      padding-left: 9px;
+    }
+
+    image {
+      margin-right: 9px;
+      -gtk-icon-transform: scale(0.8);
+      font-size: 1.6em;
+    }
+  }  
+
+  scrolledwindow {
+    @include mixins.scrollbar;
+    padding: 16px;
+    padding-bottom: 0;
+  }
+
+  .app {
+    margin: 0.25rem 0;
+
+    label {
+      &.title {
+        color: material.$onSurface;
+      }
+
+      &.description {
+        color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 67%);
+      }
+    }
+
+    image {
+      margin-right: 9px;
+    }
+
+    &:hover, &:focus {
+      @include mixins.elevation-border;
+      @include mixins.small-rounding;
+      background-color: colors.$t_surfaceVariant;
+    }
+  }
 }

@@ -1,9 +1,9 @@
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
-import icons from '../icons.js';
-import { launchApp } from '../utils.js';
-import Fuse from '../lib/fuse.js';
+import Fuse from '../../lib/fuse.js';
+import icons from '../../icons.js';
+import { launchApp } from '../../utils.js';
 
 const AppItem = (app) =>
     Widget.Button({
@@ -92,7 +92,7 @@ export default () => {
         onAccept: ({ text }) => {
             const list = Applications.query(text);
             if (list[0]) {
-                App.toggleWindow('overview');
+                App.closeWindow('overview');
                 list[0].launch();
             }
         },
@@ -133,10 +133,15 @@ export default () => {
             [
                 App,
                 (_, name, visible) => {
-                    if (name !== 'overview') {return;}
+                    if (name !== 'overview') {
+                        return;
+                    }
 
                     entry.set_text('');
-                    if (visible) {entry.grab_focus();}
+
+                    if (visible) {
+                        entry.grab_focus();
+                    }
                 },
             ],
         ],
