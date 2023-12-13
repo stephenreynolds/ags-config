@@ -106,7 +106,7 @@ export default () => {
             list.children = items.map((app) => [ AppItem(app) ]).flat();
             list.show_all();
 
-            placeholder.visible = list.children.length === 1;
+            placeholder.visible = list.children.length === 0;
         },
     });
 
