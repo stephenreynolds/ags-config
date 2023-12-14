@@ -2,36 +2,57 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import { setupCursorHover } from '../../misc/cursorHover.js';
 import MaterialIcon from '../../misc/MaterialIcon.js';
+import TodoList from './TodoList.js';
 
 function checkLeapYear(year) {
-    return (
-        year % 400 == 0 ||
-        (year % 4 == 0 && year % 100 != 0));
+    return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
 }
 
 function getMonthDays(month, year) {
     const leapYear = checkLeapYear(year);
-    if ((month <= 7 && month % 2 == 1) || (month >= 8 && month % 2 == 0)) {return 31;}
-    if (month == 2 && leapYear) {return 29;}
-    if (month == 2 && !leapYear) {return 28;}
+    if ((month <= 7 && month % 2 == 1) || (month >= 8 && month % 2 == 0)) {
+        return 31;
+    }
+    if (month == 2 && leapYear) {
+        return 29;
+    }
+    if (month == 2 && !leapYear) {
+        return 28;
+    }
     return 30;
 }
 
 function getNextMonthDays(month, year) {
     const leapYear = checkLeapYear(year);
-    if (month == 1 && leapYear) {return 29;}
-    if (month == 1 && !leapYear) {return 28;}
-    if (month == 12) {return 31;}
-    if ((month <= 7 && month % 2 == 1) || (month >= 8 && month % 2 == 0)) {return 30;}
+    if (month == 1 && leapYear) {
+        return 29;
+    }
+    if (month == 1 && !leapYear) {
+        return 28;
+    }
+    if (month == 12) {
+        return 31;
+    }
+    if ((month <= 7 && month % 2 == 1) || (month >= 8 && month % 2 == 0)) {
+        return 30;
+    }
     return 31;
 }
 
 function getPrevMonthDays(month, year) {
     const leapYear = checkLeapYear(year);
-    if (month == 3 && leapYear) {return 29;}
-    if (month == 3 && !leapYear) {return 28;}
-    if (month == 1) {return 31;}
-    if ((month <= 7 && month % 2 == 1) || (month >= 8 && month % 2 == 0)) {return 30;}
+    if (month == 3 && leapYear) {
+        return 29;
+    }
+    if (month == 3 && !leapYear) {
+        return 28;
+    }
+    if (month == 1) {
+        return 31;
+    }
+    if ((month <= 7 && month % 2 == 1) || (month >= 8 && month % 2 == 0)) {
+        return 30;
+    }
     return 31;
 }
 
@@ -210,6 +231,7 @@ const contentStack = Widget.Stack({
     hexpand: true,
     items: [
         [ 'calendar', Calendar() ],
+        [ 'todo', TodoList() ],
     ],
     transition: 'slide_up_down',
     transition_duration: 180,
