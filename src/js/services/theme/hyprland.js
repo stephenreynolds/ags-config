@@ -1,6 +1,5 @@
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 function sendBatch(batch) {
     const command = batch
@@ -64,36 +63,6 @@ function listenMatchingAlphaIgnore() {
     });
 }
 
-const noGaps = [ 'firefox' ];
-
-function disableGaps(id) {
-    Hyprland.sendMessage(`keyword workspace ${id},gapsout:0,rounding:false,border:false`).catch(() => {});
-}
-
-function resetGaps(id, gapsout) {
-    Hyprland.sendMessage(`keyword workspace ${id},gapsout:${gapsout},rounding:true,border:true`).catch(() => {});
-}
-
-function listenMatchingSingleClient(gapsout) {
-    Hyprland.connect('changed', () => {
-        Utils.timeout(10, () => {
-            Hyprland.workspaces.map((workspace) => {
-                if (workspace.windows === 1) {
-                    const client = Hyprland.clients.find((c) => c.workspace.id === workspace.id);
-                    if (client) {
-                        const removeGaps = noGaps.some((c) => client.class === c);
-                        if (removeGaps) {
-                            disableGaps(workspace.id);
-                            return;
-                        }
-                    }
-                }
-                resetGaps(workspace.id, gapsout);
-            });
-        });
-    });
-}
-
 export default async function({
     wm_gaps_in,
     wm_gaps_out,
@@ -122,6 +91,4 @@ export default async function({
     });
 
     listenMatchingAlphaIgnore();
-
-    listenMatchingSingleClient(wm_gaps_out);
 }
