@@ -27,7 +27,7 @@ const NotificationIcon = (notification) => {
     if (notification.image) {
         return Widget.Box({
             className: 'notification-icon',
-            valign: Gtk.Align.CENTER,
+            vpack: 'start',
             hexpand: false,
             css: `
                 background-image: url('${notification.image}');
@@ -47,7 +47,7 @@ const NotificationIcon = (notification) => {
     }
 
     return Widget.Box({
-        valign: Gtk.Align.CENTER,
+        vpack: 'center',
         hexpand: false,
         className: 'notification-icon',
         setup: box => {
@@ -56,8 +56,9 @@ const NotificationIcon = (notification) => {
             if (iconName !== 'NO_ICON') {
                 icon = Widget.Icon({
                     iconName,
-                    halign: Gtk.Align.CENTER, hexpand: true,
-                    valign: Gtk.Align.CENTER,
+                    hexpand: true,
+                    hpack: 'center',
+                    vpack: 'center',
                     setup: (self) => {
                         box.toggleClassName(`notification-icon-material-${notification.urgency}`, true);
                         Utils.timeout(1, () => {
