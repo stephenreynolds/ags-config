@@ -41,7 +41,7 @@ function initConfig({
     ]);
 }
 
-const noAlphaignore = [ 'verification', 'powermenu' ];
+const noAlphaignore = [ 'verification', 'powermenu', '^(notifications-*)', '^(indicator-.*)' ];
 
 function listenMatchingAlphaIgnore() {
     App.connect('config-parsed', () => {
@@ -56,7 +56,6 @@ function listenMatchingAlphaIgnore() {
             if (noAlphaignore.every((skip) => !name.includes(skip))) {
                 batch.push(`layerrule ignorealpha 0.6, ${name}`);
             }
-
         }
 
         sendBatch(batch);
