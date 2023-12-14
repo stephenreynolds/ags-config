@@ -185,7 +185,7 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
                 overlays: [
                     Widget.Button({
                         className: 'notification-close-btn',
-                        onClicked: () => destroyWithAnims,
+                        on_clicked: destroyWithAnims,
                         vpack: 'center',
                         child: MaterialIcon('close', 'xl', {
                             vpack: 'center',

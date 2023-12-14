@@ -41,6 +41,10 @@
   font-size: 3rem;
 }
 
+.text-semibold {
+  font-weight: 500;
+}
+
 .tilefont {
   @include mixins.titlefont;
 }

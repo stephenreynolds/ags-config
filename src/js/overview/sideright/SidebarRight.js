@@ -1,5 +1,7 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import NotificationList from './NotificationList.js';
+import Calendar from './Calendar.js';
+import Timezones from './Timezones.js';
 
 export default () => Widget.Box({
     class_name: 'sidebar-right',
@@ -11,7 +13,9 @@ export default () => Widget.Box({
         vexpand: true,
         className: 'spacing-v-15',
         children: [
-            NotificationList({ vexpand: true }),
+            Timezones(),
+            NotificationList(),
+            Calendar(),
         ],
     }),
 });

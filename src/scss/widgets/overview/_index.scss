@@ -18,6 +18,12 @@
   padding: 0.341rem;
 }
 
+.sidebar-group {
+  @include mixins.normal-rounding;
+  @include group-padding;
+  background-color: colors.$t_surface;
+}
+
 .sidebar-group-invisible {
   @include group-padding;
 }

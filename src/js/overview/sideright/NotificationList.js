@@ -89,6 +89,7 @@ export default (props) => {
         hexpand: true,
         hscroll: 'never',
         vscroll: 'automatic',
+        class_name: 'notifications-scrollable',
         child: Widget.Box({
             vexpand: true,
             children: [ NotificationList ],

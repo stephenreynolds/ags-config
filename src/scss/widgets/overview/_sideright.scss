@@ -1,5 +1,6 @@
 @use "../../lib/mixins";
 @use "../../lib/colors";
+@use "../../lib/material";
 @use "../../lib/notification";
 
 .sidebar-right {
@@ -17,6 +18,10 @@
   margin-right: -30.682rem;
 }
 
+.notifications-scrollable {
+  @include mixins.scrollbar;
+}
+
 .notification-closeall-btn {
   @include notification.notification-rounding;
   padding: 0.341rem;
@@ -28,4 +33,89 @@
   &:active {
     background-color: colors.$activecolor;
   }
+}
+
+.date {
+  font-weight: 500;
+}
+
+.tz-local {
+  font-size: 2rem;
+}
+
+.sidebar-calendar-btn {
+  @include mixins.full-rounding;
+  @include mixins.menu_decel;
+  min-height: 2.523rem;
+  min-width: 2.523rem;
+  color: material.$onSurface;
+}
+
+.sidebar-calendar-btn:hover {
+    background-color: colors.$hovercolor;
+}
+
+.sidebar-calendar-btn:active {
+    background-color: colors.$activecolor;
+}
+
+.sidebar-calendar-btn-txt {
+    margin-left: -10.341rem;
+    margin-right: -10.341rem;
+}
+
+.sidebar-calendar-btn-today {
+    background-color: material.$primary;
+    color: material.$onPrimary;
+}
+
+.sidebar-calendar-btn-today:hover {
+    background-color: mix(material.$primary, colors.$hovercolor, 90%);
+}
+
+.sidebar-calendar-btn-today:active {
+    background-color: mix(material.$primary, colors.$hovercolor, 70%);
+}
+
+.sidebar-calendar-btn-othermonth {
+    color: mix(material.$onSurface, material.$surface, 50%);
+}
+
+.sidebar-calendar-header {
+    margin: 0.341rem;
+}
+
+.sidebar-calendar-monthyear-btn {
+    @include mixins.full-rounding;
+    padding: 0rem 0.682rem;
+    background-color: colors.$t_surfaceVariant;
+    color: material.$onSurfaceVariant;
+}
+
+.sidebar-calendar-monthyear-btn:hover {
+    background-color: mix(colors.$t_surfaceVariant, material.$onSurfaceVariant, 95%);
+    color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 95%);
+}
+
+.sidebar-calendar-monthyear-btn:active {
+    background-color: mix(material.$surfaceVariant, material.$onSurfaceVariant, 85%);
+    color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 85%);
+}
+
+.sidebar-calendar-monthshift-btn {
+    @include mixins.full-rounding;
+    min-width: 2.045rem;
+    min-height: 2.045rem;
+    background-color: colors.$t_surfaceVariant;
+    color: material.$onSurfaceVariant;
+}
+
+.sidebar-calendar-monthshift-btn:hover {
+    background-color: mix(colors.$t_surfaceVariant, material.$onSurfaceVariant, 95%);
+    color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 95%);
+}
+
+.sidebar-calendar-monthshift-btn:active {
+    background-color: mix(material.$surfaceVariant, material.$onSurfaceVariant, 85%);
+    color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 85%);
 }
