@@ -27,7 +27,7 @@ const misc = {
     radii: 9,
     spacing: 9,
     shadow: 'rgba(0, 0, 0, 0.6)',
-    drop_shadow: false,
+    drop_shadow: true,
     transition: 200,
     desktop_clock: 'center center',
     font: 'SF Pro Display',

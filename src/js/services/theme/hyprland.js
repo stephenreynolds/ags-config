@@ -37,7 +37,7 @@ function initConfig({
         `group:groupbar:col.inactive ${hypr_group_inactive}`,
         `group:groupbar:col.locked_active ${hypr_group_locked_active}`,
         `decoration:rounding ${wm_rounding}`,
-        `decoration:drop_shadow ${drop_shadow ? 'yes' : 'no'}`,
+        `decoration:drop_shadow ${drop_shadow}`,
     ]);
 }
 
