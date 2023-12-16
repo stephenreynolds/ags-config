@@ -16,7 +16,7 @@ function getDayString(time) {
 }
 
 export default () => Widget.Box({
-    class_name: 'timezones',
+    class_name: 'sidebar-group-invisible',
     spacing: 20,
     homogeneous: true,
     children: [
