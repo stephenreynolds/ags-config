@@ -46,7 +46,22 @@ const NotificationList = Widget.Box({
             }
         }, 'closed' ],
 
-        [ Notifications, box => box.visible = Notifications.notifications.length > 0 ],
+        [ Notifications, (box) => {
+            if (Notifications.notifications.length === 0) {
+                box.children = [
+                    Widget.Box({
+                        hexpand: true,
+                        vertical: true,
+                        vpack: 'center',
+                        class_name: 'text',
+                        children: [
+                            MaterialIcon('check', '5xl'),
+                            Widget.Label({ label: 'No new notifications' }),
+                        ],
+                    }),
+                ];
+            }
+        } ],
     ],
 });
 
