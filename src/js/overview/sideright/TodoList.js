@@ -98,7 +98,9 @@ const todoItems = (isDone) => Widget.Scrollable({
                     }),
                 ];
             }
-            else {self.homogeneous = false;}
+            else {
+                self.homogeneous = false;
+            }
         }, 'updated' ]],
     }),
     setup: (listContents) => {
