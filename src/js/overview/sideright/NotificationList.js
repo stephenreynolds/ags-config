@@ -51,38 +51,33 @@ const NotificationList = Widget.Box({
 });
 
 export default (props) => {
-    const listTitle = Widget.Revealer({
-        revealChild: false,
-        connections: [[ Notifications, (revealer) => {
-            revealer.revealChild = Notifications.notifications.length > 0;
-        } ]],
-        child: Widget.Box({
-            vpack: 'start',
-            className: 'sidebar-group-invisible text',
-            children: [
-                Widget.Label({
-                    className: 'text-xl',
-                    hexpand: true,
-                    xalign: 0,
-                    label: 'Notifications',
+    const listTitle = Widget.Box({
+        vpack: 'start',
+        className: 'sidebar-group-invisible text',
+        children: [
+            Widget.Label({
+                className: 'text-xl',
+                hexpand: true,
+                xalign: 0,
+                label: 'Notifications',
+            }),
+            Widget.Button({
+                className: 'notification-closeall-btn',
+                onClicked: () => Notifications.clear(),
+                child: Widget.Box({
+                    className: 'spacing-h-5',
+                    children: [
+                        MaterialIcon('clear_all', 'base'),
+                        Widget.Label({
+                            className: 'text-lg',
+                            label: 'Clear',
+                        }),
+                    ],
                 }),
-                Widget.Button({
-                    className: 'notification-closeall-btn',
-                    onClicked: () => Notifications.clear(),
-                    child: Widget.Box({
-                        className: 'spacing-h-5',
-                        children: [
-                            MaterialIcon('clear_all', 'base'),
-                            Widget.Label({
-                                className: 'text-lg',
-                                label: 'Clear',
-                            }),
-                        ],
-                    }),
-                    setup: button => setupCursorHover(button),
-                }),
-            ],
-        }),
+                binds: [[ 'visible', Notifications, 'notifications', (notifications) => notifications.length > 0 ]],
+                setup: button => setupCursorHover(button),
+            }),
+        ],
     });
 
     const listContents = Widget.Scrollable({
