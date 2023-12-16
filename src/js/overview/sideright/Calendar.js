@@ -245,14 +245,14 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
     on_clicked: (button) => {
         contentStack.shown = stackItemName;
         const children = button.get_parent().get_children();
-        children.map((child) => {
-            if (child !== button) {
-                child.toggleClassName('sidebar-navrail-btn-active', false);
+        for (let i = 0; i < children.length; i++) {
+            if (children[i] !== button) {
+                children[i].toggleClassName('sidebar-navrail-btn-active', false);
             }
             else {
-                button.toggleClassName('sidebar-navrail-btn-active, true');
+                button.toggleClassName('sidebar-navrail-btn-active', true);
             }
-        });
+        }
     },
     child: Widget.Box({
         class_name: 'spacing-v-5',

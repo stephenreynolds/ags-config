@@ -50,3 +50,30 @@
         background-color: mix(material.$onSurfaceVariant, material.$surfaceVariant, 50%);
     }
 }
+
+.sidebar-navrail {
+    padding: 0rem mixins.$rounding_medium;
+}
+
+.sidebar-navrail-btn>box>label {
+    @include mixins.full-rounding;
+    @include mixins.menu_decel;
+}
+
+.sidebar-navrail-btn:hover>box>label:first-child {
+    background-color: mix(colors.$t_surfaceVariant, material.$onSurfaceVariant, 90%);
+}
+
+.sidebar-navrail-btn:active>box>label:first-child {
+    background-color: mix(material.$surfaceVariant, material.$onSurfaceVariant, 75%);
+}
+
+.sidebar-navrail-btn-active>box>label:first-child {
+    background-color: material.$secondaryContainer;
+    color: material.$onSecondaryContainer;
+}
+
+.sidebar-navrail-btn-active:hover>box>label:first-child {
+    background-color: mix(material.$secondaryContainer, colors.$hovercolor, 90%);
+    color: mix(material.$onSecondaryContainer, colors.$hovercolor, 90%);
+}
