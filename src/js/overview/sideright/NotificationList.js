@@ -5,6 +5,18 @@ import MaterialIcon from '../../misc/MaterialIcon.js';
 import { setupCursorHover } from '../../misc/cursorHover.js';
 import Notification from '../../misc/Notification.js';
 
+const Placeholder = Widget.Box({
+    hexpand: true,
+    vertical: true,
+    vpack: 'center',
+    class_name: 'text',
+    children: [
+        MaterialIcon('check', '5xl'),
+        Widget.Label({ label: 'No new notifications' }),
+    ],
+    connections: [[ Notifications, (box) => box.visible = Notifications.notifications.length == 0 ]],
+});
+
 const NotificationList = Widget.Box({
     className: 'spacing-v-5-revealer',
     vertical: true,
@@ -46,22 +58,7 @@ const NotificationList = Widget.Box({
             }
         }, 'closed' ],
 
-        [ Notifications, (box) => {
-            if (Notifications.notifications.length === 0) {
-                box.children = [
-                    Widget.Box({
-                        hexpand: true,
-                        vertical: true,
-                        vpack: 'center',
-                        class_name: 'text',
-                        children: [
-                            MaterialIcon('check', '5xl'),
-                            Widget.Label({ label: 'No new notifications' }),
-                        ],
-                    }),
-                ];
-            }
-        } ],
+        [ Notifications, (box) => box.visible = Notifications.notifications.length > 0 ],
     ],
 });
 
@@ -89,10 +86,10 @@ export default (props) => {
                         }),
                     ],
                 }),
-                binds: [[ 'visible', Notifications, 'notifications', (notifications) => notifications.length > 0 ]],
                 setup: button => setupCursorHover(button),
             }),
         ],
+        binds: [[ 'visible', Notifications, 'notifications', (notifications) => notifications.length > 0 ]],
     });
 
     const listContents = Widget.Scrollable({
@@ -102,7 +99,10 @@ export default (props) => {
         class_name: 'notifications-scrollable',
         child: Widget.Box({
             vexpand: true,
-            children: [ NotificationList ],
+            children: [
+                Placeholder,
+                NotificationList,
+            ],
         }),
     });
 
