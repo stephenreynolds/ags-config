@@ -28,11 +28,11 @@ export default () => Widget.Box({
             ]],
         }),
         Widget.Box({
+            spacing: 20,
             children: [
                 Widget.Box({
                     vertical: true,
                     hexpand: true,
-                    hpack: 'start',
                     children: [
                         Widget.Label({
                             class_name: 'tz-label',
@@ -48,11 +48,10 @@ export default () => Widget.Box({
                 }),
                 Widget.Box({
                     vertical: true,
-                    hexpand: true,
                     children: [
                         Widget.Label({
                             class_name: 'tz-utc',
-                            xalign: 0,
+                            xalign: 1,
                             connections: [[ 1000, label => {
                                 const time = GLib.DateTime.new_now_utc();
                                 const timeString = `${time.format(options.timeFormat)} ${getDayString(time)}`;
@@ -61,7 +60,7 @@ export default () => Widget.Box({
                         }),
                         Widget.Label({
                             class_name: 'tz-jst',
-                            xalign: 0,
+                            xalign: 1,
                             connections: [[ 1000, label => {
                                 const time = GLib.DateTime.new_now(GLib.TimeZone.new('Asia/Tokyo'));
                                 const timeString = `${time.format(options.timeFormat)} ${getDayString(time)}`;

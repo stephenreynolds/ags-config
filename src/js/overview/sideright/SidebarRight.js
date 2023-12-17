@@ -13,8 +13,8 @@ export default () => Widget.Box({
         vexpand: true,
         className: 'spacing-v-15',
         children: [
-            Timezones(),
             NotificationList(),
+            Timezones(),
             Calendar(),
         ],
     }),
