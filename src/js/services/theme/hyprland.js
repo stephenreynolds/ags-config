@@ -1,5 +1,7 @@
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+import options from '../../options.js';
 
 function sendBatch(batch) {
     const command = batch
@@ -62,6 +64,29 @@ function listenMatchingAlphaIgnore() {
     });
 }
 
+function listenForNoGapsWhenSingle(gapsout) {
+    const events = [ 'openwindow', 'closewindow', 'movewindow', 'changefloatingmode' ];
+
+    const setGaps = () => Hyprland.workspaces.map((workspace) => {
+        const tiledClients = Hyprland.clients.filter((c) => c.workspace.id === workspace.id && !c.floating);
+
+        if (tiledClients.length === 1 && options.noGapsWindowClasses.includes(tiledClients[0].class)) {
+            Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:0,rounding:false,border:false`);
+            return;
+        }
+
+        Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:${gapsout},rounding:true,border:true`);
+    });
+
+    App.connect('config-parsed', () => Utils.timeout(10, setGaps));
+
+    Hyprland.connect('event', (_, event) => {
+        if (events.includes(event)) {
+            Utils.timeout(5, setGaps);
+        }
+    });
+}
+
 export default async function({
     wm_gaps_in,
     wm_gaps_out,
@@ -90,4 +115,5 @@ export default async function({
     });
 
     listenMatchingAlphaIgnore();
+    listenForNoGapsWhenSingle(wm_gaps_out);
 }
