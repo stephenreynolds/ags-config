@@ -85,7 +85,7 @@ function listenForNoGapsWhenSingle(gapsout) {
 
     Hyprland.connect('event', (_, event) => {
         if (events.includes(event)) {
-            Utils.timeout(5, setGaps);
+            Utils.timeout(10, setGaps);
         }
     });
 }
