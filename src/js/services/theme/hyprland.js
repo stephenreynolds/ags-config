@@ -74,11 +74,11 @@ function listenForNoGapsWhenSingle(gapsout) {
         const tiledClients = Hyprland.clients.filter((c) => c.workspace.id === workspace.id && !c.floating);
 
         if (tiledClients.length === 1 && options.noGapsWindowClasses.includes(tiledClients[0].class)) {
-            Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:0,rounding:false,border:false`);
+            Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:0,rounding:false`);
             return;
         }
 
-        Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:${gapsout},rounding:true,border:true`);
+        Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:${gapsout},rounding:true`);
     });
 
     App.connect('config-parsed', () => Utils.timeout(10, setGaps));
