@@ -24,6 +24,7 @@ const misc = {
     wm_gaps_out: 8,
     wm_gaps_workspaces: 50,
     wm_rounding: 10,
+    wm_no_gaps_when_only: 0,
     radii: 9,
     spacing: 9,
     shadow: 'rgba(0, 0, 0, 0.6)',

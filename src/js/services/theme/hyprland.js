@@ -16,6 +16,7 @@ function initConfig({
     wm_gaps_in,
     wm_gaps_out,
     wm_gaps_workspaces,
+    wm_no_gaps_when_only,
     border_width,
     hypr_active_border,
     hypr_inactive_border,
@@ -35,6 +36,8 @@ function initConfig({
         `general:col.border_active ${hypr_group_active}`,
         `general:col.border_inactive ${hypr_inactive_border}`,
         `general:col.border_locked_active ${hypr_group_locked_active}`,
+        `dwindle:no_gaps_when_only ${wm_no_gaps_when_only}`,
+        `master:no_gaps_when_only ${wm_no_gaps_when_only}`,
         `group:groupbar:col.active ${hypr_group_active}`,
         `group:groupbar:col.inactive ${hypr_group_inactive}`,
         `group:groupbar:col.locked_active ${hypr_group_locked_active}`,
@@ -91,6 +94,7 @@ export default async function({
     wm_gaps_in,
     wm_gaps_out,
     wm_gaps_workspaces,
+    wm_no_gaps_when_only,
     border_width,
     hypr_active_border,
     hypr_inactive_border,
@@ -104,6 +108,7 @@ export default async function({
         wm_gaps_in,
         wm_gaps_out,
         wm_gaps_workspaces,
+        wm_no_gaps_when_only,
         border_width,
         hypr_active_border,
         hypr_inactive_border,
@@ -115,5 +120,8 @@ export default async function({
     });
 
     listenMatchingAlphaIgnore();
-    listenForNoGapsWhenSingle(wm_gaps_out);
+
+    if (wm_no_gaps_when_only === 0) {
+        listenForNoGapsWhenSingle(wm_gaps_out);
+    }
 }
