@@ -27,6 +27,7 @@
         swww
         libnotify
         imagemagick
+        xdotool
       ]);
 
       projectRoot = toString (builtins.getEnv "PWD");
