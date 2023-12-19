@@ -90,26 +90,18 @@ function listenForNoGapsWhenSingle(gapsout) {
     });
 }
 
-function listenCloseWindow() {
-    const unmapClasses = [ 'discord' ];
-
+function listenCloseClient() {
     Hyprland.connect('client-removed', () => {
-        if (unmapClasses.includes(Hyprland.active.client.class)) {
-            Utils.execAsync([ 'xdotool', 'getactivewindow windowunmap' ]);
-        }
-
-        Utils.timeout(10, () => {
-            const empty = Hyprland.active.workspace.windows === 0;
-            const special = Hyprland.active.workspace.id === -99;
-            if (empty && !special) {
-                const monitorWorkspaces = Hyprland.workspaces.filter(
-                    (w) => w.monitor.id === Hyprland.active.monitor.id,
-                );
-                if (monitorWorkspaces.length > 1) {
-                    Hyprland.sendMessage('dispatch workspace r-1');
-                }
+        const activeWorkspace = Hyprland.getWorkspace(Hyprland.active.workspace.id);
+        const empty = activeWorkspace.windows === 0;
+        const special = activeWorkspace.id === -99;
+        if (empty && !special) {
+            const monitorId = Hyprland.monitors.find((m) => m.name === Hyprland.active.monitor).id;
+            const monitorWorkspaces = Hyprland.workspaces.filter((w) => w.monitorID === monitorId);
+            if (monitorWorkspaces.length > 1) {
+                Hyprland.sendMessage('dispatch workspace r-1');
             }
-        });
+        }
     });
 }
 
@@ -143,7 +135,7 @@ export default async function({
     });
 
     listenMatchingAlphaIgnore();
-    listenCloseWindow();
+    listenCloseClient();
 
     if (wm_no_gaps_when_only === 0) {
         listenForNoGapsWhenSingle(wm_gaps_out);
