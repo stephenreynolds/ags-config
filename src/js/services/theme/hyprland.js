@@ -71,7 +71,7 @@ function listenForNoGapsWhenSingle(gapsout) {
     const events = [ 'openwindow', 'closewindow', 'movewindow', 'changefloatingmode' ];
 
     const setGaps = () => Hyprland.workspaces.map((workspace) => {
-        const tiledClients = Hyprland.clients.filter((c) => c.workspace.id === workspace.id && !c.floating);
+        const tiledClients = Hyprland.clients.filter((c) => c.workspace.id === workspace.id && !c.floating && c.mapped);
 
         if (tiledClients.length === 1 && options.noGapsWindowClasses.includes(tiledClients[0].class)) {
             Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:0,rounding:false`);
