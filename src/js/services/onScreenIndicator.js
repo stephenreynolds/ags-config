@@ -24,20 +24,6 @@ class IndicatorService extends Service {
         });
     }
 
-    #workspaceDelay = 1000;
-    #workspaceCount = 0;
-
-    workspace() {
-        this.emit('popup-workspace', true);
-        this.#workspaceCount++;
-        Utils.timeout(this.#workspaceDelay, () => {
-            this.#workspaceCount--;
-
-            if (this.#workspaceCount === 0)
-            {this.emit('popup-workspace', false);}
-        });
-    }
-
     connect(event = 'popup', callback) {
         return super.connect(event, callback);
     }

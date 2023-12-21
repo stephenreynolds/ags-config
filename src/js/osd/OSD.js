@@ -1,9 +1,13 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Indicator from '../services/onScreenIndicator.js';
 import icons from '../icons.js';
 import options from '../options.js';
+
+let workspaceDelay = 1000;
+let workspaceCount = 0;
 
 const WorkspaceIndicator = (monitor) => Widget.Box({
     className: 'osd-workspace',
@@ -108,6 +112,7 @@ export default (monitor) => Widget.Window({
             Widget.Revealer({
                 transition: 'slide_up',
                 transitionDuration: options.transitionDuration,
+                revealChild: false,
                 connections: [
                     [ Indicator, (self, value) => {
                         if (!isActiveMonitor(monitor)) {
@@ -123,14 +128,25 @@ export default (monitor) => Widget.Window({
                 transition: 'slide_up',
                 transitionDuration: options.transitionDuration,
                 hpack: 'center',
+                revealChild: false,
                 connections: [
-                    [ Indicator, (self, reveal) => {
-                        if (!reveal || !isActiveMonitor(monitor)) {
+                    [ Hyprland, (self, name) => {
+                        if (name !== 'workspace') {
+                            return;
+                        }
+                        if (!isActiveMonitor(monitor)) {
                             self.revealChild = false;
                             return;
                         }
                         self.revealChild = true;
-                    }, 'popup-workspace' ],
+                        workspaceCount++;
+                        Utils.timeout(workspaceDelay, () => {
+                            workspaceCount--;
+                            if (workspaceCount === 0) {
+                                self.revealChild = false;
+                            }
+                        });
+                    }, 'event' ],
                 ],
                 child: WorkspaceIndicator(monitor),
             }),

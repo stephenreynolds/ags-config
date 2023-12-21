@@ -33,9 +33,6 @@ function initConfig({
         `general:gaps_workspaces ${wm_gaps_workspaces}`,
         `general:col.active_border ${hypr_active_border}`,
         `general:col.inactive_border ${hypr_inactive_border}`,
-        `general:col.border_active ${hypr_group_active}`,
-        `general:col.border_inactive ${hypr_inactive_border}`,
-        `general:col.border_locked_active ${hypr_group_locked_active}`,
         `dwindle:no_gaps_when_only ${wm_no_gaps_when_only}`,
         `master:no_gaps_when_only ${wm_no_gaps_when_only}`,
         `group:groupbar:col.active ${hypr_group_active}`,
@@ -70,22 +67,29 @@ function listenMatchingAlphaIgnore() {
 function listenForNoGapsWhenSingle(gapsout) {
     const events = [ 'openwindow', 'closewindow', 'movewindow', 'changefloatingmode' ];
 
-    const setGaps = () => Hyprland.workspaces.map((workspace) => {
-        const tiledClients = Hyprland.clients.filter((c) => c.workspace.id === workspace.id && !c.floating && c.mapped);
+    const setGaps = () => Utils.timeout(10, () =>
+        Hyprland.workspaces.map((workspace) => {
+            const tiledClients = Hyprland.clients.filter((c) => c.workspace.id === workspace.id && !c.floating && c.mapped);
 
-        if (tiledClients.length === 1 && options.noGapsWindowClasses.includes(tiledClients[0].class)) {
-            Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:0,rounding:false`);
-            return;
-        }
+            if (tiledClients.length === 1 && options.noGapsWindowClasses.includes(tiledClients[0].class)) {
+                Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:0,rounding:false`)
+                    .catch(() => {});
+                return;
+            }
 
-        Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:${gapsout},rounding:true`);
-    });
+            Hyprland.sendMessage(`keyword workspace ${workspace.id},gapsout:${gapsout},rounding:true`)
+                .catch(() => {});
+        }),
+    );
 
-    App.connect('config-parsed', () => Utils.timeout(10, setGaps));
+    App.connect('config-parsed', setGaps);
 
     Hyprland.connect('event', (_, event) => {
         if (events.includes(event)) {
-            Utils.timeout(10, setGaps);
+            setGaps();
+        }
+    });
+}
         }
     });
 }
