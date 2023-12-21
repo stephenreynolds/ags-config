@@ -90,9 +90,6 @@ function listenForNoGapsWhenSingle(gapsout) {
         }
     });
 }
-        }
-    });
-}
 
 export default async function({
     wm_gaps_in,
