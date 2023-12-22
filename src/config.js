@@ -26,6 +26,6 @@ export default {
     maxStreamVolume: 1.05,
     cacheNotificationActions: true,
     closeWindowDelay: {
-        'overview': 210,
+        'overview': 130,
     },
 };
