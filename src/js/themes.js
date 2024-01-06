@@ -1,3 +1,6 @@
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+const WP = `/home/${Utils.USER}/Pictures/Wallpapers/`;
+
 const charm = {
     red: '#e55f86',
     green: '#00D787',
@@ -52,6 +55,7 @@ const colors = {
 
 // Themes
 const catppuccin_mocha = {
+    wallpaper: WP + '1212315.jpg',
     name: 'catppuccin_mocha',
     icon: '󰄛',
     ...dark,
