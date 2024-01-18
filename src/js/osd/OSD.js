@@ -96,7 +96,7 @@ const VolumeIndicator = () => Widget.Box({
 });
 
 const isActiveMonitor = (monitor) =>
-    monitor === Hyprland.monitors.find(m => m.name === Hyprland.active.monitor).id;
+    Hyprland.monitors ?? monitor === Hyprland.monitors.find(m => m.name === Hyprland.active.monitor).id;
 
 export default (monitor) => Widget.Window({
     name: `indicator-${monitor}`,
